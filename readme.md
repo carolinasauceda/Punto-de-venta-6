@@ -11,7 +11,7 @@
 * Livan Alejandro Sanchez Orduña
 * Angel Alberto Torres Tores
 
-**Tecnologias:**
+**Tecnologías:**
 
 * PHP
 * Boostrap 4
