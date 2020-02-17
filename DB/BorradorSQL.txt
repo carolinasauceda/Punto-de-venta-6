@@ -1,0 +1,83 @@
+create table Proveedores (IDProveedor INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+                         Compania varchar(50) NOT NULL,
+                         Contacto varchar(50) NOT NuLL,
+                         Correo varchar(50),
+                         Telefono varchar(20),
+                         RActivo TINYINT(1)
+                         );
+						 
+CREATE TABLE Usuarios (IDUsuario varchar(25) NOT NULL PRIMARY KEY,
+                      IDEmpleado int NOT NULL,
+                      IDCargo int NOT NULL,
+                      Clave varchar(25) NOT NULL,
+                      Activo TINYINT(1),
+                      FOREIGN KEY (IDEmpleado) REFERENCES Empleados(IDEmpleado),
+					  FOREIGN KEY (IDCargo) REFERENCES Cargo(IDCargo)					  
+                      );
+					  
+CREATE table Cargo (IDCargo int AUTO_INCREMENT PRIMARY KEY,
+                   Descripcion varchar(50) NOT NULL,
+                   Nivel int
+                   );
+				   
+CREATE TABLE Empleados (IDEmpleado int AUTO_INCREMENT PRIMARY KEY,
+                       Nombre varchar(50) NOT NULL,
+                       Apellido_P varchar(50) NOT nULL,
+                       Apellido_M varchar(50) NOT NULL,
+                       IDCargo int NOT NULL,
+                       Fecha_Nacimiento DATE NOT NULL,
+                       Fecha_Contratacion DATE NOT NULL,
+                       Direccion varchar(50),
+                       Telefono varchar(20),
+                       Estado varchar(20),
+                       );
+
+Create TABLE Productos(
+		IDProducto varchar(50) PRIMARY KEY,
+    	Nombre varchar(50) NOT NULL,
+    	IDProveedor int NOT NULL,
+    	IDCategoria int NOT NULL,
+    	Cantidad int NOT NULL,
+    	PrecioUnitario decimal(7,2) NOT NULL,
+    	EnExistencia int NOT NULL,
+    	BajoPedido int not null,
+    	RActivo tinyInt(1),
+    	FOREIGN KEY (IDProveedor) REFERENCES Proveedores(IDProveedor),
+   		FOREIGN KEY (IDCategoria) REFERENCES categoria_productos(IDCategoria)
+		);
+		
+CREATE TABLE categoria_productos (IDCategoria int AUTO_INCREMENT PRIMARY KEY,
+                                 Nombre varchar(50) NOT NULL,
+                                 Descripcion varchar(50),
+                                 Foto MEDIUMBLOB,
+                                 RActivo tinyint(1)
+                                 );
+
+create table clientes (IDCliente int AUTO_INCREMENT PRIMARY KEY,
+                      Nombre varchar(50) not null,
+                      Apellido_P varchar(50),
+                      Apellido_M varchar(50),
+                      correo varchar(50),
+                      telefono varchar(20),
+                      RActivo tinyint(1)
+                      ); 
+								 
+create table ventas (IDVenta int AUTO_INCREMENT PRIMARY KEY,
+                    IDCliente int not null,
+                    IDEmpleado int not null,
+                    Fecha timestamp not null,
+                    Total decimal(7,2) not null,
+                    Efectivo decimal(7,2) not null,
+                    Cambio  decimal(7,2) not null,
+                    FOREIGN KEY (IDCliente) REFERENCES Clientes(IDCliente),
+                    FOREIGN KEY (IDEmpleado) REFERENCES Empleados(IDEmpleado)
+                    );
+					
+create table DetallesVenta (IDDetallesV int AUTO_INCREMENT PRIMARY key,
+                           IDVenta int not null,
+                           IDProducto varchar(50) not null,
+                           PrecioUnitario decimal(7,2) not null,
+                           Cantidad int not null,
+                           FOREIGN KEY (IDVenta) REFERENCES ventas(IDVenta) ON DELETE CASCADE,
+                           FOREIGN KEY (IDProducto) REFERENCES productos(IDProducto)
+                           );
