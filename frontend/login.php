@@ -15,11 +15,11 @@
         <h6>Sign In</h6>
         <form action="conexion-db" method="post">
             <div class="textbox">
-                <input type="text" placeholder="Usuario">
+                <input name="usuario" type="text" placeholder="Usuario">
                 <span class="check-message hidden">Required</span>
             </div>
             <div class="textbox">
-                <input type="password" placeholder="Contraseña">
+                <input name="password" type="password" placeholder="Contraseña">
                 <span class="check-message hidden">Required</span>
             </div>
             <input type="submit" value="Log In Now" class="login-btn" disabled>
