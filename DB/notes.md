@@ -1,0 +1,1 @@
+[Fuente de inspiración para la base de datos](https://cpiprodesign.blogspot.com/2017/07/base-de-datos-sistema-punto-de-venta-en.html)
