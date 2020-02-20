@@ -8,6 +8,12 @@
 <body>
 
 <?php
-	include "common/commonJS.php";?>
+	include "DB/DBManager.php";
+
+	$coneccion= new DBManager();
+
+
+
+	?>
 </body>
 </html>
