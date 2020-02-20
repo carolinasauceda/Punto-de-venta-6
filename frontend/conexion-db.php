@@ -8,7 +8,17 @@
 <body>
 <?php
     try{
-        $base=new PDO("mysql:host=localhost; dbname=punto-venta" , "root", "");
+        /*Caro, he actualizado los nombres de tablas, de esta manera la tabla usuario ahora es Usuario, y así susecivamente
+            y modifique algunos campos en algunas tablas. Te aconsejo pasarte por el registro de commits.
+
+        PD: Te aconsejo que la base de datos se llame simplemente puntoventa, por que puede ocacionar problemas para despues el guión.
+        Y por ultimo, a si, deje un archivo sql en la carpeta DB, pueden importar la base de datos en su localhost para hacer pruebas,
+        si no modifico nada pues seria la mas actualizada ( y ya me da miedo moverle pues veo ya estan haciendo conexiones).
+
+        PD2: Revisa la estructura de la bd actual y dime o elimina que si y que no.
+
+        */
+        $base=new PDO("mysql:host=localhost; dbname=puntoventa" , "root", "");
         $base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sql="SELECT * FROM usuarios where IDEmpleado= :login AND Clave= :password";
         $resultado=$base->prepare($sql);
