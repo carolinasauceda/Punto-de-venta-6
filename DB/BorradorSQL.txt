@@ -50,15 +50,12 @@ create table Ventas (IDVenta int AUTO_INCREMENT PRIMARY KEY,
                     );
 					
 CREATE TABLE Usuarios (IDUsuario varchar(25) NOT NULL PRIMARY KEY,
-                      IDEmpleado varchar(25) NOT NULL,
                       NivelUsuario int NOT NULL,
 		     Clave varchar(25) NOT NULL,
 		     Activo TINYINT(1),
-                      FOREIGN KEY (IDEmpleado) REFERENCES Empleados(IDEmpleado),
 		      FOREIGN KEY (NivelUsuario) REFERENCES NivelUsuario(IDNivel)					  
                       );
-					
-
+				
 Create TABLE Productos(
 	IDProducto varchar(50) PRIMARY KEY,
     	Nombre varchar(50) NOT NULL,
