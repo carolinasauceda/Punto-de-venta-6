@@ -6,7 +6,7 @@ create table Proveedores (IDProveedor INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                          RActivo TINYINT(1)
                          );
 						 
-CREATE table Cargo (IDCargo int AUTO_INCREMENT PRIMARY KEY,
+CREATE table NivelUsuario (IDNivel int AUTO_INCREMENT PRIMARY KEY,
                    Descripcion varchar(50) NOT NULL,
                    Nivel int
                    );
@@ -15,13 +15,13 @@ CREATE TABLE Empleados (IDEmpleado int AUTO_INCREMENT PRIMARY KEY,
                        Nombre varchar(50) NOT NULL,
                        Apellido_P varchar(50) NOT nULL,
                        Apellido_M varchar(50) NOT NULL,
-                       IDCargo int NOT NULL,
                        Fecha_Nacimiento DATE NOT NULL,
                        Fecha_Contratacion DATE NOT NULL,
                        Direccion varchar(50),
                        Telefono varchar(20),
                        Estado varchar(20)
                        );
+
 CREATE TABLE CategoriaProductos (IDCategoria int AUTO_INCREMENT PRIMARY KEY,
                                  Nombre varchar(50) NOT NULL,
                                  Descripcion varchar(50),
@@ -51,11 +51,11 @@ create table Ventas (IDVenta int AUTO_INCREMENT PRIMARY KEY,
 					
 CREATE TABLE Usuarios (IDUsuario varchar(25) NOT NULL PRIMARY KEY,
                       IDEmpleado int NOT NULL,
-                      IDCargo int NOT NULL,
-                      Clave varchar(25) NOT NULL,
-                      Activo TINYINT(1),
+                      NivelUsuario int NOT NULL,
+		     Clave varchar(25) NOT NULL,
+		     Activo TINYINT(1),
                       FOREIGN KEY (IDEmpleado) REFERENCES Empleados(IDEmpleado),
-					  FOREIGN KEY (IDCargo) REFERENCES Cargo(IDCargo)					  
+		      FOREIGN KEY (NivelUsuario) REFERENCES NivelUsuario(IDNivel)					  
                       );
 					
 
