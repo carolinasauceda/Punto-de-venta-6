@@ -60,7 +60,7 @@ CREATE TABLE Usuarios (IDUsuario varchar(25) NOT NULL PRIMARY KEY,
 					
 
 Create TABLE Productos(
-		IDProducto varchar(50) PRIMARY KEY,
+	IDProducto varchar(50) PRIMARY KEY,
     	Nombre varchar(50) NOT NULL,
     	IDProveedor int NOT NULL,
     	IDCategoria int NOT NULL,
@@ -70,7 +70,7 @@ Create TABLE Productos(
     	BajoPedido int not null,
     	RActivo tinyInt(1),
     	FOREIGN KEY (IDProveedor) REFERENCES Proveedores(IDProveedor),
-   		FOREIGN KEY (IDCategoria) REFERENCES CategoriaProductos(IDCategoria)
+   	FOREIGN KEY (IDCategoria) REFERENCES CategoriaProductos(IDCategoria)
 		);
 		
 					
@@ -79,6 +79,6 @@ create table DetallesVenta (IDDetallesV int AUTO_INCREMENT PRIMARY key,
                            IDProducto varchar(50) not null,
                            PrecioUnitario decimal(7,2) not null,
                            Cantidad int not null,
-                           FOREIGN KEY (IDVenta) REFERENCES ventas(IDVenta) ON DELETE CASCADE,
-                           FOREIGN KEY (IDProducto) REFERENCES productos(IDProducto)
+                           FOREIGN KEY (IDVenta) REFERENCES Ventas(IDVenta) ON DELETE CASCADE,
+                           FOREIGN KEY (IDProducto) REFERENCES Productos(IDProducto)
                            );
