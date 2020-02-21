@@ -19,7 +19,10 @@ CREATE TABLE Empleados (IDEmpleado varchar(25) PRIMARY KEY,
                        Fecha_Contratacion DATE NOT NULL,
                        Direccion varchar(50),
                        Telefono varchar(20),
-                       Estado varchar(20)
+                       NivelUsuario int NOT NULL,
+                       Clave varchar(25) NOT NULL,
+                       RActivo TINYINT(1),
+                       FOREIGN KEY (NivelUsuario) REFERENCES NivelUsuario(IDNivel)
                        );
 
 CREATE TABLE CategoriaProductos (IDCategoria int AUTO_INCREMENT PRIMARY KEY,
@@ -48,13 +51,6 @@ create table Ventas (IDVenta int AUTO_INCREMENT PRIMARY KEY,
                     FOREIGN KEY (IDCliente) REFERENCES Clientes(IDCliente),
                     FOREIGN KEY (IDEmpleado) REFERENCES Empleados(IDEmpleado)
                     );
-					
-CREATE TABLE Usuarios (IDUsuario varchar(25) NOT NULL PRIMARY KEY,
-                      NivelUsuario int NOT NULL,
-		     Clave varchar(25) NOT NULL,
-		     Activo TINYINT(1),
-		      FOREIGN KEY (NivelUsuario) REFERENCES NivelUsuario(IDNivel)					  
-                      );
 				
 Create TABLE Productos(
 	IDProducto varchar(50) PRIMARY KEY,
