@@ -27,8 +27,7 @@ CREATE TABLE Empleados (IDEmpleado varchar(25) PRIMARY KEY,
 
 CREATE TABLE CategoriaProductos (IDCategoria int AUTO_INCREMENT PRIMARY KEY,
                                  Nombre varchar(50) NOT NULL,
-                                 Descripcion varchar(50),
-                                 Foto MEDIUMBLOB,
+                                 Descripcion varchar(150),
                                  RActivo tinyint(1)
                                  );
 								 
@@ -57,10 +56,10 @@ Create TABLE Productos(
     	Nombre varchar(50) NOT NULL,
     	IDProveedor int NOT NULL,
     	IDCategoria int NOT NULL,
-    	Cantidad int NOT NULL,
     	PrecioUnitario decimal(7,2) NOT NULL,
     	EnExistencia int NOT NULL,
     	BajoPedido int not null,
+        Foto MEDIUMBLOB,
     	RActivo tinyInt(1),
     	FOREIGN KEY (IDProveedor) REFERENCES Proveedores(IDProveedor),
    	FOREIGN KEY (IDCategoria) REFERENCES CategoriaProductos(IDCategoria)
