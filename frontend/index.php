@@ -6,6 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <p>Este es el index del frontend</p>
 </body>
 </html>
