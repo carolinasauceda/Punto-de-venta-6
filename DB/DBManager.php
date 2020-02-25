@@ -3,7 +3,7 @@
 class DBManager{
     public $base;
     protected $sql; //Instruccion sql
-    const DBName="punto-venta";
+    const DBName="puntoventa";
     const Host="localhost";
     const DBUserName="root";
     const DBPassword="";
