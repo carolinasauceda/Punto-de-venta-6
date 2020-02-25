@@ -4,16 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css?family=Hind&display=swap" rel="stylesheet">
+    <?php include "../common/commonHeaders.php"?>
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <title>Punto de venta</title>
+    
+    <?php
+    require "Controllers/loginController.php";
+    $Login = new loginManager();
+    ?>
+
 </head>
 <body>
     <div class="login-form">
         <div class="logo"><img src="img/logo-prueba.png" alt=""></div>
         <h6>Sign In</h6>
-        <form action="conexion-db" method="post">
+        <form method="post">
             <div class="textbox">
                 <input name="usuario" type="text" placeholder="Usuario">
                 <span class="check-message hidden">Required</span>
@@ -22,7 +27,7 @@
                 <input name="password" type="password" placeholder="Contraseña">
                 <span class="check-message hidden">Required</span>
             </div>
-            <input type="submit" value="Log In Now" class="login-btn" disabled>
+            <input type="submit" value="Log In Now" name="loginbtn" class="login-btn" disabled>
             <div class="privacy-link">
                 <h6>Aplicacion</h6>
             </div>
@@ -53,5 +58,11 @@
             }
         });
     </script>
+
+    <?php
+    if(isset($_POST['loginbtn'])){ // button name
+        $Login->actionLogin();
+    }
+    ?>
 </body>
 </html>
