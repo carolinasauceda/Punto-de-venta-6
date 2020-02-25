@@ -1,4 +1,4 @@
-<!--Codigo relevante a la base de datos-->
+
 <?php
 class DBManager{
     public $base;
@@ -14,7 +14,6 @@ class DBManager{
             $this->base=new PDO('mysql:host=' . self::Host. '; dbname='. self::DBName, self::DBUserName, self::DBPassword);
             $this->base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
            // $this->base->exec("SET CHARACTER utf8"); //Para setear los caracteres a utf8, yo la comento por problemas en linux
-            echo "<script>console.log('Conexión establecida con la bd')</script>";
         }catch(Exception $e){
             die("Error en conexion" . $e->getMessage());
 
