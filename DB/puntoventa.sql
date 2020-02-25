@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 22-02-2020 a las 18:38:17
+-- Tiempo de generación: 25-02-2020 a las 03:38:26
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.2
 
@@ -161,7 +161,6 @@ CREATE TABLE IF NOT EXISTS `Productos` (
   `IDCategoria` int(11) NOT NULL,
   `PrecioUnitario` decimal(7,2) NOT NULL,
   `EnExistencia` int(11) NOT NULL,
-  `BajoPedido` int(11) NOT NULL,
   `Foto` mediumblob DEFAULT NULL,
   `RActivo` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`IDProducto`),
@@ -173,11 +172,11 @@ CREATE TABLE IF NOT EXISTS `Productos` (
 -- Volcado de datos para la tabla `Productos`
 --
 
-INSERT INTO `Productos` (`IDProducto`, `Nombre`, `IDProveedor`, `IDCategoria`, `PrecioUnitario`, `EnExistencia`, `BajoPedido`, `Foto`, `RActivo`) VALUES
-('0bd4a8de-f471-4309-9b74-f4975a3ebbf3', 'Pan tajado 500g', 1, 14, '20.00', 30, 50, NULL, 1),
-('4cc0d046-8cb3-49d5-8d79-2ee26d483eb0', 'Refresco Coca-Cola 500ml', 2, 13, '10.50', 500, 100, NULL, 1),
-('7b095654-67a7-4e88-9c1b-412f8b42d1b7', 'Donas Bimbo 100g', 1, 14, '10.50', 30, 0, NULL, 1),
-('a5f86f43-8580-4b67-a44c-1d7d45d94954', 'Refresco Pepsi 1L', 4, 13, '23.50', 400, 200, NULL, 1);
+INSERT INTO `Productos` (`IDProducto`, `Nombre`, `IDProveedor`, `IDCategoria`, `PrecioUnitario`, `EnExistencia`, `Foto`, `RActivo`) VALUES
+('0bd4a8de-f471-4309-9b74-f4975a3ebbf3', 'Pan tajado 500g', 1, 14, '20.00', 30, NULL, 1),
+('4cc0d046-8cb3-49d5-8d79-2ee26d483eb0', 'Refresco Coca-Cola 500ml', 2, 13, '10.50', 500, NULL, 1),
+('7b095654-67a7-4e88-9c1b-412f8b42d1b7', 'Donas Bimbo 100g', 1, 14, '10.50', 30, NULL, 1),
+('a5f86f43-8580-4b67-a44c-1d7d45d94954', 'Refresco Pepsi 1L', 4, 13, '23.50', 400, NULL, 1);
 
 -- --------------------------------------------------------
 
