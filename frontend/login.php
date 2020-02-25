@@ -7,11 +7,6 @@
     <?php include "../common/commonHeaders.php"?>
     <link rel="stylesheet" href="css/style.css">
     <title>Punto de venta</title>
-    
-    <?php
-    require "Controllers/loginController.php";
-    $Login = new loginManager();
-    ?>
 
 </head>
 <body>
@@ -20,11 +15,11 @@
         <h6>Sign In</h6>
         <form method="post">
             <div class="textbox">
-                <input name="usuario" type="text" placeholder="Usuario">
+                <input name="usuario"  id="usuario-field" type="text" placeholder="Usuario">
                 <span class="check-message hidden">Required</span>
             </div>
             <div class="textbox">
-                <input name="password" type="password" placeholder="Contraseña">
+                <input name="password" type="password" id="password-field" placeholder="Contraseña">
                 <span class="check-message hidden">Required</span>
             </div>
             <input type="submit" value="Log In Now" name="loginbtn" class="login-btn" disabled>
@@ -60,9 +55,12 @@
     </script>
 
     <?php
-    if(isset($_POST['loginbtn'])){ // button name
+    /*if(isset($_POST['loginbtn'])){ // button name
         $Login->actionLogin();
-    }
+    }*/
     ?>
+    <script src="js/login.js"></script>
+
+
 </body>
 </html>
