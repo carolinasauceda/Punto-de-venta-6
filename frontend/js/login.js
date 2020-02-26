@@ -11,6 +11,7 @@ $(document).ready(function(){
                 console.log("Access allow");
                 window.location.href = "index.php";
             }else{
+                //Colocar aquí tu magia xd
                 console.log("Access denied");
                 alert("Credenciales incorrectas");
             }

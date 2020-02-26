@@ -63,7 +63,7 @@
     }*/
     ?>
     <script src="js/login.js"></script>
-
+    <!--Nota para caro: si deseas agregar algun mensajito controlado por javascript favor de pasarte al archivo login.js dentro de la carpeta js de este directorio-->
 
 </body>
 </html>
