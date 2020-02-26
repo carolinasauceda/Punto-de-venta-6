@@ -18,6 +18,13 @@ class loginManager extends  DBManager {
             $numero_registro=$resultado->rowCount();
             if($numero_registro!=0){
                 //header("location:../index.php");
+                $userData=$resultado->fetch();
+                session_start(); //Inicio una sesión de usuario
+                $_SESSION["usuario"]=$login; //y guardo que usuario a iniciado la sesión
+                $_SESSION["Nombre"]=$userData["Nombre"];
+                $_SESSION["ApellidoP"]=$userData["Apellido_P"];
+                $_SESSION["ApellidoM"]=$userData["Apellido_M"];
+
                 return 1;
             }else{
                 //header("location:../login.php");
