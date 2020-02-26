@@ -7,7 +7,10 @@
     <?php include "../common/commonHeaders.php"?>
     <link rel="stylesheet" href="css/style.css">
     <title>Punto de venta</title>
-
+    <?php
+    session_start();
+    session_destroy();
+    ?>
 </head>
 <body>
     <div class="login-form">
