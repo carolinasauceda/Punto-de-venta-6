@@ -24,10 +24,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">INICIO</a>
+                <a class="nav-link" href="index.php">INICIO</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">SALIR</a>
+                <a class="nav-link" href="login.php">SALIR</a>
             </li>
         </ul>
 
@@ -42,7 +42,7 @@
                     <div class="card">
                         <div class="card-header">Nuevo cliente</div>
                         <div class="card-body">
-                            <form name="my-form" onsubmit="return validform()" action="success.php" method="">
+                            <form name="my-form"   method="post">
                                 <div class="form-group row">
                                     <label for="full_name" class="col-md-4 col-form-label text-md-right">RFC</label>
                                     <div class="col-md-6">
