@@ -11,8 +11,14 @@
     <link rel="icon" href="Favicon.png">
 
     <title>Nueva Categoria</title>
+
 </head>
 <body>
+
+    <?php
+        $id=0;
+            if(isset($_GET["id"])){$id=(int)$_GET["id"];}else{echo $id=0;}
+    ?>
 
 <nav class="navbar navbar-expand-lg navbar-light navbar-laravel">
     <div class="container">
@@ -42,31 +48,30 @@
                     <div class="card">
                         <div class="card-header">Nueva categoria</div>
                         <div class="card-body">
-                            <form name="my-form"   method="post">
+                            <form name="my-form" id="formulario-categoria"   method="post">
                                 <div class="form-group row">
                                     <label for="full_name" class="col-md-4 col-form-label text-md-right">Nombre</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="nombre" class="form-control" name="nombre">
+                                        <input type="text" id="nombre" data="<?php echo $id?>"class="form-control" name="nombre">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label for="email_address" class="col-md-4 col-form-label text-md-right">Descripción</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="compania" class="form-control" name="compania">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="permanent_address" class="col-md-4 col-form-label text-md-right">Estado</label>
-                                    <div class="col-md-6">
-                                        <input list="estado" id="estado-seleccion" class="form-control" name="estado-seleccion">
-                                        <datalist id="estado">
-                                            <option value="activo">
-                                            <option value="archivado">
-                                          </datalist>
+                                        <input type="text" id="descripcion" class="form-control" name="descripcion">
                                     </div>
                                 </div>
 
+                                <div class="form-group row">
+                                    <label for="permanent_address" class="col-md-4 col-form-label text-md-right">Estado del registro:</label>
+                                    <div class="col-md-6">
+                                        <select name="transporte" id="estado-seleccion" class="form-control">
+                                            <option value="1">Activo</option>
+                                            <option value="0">Archivado</option>
+                                        </select>
+                                    </div>
+                                </div>
 
                                 <!--<div class="form-group row">
                                     <label for="nid_number" class="col-md-4 col-form-label text-md-right"><abbr
@@ -77,8 +82,11 @@
                                 </div>-->
 
                                     <div class="col-md-6 offset-md-4">
-                                        <button type="submit" class="btn btn-primary">
+                                        <button type="submit" class="btn btn-primary actionbutton"  id="btnSave">
                                         Guardar
+                                        </button>
+                                        <button type="submit" class="btn btn-primary actionbutton" id="btnlol">
+                                            Guardar Cambios
                                         </button>
                                     </div>
                                 </div>
@@ -90,7 +98,7 @@
     </div>
 
 </main>
-
-c
+<?php include "../common/commonHeaders.php"; ?>
+<script src="js/formulario_categoria.js"></script>
 </body>
 </html>
