@@ -6,7 +6,8 @@
 ?>
 </head>
 <body>
-
+<br>
+<a href="frontend/index.php">Frontend</a>
 <?php
 	include "DB/DBManager.php";
 	echo "<h1>Conexión Basica a tabla clientes:</h1>";
