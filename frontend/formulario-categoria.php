@@ -111,6 +111,6 @@
 
 </main>
 <?php include "../common/commonJS.php"; ?>
-<script src="js/formulario_categoria.js"></script>
+<script src="js/AJAX_formulario_categoria.js"></script>
 </body>
 </html>
