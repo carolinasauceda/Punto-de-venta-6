@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <?php  require "../common/Controllers/sessionController.php" ?>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -48,25 +49,33 @@
                     <div class="card">
                         <div class="card-header">Nueva categoria</div>
                         <div class="card-body">
+                            <div class="alert alert-success alert-dismissible d-none" id="SuccessAlert">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>Operación realizada con éxito</strong>
+                            </div>
+                            <div class="alert alert-warning alert-dismissible d-none" id="WarningAlert">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>Verifica que la información este correctamente llenada</strong>
+                            </div>
                             <form name="my-form" id="formulario-categoria"   method="post">
                                 <div class="form-group row">
                                     <label for="full_name" class="col-md-4 col-form-label text-md-right">Nombre</label>
                                     <div class="col-md-6">
-                                        <input type="text" value="<?php echo 'Holis'?>"id="nombre" data="<?php echo $id?>"class="form-control" name="nombre">
+                                        <input type="text" value=""id="nombre" data="<?php echo $id?>"class="form-control" name="nombre">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label for="email_address" class="col-md-4 col-form-label text-md-right">Descripción</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="descripcion" class="form-control" name="descripcion">
+                                        <input type="text" id="descripcion" class="form-control" name="descripcion" value="">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label for="permanent_address" class="col-md-4 col-form-label text-md-right">Estado del registro:</label>
                                     <div class="col-md-6">
-                                        <select name="transporte" id="estado-seleccion" class="form-control">
+                                        <select id="estado-seleccion" class="form-control">
                                             <option value="1">Activo</option>
                                             <option value="0">Archivado</option>
                                         </select>
@@ -85,8 +94,11 @@
                                         <button type="submit" class="btn btn-primary actionbutton"  id="btnSave">
                                         Guardar
                                         </button>
-                                        <button type="submit" class="btn btn-primary actionbutton" id="btnlol">
-                                            Guardar Cambios
+                                        <button type="submit" class="btn btn-primary actionbutton" id="btnAddNew">
+                                            Nuevo Registro
+                                        </button>
+                                        <button type="submit" class="btn btn-danger actionbutton" id="btnDelete">
+                                        Borrar Registro
                                         </button>
                                     </div>
                                 </div>
@@ -98,7 +110,7 @@
     </div>
 
 </main>
-<?php include "../common/commonHeaders.php"; ?>
+<?php include "../common/commonJS.php"; ?>
 <script src="js/formulario_categoria.js"></script>
 </body>
 </html>
