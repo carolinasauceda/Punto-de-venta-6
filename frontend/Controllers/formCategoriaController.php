@@ -71,6 +71,25 @@ class tablaCategoria extends  DBManager{
             die("Error en la conexion: " . $e);
         }
     }
+
+    function dropRegisterByID($ID){
+        try{
+            if($this->_registerExist($ID)){
+                $this->sql="Delete from CategoriaProductos where IDCategoria= :ID";
+                $resultado=$this->base->prepare($this->sql);
+                $resultado->bindValue(":ID",$ID);
+                $resultado->execute();
+                $this->closeConection();
+                return 1;
+            }else{
+                return 0;
+            }
+
+        }catch(Exception $e){
+            die("Error al conectar con la BD: " . $e);
+        }
+
+    }
 }
 
 
@@ -91,13 +110,10 @@ if(isset($_POST['nombre'])){
     }
 
 
-}else{
-    echo 0;
-}
-
-
-if(isset($_POST["initData"])){
+}else if(isset($_POST["initData"])){
     $result= $formCatobj->getRegisterFilterByID($_POST["initData"]);
+    if($result==0)
+        return 0;
     $json=array(
         'id'=>$result['IDCategoria'],
         'Nombre'=>$result['Nombre'],
@@ -105,5 +121,9 @@ if(isset($_POST["initData"])){
         'RActivo'=>$result['RActivo']
     );
     echo json_encode($json);
+}else if(isset($_POST["deleteAction"])){
+    echo $formCatobj->dropRegisterByID($_POST['id']);
+}else{
+    echo 0;
 }
 ?>
