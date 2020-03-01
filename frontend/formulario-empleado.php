@@ -148,6 +148,6 @@
     </div>
 
 </main>
-<?php include "../common/commonHeaders.php"; ?>
+<?php include "../common/commonJS.php"; ?>
 </body>
 </html>
