@@ -9,8 +9,9 @@ class tablaCategoria extends  DBManager{
 
     protected function _registerExist($id){
         try{
-            $this->sql="SELECT * FROM CategoriaProductos where IDCategoria= $id";
+            $this->sql="SELECT * FROM CategoriaProductos where IDCategoria= :id";
             $resultado=$this->base->prepare($this->sql);
+            $resultado->bindValue(":id",$id);
             $resultado->execute();
             $numero_registro=$resultado->rowCount();
             if($numero_registro!=0){
@@ -41,10 +42,33 @@ class tablaCategoria extends  DBManager{
             $resultado->bindValue(":activo",$activo);
             $typeSqlrequest==1?$resultado->bindValue(":ID",$id):null;
             $resultado->execute();
+            $this->closeConection();
             echo 1;
 
         }catch (Exception $e){
             die("Error" . $e);
+        }
+    }
+
+
+    function getRegisterFilterByID($ID){
+        try{
+            $this->sql="SELECT * FROM CategoriaProductos where IDCategoria= :id";
+            $resultado=$this->base->prepare($this->sql);
+            $resultado->bindValue(":id",$ID);
+            $resultado->execute();
+            $numero_registro=$resultado->rowCount();
+            $this->closeConection();
+            if($numero_registro!=0){
+
+                return $resultado->fetch();
+
+            }else{
+                return 0; //no existe
+            }
+
+        }catch(Exception $e){
+            die("Error en la conexion: " . $e);
         }
     }
 }
@@ -69,5 +93,17 @@ if(isset($_POST['nombre'])){
 
 }else{
     echo 0;
+}
+
+
+if(isset($_POST["initData"])){
+    $result= $formCatobj->getRegisterFilterByID($_POST["initData"]);
+    $json=array(
+        'id'=>$result['IDCategoria'],
+        'Nombre'=>$result['Nombre'],
+        'Descripcion'=>$result['Descripcion'],
+        'RActivo'=>$result['RActivo']
+    );
+    echo json_encode($json);
 }
 ?>

@@ -4,6 +4,18 @@ $('.actionbutton').click(function() {
 });
 
 $(document).ready(function(){
+    loadregister();
+
+    function loadregister(){
+        const postData={
+            initData:$("#nombre").attr("data"),
+        };
+        $.post("Controllers/formCategoriaController.php",postData,function(ServerResponse){
+            console.log(ServerResponse);
+        });
+    }
+
+
     $('#formulario-categoria').submit(function (e){
         const postData={
             id:$("#nombre").attr("data"),
@@ -32,6 +44,5 @@ $(document).ready(function(){
         e.preventDefault();
     });
 
-    $('#btnlol').sum
 });
 

@@ -17,7 +17,7 @@
 
     <?php
         $id=0;
-            if(isset($_GET["id"])){$id=(int)$_GET["id"];}else{echo $id=0;}
+            if(isset($_GET["id"])){$id=(int)$_GET["id"];}else{$id=0;}
     ?>
 
 <nav class="navbar navbar-expand-lg navbar-light navbar-laravel">
@@ -52,7 +52,7 @@
                                 <div class="form-group row">
                                     <label for="full_name" class="col-md-4 col-form-label text-md-right">Nombre</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="nombre" data="<?php echo $id?>"class="form-control" name="nombre">
+                                        <input type="text" value="<?php echo 'Holis'?>"id="nombre" data="<?php echo $id?>"class="form-control" name="nombre">
                                     </div>
                                 </div>
 
