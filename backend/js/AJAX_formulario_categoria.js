@@ -54,14 +54,14 @@ $(document).ready(function(){
                $.post(ConnectionString,{deleteAction:1, id:$("#nombre").attr("data"),},function(response){
                    if(response==0){
                        alert("Este registro no existe o ha sido borrado previamente");
-                       window.location.href="/backend/formulario-categoria.php";
+                       window.location.href="../../backend/formulario-categoria.php";
                    }else if(response==1){
                         $('#SuccessAlert').attr('class',"alert alert-success alert-dismissible d-block");
                    }
                })
             }
         }else if(buttonpressed=="btnAddNew"){
-            window.location="/backend/formulario-categoria.php";
+            window.location="../../backend/formulario-categoria.php";
         }
         e.preventDefault();
     });
