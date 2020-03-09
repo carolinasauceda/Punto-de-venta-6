@@ -1,4 +1,4 @@
-<!--Pagina principal del frontend-->
+<!--Pagina principal del backend-->
 <!DOCTYPE html>
 <html lang="en">
 <head>

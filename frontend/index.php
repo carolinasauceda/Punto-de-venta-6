@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <p>Bienvenido al Frontend: <?php echo $_SESSION["Nombre"] . " " . $_SESSION["ApellidoP"] . " " . $_SESSION["ApellidoM"]?></p>
+    <p>Bienvenido al backend: <?php echo $_SESSION["Nombre"] . " " . $_SESSION["ApellidoP"] . " " . $_SESSION["ApellidoM"]?></p>
     <a href="login.php">Logout</a>
     <br>
     <br> <a href="formulario-categoria.php">Formulario categoria</a>
