@@ -6,7 +6,7 @@
     text-decoration: none;
 }
 body{
-    background: #121212;
+    background: #272727;
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -14,7 +14,7 @@ body{
 }
 .login-form{
     width: 470px;
-    background: #202020;
+    background: #313131;
     padding: 30px 60px;
 }
 .logo{
@@ -73,7 +73,7 @@ body{
     transition: .3s linear;
 }
 .login-btn.active{
-    background: #037bee;
+    background: #03ee4a;
     color: #fff;
 }
 .login-btn.active:hover{
