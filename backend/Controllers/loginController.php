@@ -24,6 +24,17 @@ class loginManager extends  DBManager {
                 $_SESSION["Nombre"]=$userData["Nombre"];
                 $_SESSION["ApellidoP"]=$userData["Apellido_P"];
                 $_SESSION["ApellidoM"]=$userData["Apellido_M"];
+                $this->sql="SELECT * FROM NivelUsuario where IDNivel= :id";
+                $resultado=$this->base->prepare($this->sql);
+                $resultado->bindValue(":id",$userData["NivelUsuario"]);
+                $resultado->execute();
+                $numero_registro=$resultado->rowCount();
+                if($numero_registro!=0){
+                    $userLevel=$resultado->fetch();
+                    $_SESSION["AutorizacionNivel"]=$userLevel["Nivel"];
+                    $_SESSION["UsuarioTipo"]=$userLevel["Descripcion"];
+                }
+
 
                 return 1;
             }else{

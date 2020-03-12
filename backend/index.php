@@ -8,6 +8,7 @@
 </head>
 <body>
     <p>Bienvenido al backend: <?php echo $_SESSION["Nombre"] . " " . $_SESSION["ApellidoP"] . " " . $_SESSION["ApellidoM"]?></p>
+    <p>Usuario: <?= $_SESSION["UsuarioTipo"]?> Autorizacion nivel: <?= $_SESSION["AutorizacionNivel"]?></p>
     <a href="login.php">Logout</a>
     <br>
     <br> <a href="formulario-categoria.php">Formulario categoria</a>

@@ -10,7 +10,10 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
     <link rel="icon" href="Favicon.png">
     <title>Nuevo Cliente</title>
-
+    <?php
+    $id=0;
+    if(isset($_GET["id"])){$id=$_GET["id"];}else{$id=0;}
+    ?>
 </head>
 <body>
 
@@ -42,11 +45,13 @@
                     <div class="card">
                         <div class="card-header">Nuevo cliente</div>
                         <div class="card-body">
-                            <form name="my-form"   method="post">
+                            <div id="alertsArea"></div>
+                            <form name="my-form"  id="formulario"  method="post">
+
                                 <div class="form-group row">
                                     <label for="full_name" class="col-md-4 col-form-label text-md-right">RFC</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="id" class="form-control" name="id">
+                                        <input type="text" id="RFC" data="<?php echo $id?>" class="form-control" name="RFC">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -71,14 +76,14 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="phone_number" class="col-md-4 col-form-label text-md-right">Correo electronico</label>
+                                    <label for="correo" class="col-md-4 col-form-label text-md-right">Correo electronico</label>
                                     <div class="col-md-6">
                                         <input type="email" class="form-control" id="correo" name="correo">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="permanent_address" class="col-md-4 col-form-label text-md-right">Telefono</label>
+                                    <label for="telefono" class="col-md-4 col-form-label text-md-right">Telefono</label>
                                     <div class="col-md-6">
                                         <input type="tel" id="telefono" class="form-control" name="telefono">
                                     </div>
@@ -86,11 +91,10 @@
                                 <div class="form-group row">
                                     <label for="permanent_address" class="col-md-4 col-form-label text-md-right">Estado</label>
                                     <div class="col-md-6">
-                                        <input list="estado" id="estado-seleccion" class="form-control" name="estado-seleccion">
-                                        <datalist id="estado">
-                                            <option value="activo">
-                                            <option value="archivado">
-                                          </datalist>
+                                         <select id="estado-seleccion" class="form-control">
+                                            <option value="1">Activo</option>
+                                            <option value="0">Archivado</option>
+                                        </select>
                                     </div>
                                 </div>
 
@@ -104,8 +108,14 @@
                                 </div>-->
 
                                     <div class="col-md-6 offset-md-4">
-                                        <button type="submit" class="btn btn-primary">
-                                        Guardar
+                                        <button type="submit" class="btn btn-primary actionbutton"  id="btnSave">
+                                            Guardar
+                                        </button>
+                                        <button type="submit" class="btn btn-primary actionbutton" id="btnAddNew">
+                                            Nuevo Registro
+                                        </button>
+                                        <button type="submit" class="btn btn-danger actionbutton" id="btnDelete">
+                                            Borrar Registro
                                         </button>
                                     </div>
                                 </div>
@@ -118,5 +128,6 @@
 
 </main>
 <?php include "../common/commonJS.php"; ?>
+<script src="js/AJAX_formularioCliente.js"></script>
 </body>
 </html>

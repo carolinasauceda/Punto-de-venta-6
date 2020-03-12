@@ -49,31 +49,24 @@
                     <div class="card">
                         <div class="card-header">Nueva categoria</div>
                         <div class="card-body">
-                            <div class="alert alert-success alert-dismissible d-none" id="SuccessAlert">
-                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                <strong>Operación realizada con éxito</strong>
-                            </div>
-                            <div class="alert alert-warning alert-dismissible d-none" id="WarningAlert">
-                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                <strong>Verifica que la información este correctamente llenada</strong>
-                            </div>
-                            <form name="my-form" id="formulario-categoria"   method="post">
+                            <div id="alertsArea"></div>
+                            <form name="my-form" id="formulario"   method="post">
                                 <div class="form-group row">
-                                    <label for="full_name" class="col-md-4 col-form-label text-md-right">Nombre</label>
+                                    <label for="nombre" class="col-md-4 col-form-label text-md-right">Nombre</label>
                                     <div class="col-md-6">
-                                        <input type="text" value=""id="nombre" data="<?php echo $id?>"class="form-control" name="nombre">
+                                        <input type="text" value=""id="nombre" data="<?php echo $id?>" class="form-control" name="nombre">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="email_address" class="col-md-4 col-form-label text-md-right">Descripción</label>
+                                    <label for="descripcion" class="col-md-4 col-form-label text-md-right">Descripción</label>
                                     <div class="col-md-6">
                                         <input type="text" id="descripcion" class="form-control" name="descripcion" value="">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="permanent_address" class="col-md-4 col-form-label text-md-right">Estado del registro:</label>
+                                    <label for="estado-seleccion" class="col-md-4 col-form-label text-md-right">Estado del registro:</label>
                                     <div class="col-md-6">
                                         <select id="estado-seleccion" class="form-control">
                                             <option value="1">Activo</option>

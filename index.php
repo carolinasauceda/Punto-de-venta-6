@@ -10,6 +10,7 @@
 <a href="backend/index.php">backend</a>
 <?php
 	include "DB/DBManager.php";
+	include "DB/helperformsLists.php";
 	echo "<h1>Conexión Basica a tabla clientes:</h1>";
 	$coneccion= new tableClientsManager();
 	$resultado=$coneccion->getAllClients();
@@ -17,6 +18,11 @@
 	foreach ($resultado as $campo){
 	    echo "Nombre: " . $campo["Nombre"] . " Apellido Paterno: " . $campo["Apellido_P"] . "<br>";
     }
+
+
+    echo "Polinecio: \n\n\n";
+    $nivel = new formsList();
+    $nivel->getListaNivelUsuario();
 
 
     echo "<h1>Conexión Basica a tabla Usuarios:</h1>";
@@ -29,7 +35,6 @@
 
         echo "Nickname: " . $campo["IDUsuario"] . " Nivel: " . $Nivel->NivelUsuarioToText($campo["NivelUsuario"]) . "<br>";
     }
-
 
 
 

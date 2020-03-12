@@ -1,4 +1,5 @@
-create table Proveedores (IDProveedor INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+create table Proveedores (
+			IDProveedor INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
                          Compania varchar(50) NOT NULL,
                          Contacto varchar(50) NOT NuLL,
                          Correo varchar(50),
@@ -6,12 +7,15 @@ create table Proveedores (IDProveedor INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                          RActivo TINYINT(1)
                          );
 						 
-CREATE table NivelUsuario (IDNivel int AUTO_INCREMENT PRIMARY KEY,
+CREATE table NivelUsuario (
+		   IDNivel int AUTO_INCREMENT PRIMARY KEY,
                    Descripcion varchar(50) NOT NULL,
                    Nivel int
                    );
 						
-CREATE TABLE Empleados (IDEmpleado varchar(25) PRIMARY KEY,
+CREATE TABLE Empleados (
+		       IDEmpleado varchar(25) PRIMARY KEY,
+		       RFC varchar(13) NOT NULL,
                        Nombre varchar(50) NOT NULL,
                        Apellido_P varchar(50) NOT nULL,
                        Apellido_M varchar(50) NOT NULL,
@@ -31,7 +35,8 @@ CREATE TABLE CategoriaProductos (IDCategoria int AUTO_INCREMENT PRIMARY KEY,
                                  RActivo tinyint(1)
                                  );
 								 
-create table Clientes (IDCliente int AUTO_INCREMENT PRIMARY KEY,
+create table Clientes (
+		      RFC varchar(13) PRIMARY KEY,
                       Nombre varchar(50) not null,
                       Apellido_P varchar(50),
                       Apellido_M varchar(50),
@@ -41,13 +46,13 @@ create table Clientes (IDCliente int AUTO_INCREMENT PRIMARY KEY,
                       ); 
 								 
 create table Ventas (IDVenta int AUTO_INCREMENT PRIMARY KEY,
-                    IDCliente int not null,
+                    Cliente varchar(13) not null,
                     IDEmpleado varchar(25) not null,
                     Fecha timestamp not null,
                     Total decimal(7,2) not null,
                     Efectivo decimal(7,2) not null,
                     Cambio  decimal(7,2) not null,
-                    FOREIGN KEY (IDCliente) REFERENCES Clientes(IDCliente),
+                    FOREIGN KEY (Cliente) REFERENCES Clientes(RFC),
                     FOREIGN KEY (IDEmpleado) REFERENCES Empleados(IDEmpleado)
                     );
 				

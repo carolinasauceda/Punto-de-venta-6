@@ -1,6 +1,6 @@
 
 <?php
-class DBManager{
+class DBManager {
     public $base;
     protected $sql; //Instruccion sql
     const DBName="puntoventa";
@@ -40,6 +40,15 @@ class DBManager{
             die("Error en conexion" . $e->getMessage());
         }
     }
+
+    protected function getUserLevels(){
+        try{
+
+        }catch(Exception $e){
+            
+        }
+    }
+
 
 
 

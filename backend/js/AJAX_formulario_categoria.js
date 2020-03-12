@@ -3,6 +3,21 @@ $('.actionbutton').click(function() {
     buttonpressed = $(this).attr('id');
 });
 
+var SuccessAlert='<div class="alert alert-success alert-dismissible" id="SuccessAlert">\n' +
+    '                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>\n' +
+    '                                <strong>Operación realizada con éxito</strong>\n' +
+    '                            </div>';
+
+var WarningAlert='<div class="alert alert-warning alert-dismissible" id="WarningAlert">\n' +
+    '                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>\n' +
+    '                                <strong>Verifica que la información este correctamente llenada</strong>\n' +
+    '                            </div>';
+function dissmisAlerts(){
+    $(".alert").delay(4000).slideUp(200, function() {
+        $(this).alert('close');
+    });
+}
+
 
  var ConnectionString="Controllers/formCategoriaController.php";
 
@@ -16,7 +31,7 @@ $(document).ready(function(){
         $.post(ConnectionString,postData,function(ServerResponse){
             if(ServerResponse!=0){
                 let responde=JSON.parse(ServerResponse);
-                console.log(responde);
+                //console.log(responde);
                 $("#nombre").attr("data",responde['id']);
                 $('#nombre').attr('value',responde['Nombre']);
                 $('#descripcion').attr('value',responde['Descripcion']);
@@ -26,7 +41,7 @@ $(document).ready(function(){
         });
     }
 
-    $('#formulario-categoria').submit(function (e){
+    $('#formulario').submit(function (e){
         const postData={
             id:$("#nombre").attr("data"),
             nombre: $('#nombre').val(),
@@ -40,11 +55,14 @@ $(document).ready(function(){
                 //console.log("Server response: "+response.toString());
                 console.log(response);
                 if(response==1){
+                    $("#nombre").attr("data")=="0"?$('#formulario')[0].reset():null;
+                    $("#alertsArea").append(SuccessAlert);
+                    dissmisAlerts();
 
-                    $('#SuccessAlert').attr('class',"alert alert-success alert-dismissible d-block");
                 }else{
                     //Colocar aquí tu magia xd
-                    $('#WarningAlert').attr('class',"alert alert-warning alert-dismissible d-block");
+                    $("#alertsArea").append(WarningAlert);
+                    dissmisAlerts();
                 }
             });
 
@@ -56,7 +74,9 @@ $(document).ready(function(){
                        alert("Este registro no existe o ha sido borrado previamente");
                        window.location.href="../../backend/formulario-categoria.php";
                    }else if(response==1){
-                        $('#SuccessAlert').attr('class',"alert alert-success alert-dismissible d-block");
+                        $('input').val('');
+                       $("#alertsArea").append(SuccessAlert);
+                       dissmisAlerts();
                    }
                })
             }
