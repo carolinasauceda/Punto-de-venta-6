@@ -24,24 +24,29 @@ $(document).ready(function(){
     loadregister();
 
     function loadregister(){
-        const postData={
-            initData:$("#RFC").attr("data"),
-        };
-        $.post(ConnectionString,postData,function(ServerResponse){
-            if(ServerResponse!=0){
-                let responde=JSON.parse(ServerResponse);
-                //console.log(responde);
-                $("#RFC").attr("data",responde['RFC']);
-                $('#RFC').attr('value',responde['RFC']);
-                $('#nombre').attr('value',responde['Nombre']);
-                $('#apellido_p').attr('value',responde['Apellido_P']);
-                $('#apellido_m').attr('value',responde['Apellido_M']);
-                $('#correo').attr('value',responde['Correo']);
-                $('#telefono').attr('value',responde['Telefono']);
-                $('#estado-seleccion').val(responde['RActivo']);
-            }
+        if($("#RFC").attr("data")!=0){
+            const postData={
+                initData:$("#RFC").attr("data"),
+            };
+            $.post(ConnectionString,postData,function(ServerResponse){
+                if(ServerResponse!=0){
+                    let responde=JSON.parse(ServerResponse);
+                    //console.log(responde);
+                    $("#RFC").attr("data",responde['RFC']);
+                    $('#RFC').attr('value',responde['RFC']);
+                    $('#nombre').attr('value',responde['Nombre']);
+                    $('#apellido_p').attr('value',responde['Apellido_P']);
+                    $('#apellido_m').attr('value',responde['Apellido_M']);
+                    $('#correo').attr('value',responde['Correo']);
+                    $('#telefono').attr('value',responde['Telefono']);
+                    $('#estado-seleccion').val(responde['RActivo']);
+                }else{
+                    alert("Este registro no existe");
+                }
 
-        });
+            });
+        }
+
     }
 
     $('#formulario').submit(function (e){

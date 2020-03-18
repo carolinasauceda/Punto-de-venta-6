@@ -10,7 +10,7 @@ class tablaEmpleados extends  DBManager{
 
     protected function _registerExist($id){
         try{
-            $this->sql="SELECT * FROM Clientes where RFC= :id";
+            $this->sql="SELECT * FROM Empleados where IDEmpleado= :id";
             $resultado=$this->base->prepare($this->sql);
             $resultado->bindValue(":id",$id);
             $resultado->execute();
@@ -23,18 +23,56 @@ class tablaEmpleados extends  DBManager{
         }catch (Exception $e){
             die("Error" . $e);
         }
+
+      //AILC200317
     }
 
-    function saveChanges($id, $rfc, $nombre, $apellido_P, $apellido_M, $correo, $telefono, $activo){
+    function saveChanges($id, $rfc, $nombre, $apellido_P, $apellido_M, $fnac, $fcontratacion, $direccion, $telefono, $tipoUsuario, $clave, $activo){
 
         try{
             $typeSqlrequest=$this->_registerExist($id);
             if($typeSqlrequest==0){
                 //IS an insert instruction
-                $this->sql="Insert Into Clientes (RFC, Nombre, Apellido_P, Apellido_M, Correo, Telefono, RActivo) values (:rfc,:nombre,:apellido_P, :apellido_M, :correo, :telefono,:activo)";
+                $id=strtoupper(substr($apellido_M, 0, 2) . substr($apellido_P,0, 1) .
+                        substr( $nombre, 0, 1)). str_replace("-","",$fcontratacion) .
+                    strval(rand ( 10 , 99 )) ;
+                $this->sql="Insert Into Empleados (IDEmpleado, 
+                                                    RFC,
+                                                    Nombre, 
+                                                    Apellido_P, 
+                                                    Apellido_M, 
+                                                    Fecha_Nacimiento, 
+                                                    Fecha_Contratacion, 
+                                                    Direccion, 
+                                                    Telefono, 
+                                                    NivelUsuario, 
+                                                    Clave, 
+                                                    RActivo) 
+                                                    values ('$id',
+                                                            :rfc,
+                                                            :nombre,
+                                                            :apellido_P, 
+                                                            :apellido_M, 
+                                                            :fnac, 
+                                                            :fcontratacion, 
+                                                            :direccion, 
+                                                            :telefono, 
+                                                            :nivelusuario,
+                                                            :clave,
+                                                            :activo)";
             }else{
                 //IS an Update instruction
-                $this->sql="Update Clientes set RFC= :rfc, Nombre= :nombre, Apellido_P= :apellido_P, Apellido_M= :apellido_M, Correo= :correo, Telefono= :telefono, RActivo= :activo where RFC= :ID";
+                $this->sql="Update Empleados set RFC= :rfc, Nombre= :nombre, 
+                                                            Apellido_P= :apellido_P, 
+                                                            Apellido_M= :apellido_M, 
+                                                            Fecha_Nacimiento=:fnac, 
+                                                            Fecha_Contratacion=:fcontratacion,  
+                                                            Direccion=:direccion,
+                                                            Telefono= :telefono, 
+                                                            NivelUsuario=:nivelusuario,
+                                                            Clave=:clave,
+                                                            RActivo= :activo 
+                                                            where IDEmpleado= :ID";
             }
 
             $resultado=$this->base->prepare($this->sql);
@@ -42,8 +80,12 @@ class tablaEmpleados extends  DBManager{
             $resultado->bindValue(":nombre",$nombre);
             $resultado->bindValue(":apellido_P",$apellido_P);
             $resultado->bindValue(":apellido_M",$apellido_M);
-            $resultado->bindValue(":correo",$correo);
+            $resultado->bindValue(":fnac",$fnac);
+            $resultado->bindValue(":fcontratacion",$fcontratacion);
+            $resultado->bindValue(":direccion",$direccion);
             $resultado->bindValue(":telefono",$telefono);
+            $resultado->bindValue(":nivelusuario",$tipoUsuario);
+            $resultado->bindValue(":clave",$clave);
             $resultado->bindValue(":activo",$activo);
             $typeSqlrequest==1?$resultado->bindValue(":ID",$id):null;
             $resultado->execute();
@@ -58,7 +100,7 @@ class tablaEmpleados extends  DBManager{
 
     function getRegisterFilterByID($ID){
         try{
-            $this->sql="SELECT * FROM Clientes where RFC= :id";
+            $this->sql="SELECT * FROM Empleados where IDEmpleado= :id";
             $resultado=$this->base->prepare($this->sql);
             $resultado->bindValue(":id",$ID);
             $resultado->execute();
@@ -80,7 +122,7 @@ class tablaEmpleados extends  DBManager{
     function dropRegisterByID($ID){
         try{
             if($this->_registerExist($ID)){
-                $this->sql="Delete from Clientes where RFC= :ID";
+                $this->sql="Delete from Empleados where RFC= :ID";
                 $resultado=$this->base->prepare($this->sql);
                 $resultado->bindValue(":ID",$ID);
                 $resultado->execute();
@@ -98,22 +140,26 @@ class tablaEmpleados extends  DBManager{
 }
 
 
-$formObj= new tablaCliente();
+$formObj= new tablaEmpleados();
 
 if(isset($_POST['rfc'])){
 
     $id=htmlentities(addslashes($_POST["id"]));
-    $nombre=htmlentities(addslashes($_POST["nombre"]));
     $rfc=htmlentities(addslashes($_POST["rfc"]));
+    $nombre=htmlentities(addslashes($_POST["nombre"]));
     $apellido_P=htmlentities(addslashes($_POST["apellido_p"]));
     $apellido_M=htmlentities(addslashes($_POST["apellido_m"]));
-    $correo=htmlentities(addslashes($_POST["correo"]));
+    $fnac=htmlentities(addslashes($_POST["fnac"]));
+    $fcontratacion=htmlentities(addslashes($_POST["fcontratacion"]));
+    $direccion=htmlentities(addslashes($_POST["direccion"]));
     $telefono=htmlentities(addslashes($_POST["telefono"]));
+    $tipoUsuario=htmlentities(addslashes($_POST["tipousuario"]));
+    $clave=htmlentities(addslashes($_POST["clave"]));
     $activo=htmlentities(addslashes($_POST["activo"]));
-    if($rfc=="" ||$nombre=="" || $apellido_M=="" || $apellido_P==""|| ((int)$activo>1)){
+    if($rfc=="" ||$nombre=="" || $apellido_M=="" || $apellido_P==""|| $clave=="" || $fcontratacion=="" || $fnac=="" || ((int)$activo>1)){
         echo 0;
     }else{
-        echo $formObj->saveChanges($id, $rfc, $nombre, $apellido_P, $apellido_M, $correo, $telefono, $activo);
+        echo $formObj->saveChanges($id, $rfc, $nombre, $apellido_P, $apellido_M, $fnac, $fcontratacion, $direccion, $telefono, $tipoUsuario, $clave, $activo);
     }
 
 
@@ -122,12 +168,17 @@ if(isset($_POST['rfc'])){
     if($result==0)
         return 0;
     $json=array(
-        'Nombre'=>$result['Nombre'],
+        'IDEmpleado'=>$result['IDEmpleado'],
         'RFC'=>$result['RFC'],
+        'Nombre'=>$result['Nombre'],
         'Apellido_P'=>$result['Apellido_P'],
         'Apellido_M'=>$result['Apellido_M'],
-        'Correo'=>$result['Correo'],
+        'Fecha_Nacimiento'=>$result['Fecha_Nacimiento'],
+        'Fecha_Contratacion'=>$result['Fecha_Contratacion'],
+        'Direccion'=>$result['Direccion'],
         'Telefono'=>$result['Telefono'],
+        'NivelUsuario'=>$result['NivelUsuario'],
+        'Clave'=>$result['Clave'],
         'RActivo'=>$result['RActivo']
     );
     echo json_encode($json);

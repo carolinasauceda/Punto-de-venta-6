@@ -25,20 +25,25 @@ $(document).ready(function(){
     loadregister();
 
     function loadregister(){
-        const postData={
-            initData:$("#nombre").attr("data"),
-        };
-        $.post(ConnectionString,postData,function(ServerResponse){
-            if(ServerResponse!=0){
-                let responde=JSON.parse(ServerResponse);
-                //console.log(responde);
-                $("#nombre").attr("data",responde['id']);
-                $('#nombre').attr('value',responde['Nombre']);
-                $('#descripcion').attr('value',responde['Descripcion']);
-                $('#estado-seleccion').val(responde['RActivo']);
-            }
+        if($("#RFC").attr("data")!=0){
+            const postData={
+                initData:$("#nombre").attr("data"),
+            };
+            $.post(ConnectionString,postData,function(ServerResponse){
+                if(ServerResponse!=0){
+                    let responde=JSON.parse(ServerResponse);
+                    //console.log(responde);
+                    $("#nombre").attr("data",responde['id']);
+                    $('#nombre').attr('value',responde['Nombre']);
+                    $('#descripcion').attr('value',responde['Descripcion']);
+                    $('#estado-seleccion').val(responde['RActivo']);
+                }
 
-        });
+            });
+        }else{
+            alert("Este registro no existe");
+        }
+
     }
 
     $('#formulario').submit(function (e){

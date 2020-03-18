@@ -11,6 +11,9 @@
 <?php
 	include "DB/DBManager.php";
 	include "DB/helperformsLists.php";
+$d1 = new Datetime();
+echo $d1->format('U');
+# 1584247951
 	echo "<h1>Conexión Basica a tabla clientes:</h1>";
 	$coneccion= new tableClientsManager();
 	$resultado=$coneccion->getAllClients();

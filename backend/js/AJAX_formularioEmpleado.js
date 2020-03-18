@@ -24,28 +24,33 @@ $(document).ready(function(){
     loadregister();
 
     function loadregister(){
-        const postData={
-            initData:$("#RFC").attr("data"),
-        };
-        $.post(ConnectionString,postData,function(ServerResponse){
-            if(ServerResponse!=0){
-                let responde=JSON.parse(ServerResponse);
-                //console.log(responde);
-                $("#RFC").attr("data",responde['RFC']);
-                $('#RFC').attr('value',responde['RFC']);
-                $('#nombre').attr('value',responde['Nombre']);
-                $('#apellido_p').attr('value',responde['Apellido_P']);
-                $('#apellido_m').attr('value',responde['Apellido_M']);
-                $('#fnac').attr('value',responde['Fecha_Nacimiento']);
-                $('#fcontratacion').attr('value',responde['Fecha_Contratacion']);
-                $('#direccion').attr('value',responde['Direccion']);
-                $('#telefono').attr('value',responde['Telefono']);
-                $('#tipousuario').attr('value',responde['NivelUsuario']);
-                $('#clave').attr('value',responde['Clave']);
-                $('#estado-seleccion').val(responde['RActivo']);
-            }
+        if($("#RFC").attr("data")!=0){
+            const postData={
+                initData:$("#RFC").attr("data"),
+            };
+            $.post(ConnectionString,postData,function(ServerResponse){
+                if(ServerResponse!=0){
+                    let responde=JSON.parse(ServerResponse);
+                    console.log("Responde: "+responde);
+                    $("#RFC").attr("data",responde['IDEmpleado']);
+                    $('#RFC').attr('value',responde['RFC']);
+                    $('#nombre').attr('value',responde['Nombre']);
+                    $('#apellido_p').attr('value',responde['Apellido_P']);
+                    $('#apellido_m').attr('value',responde['Apellido_M']);
+                    $('#fnac').attr('value',responde['Fecha_Nacimiento']);
+                    $('#fcontratacion').attr('value',responde['Fecha_Contratacion']);
+                    $('#direccion').attr('value',responde['Direccion']);
+                    $('#telefono').attr('value',responde['Telefono']);
+                    $('#tipousuario').attr('value',responde['NivelUsuario']);
+                    $('#clave').attr('value',responde['Clave']);
+                    $('#estado-seleccion').val(responde['RActivo']);
+                }else{
+                    alert("El registro no existe");
+                }
 
-        });
+            });
+        }
+
     }
 
     $('#formulario').submit(function (e){
@@ -96,7 +101,7 @@ $(document).ready(function(){
                 })
             }
         }else if(buttonpressed=="btnAddNew"){
-            window.location="../../backend/formulario-cliente.php";
+            window.location="../../backend/formulario-empleado.php";
         }
         e.preventDefault();
     });
