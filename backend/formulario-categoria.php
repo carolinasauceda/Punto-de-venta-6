@@ -104,6 +104,20 @@
 
 </main>
 <?php include "../common/commonJS.php"; ?>
-<script src="js/AJAX_formulario_categoria.js"></script>
+<script src="../common/js/CommonAlerts.js"></script>
+<script src="js/DataToSendManager.js"></script>
+<script>
+    msg = new alerts();
+    form = new DataToSendManager();
+    connection="Controllers/formCategoriaController.php";
+    formSelector="#formulario";
+    registerKeyDataField="#nombre";
+    loadregisterfunc = form.onloadCategoriaRegister();
+    savePostData=form.onSavePostDataOfCategoria();
+    onDeleteNewRedirect="../../backend/formulario-categoria.php";
+    SuccessAlert=msg.basicSuccessAlert();
+    WarningAlert=msg.basicwarningAlert();
+</script>
+<script src="js/AJAXController.js"></script>
 </body>
 </html>

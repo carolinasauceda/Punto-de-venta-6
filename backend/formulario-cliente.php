@@ -128,6 +128,20 @@
 
 </main>
 <?php include "../common/commonJS.php"; ?>
-<script src="js/AJAX_formularioCliente.js"></script>
+<script src="../common/js/CommonAlerts.js"></script>
+<script src="js/DataToSendManager.js"></script>
+<script>
+    msg = new alerts();
+    form = new DataToSendManager();
+    connection="Controllers/formClienteController.php";
+    formSelector="#formulario";
+    registerKeyDataField="#RFC";
+    loadregisterfunc = form.onloadClienteRegister();
+    savePostData=form.onSavePostDataOfCliente();
+    onDeleteNewRedirect="../../backend/formulario-cliente.php";
+    SuccessAlert=msg.basicSuccessAlert();
+    WarningAlert="Verifica que la información este correctamente llenada y/o verifique que el RFC no este relacionado con otro registro";
+</script>
+<script src="js/AJAXController.js"></script>
 </body>
 </html>

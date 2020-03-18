@@ -162,6 +162,20 @@
 
 </main>
 <?php include "../common/commonJS.php"; ?>
-<script src="js/AJAX_formularioEmpleado.js"></script>
+<script src="../common/js/CommonAlerts.js"></script>
+<script src="js/DataToSendManager.js"></script>
+<script>
+    msg = new alerts();
+    form = new DataToSendManager();
+    connection="Controllers/formEmpleadoController.php";
+    formSelector="#formulario";
+    registerKeyDataField="#RFC";
+    loadregisterfunc = form.onloadEmpleadoRegister();
+    savePostData=form.onSavePostDataOfEmpleado();
+    onDeleteNewRedirect="../../backend/formulario-empleado.php";
+    SuccessAlert=msg.basicSuccessAlert();
+    WarningAlert=msg.basicwarningAlert();
+</script>
+<script src="js/AJAXController.js"></script>
 </body>
 </html>

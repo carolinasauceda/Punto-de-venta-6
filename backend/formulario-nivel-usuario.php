@@ -12,6 +12,12 @@
 
 
     <link rel="icon" href="Favicon.png">
+
+    <?php
+    $id=0;
+    if(isset($_GET["id"])){$id=$_GET["id"];}else{$id=0;}
+    ?>
+
     <title>Nueva Categoria</title>
 </head>
 <body>
@@ -44,28 +50,18 @@
                     <div class="card">
                         <div class="card-header">Nueva categoria</div>
                         <div class="card-body">
-                            <form name="my-form"   method="post">
+                            <div id="alertsArea"></div>
+                            <form name="my-form" id="formulario"  method="post">
                                 <div class="form-group row">
-                                    <label for="full_name" class="col-md-4 col-form-label text-md-right">Nombre</label>
+                                    <label for="email_address" class="col-md-4 col-form-label text-md-right">Descripción</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="nombre" class="form-control" name="nombre">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="email_address" class="col-md-4 col-form-label text-md-right">Descripcion</label>
-                                    <div class="col-md-6">
-                                        <input type="text" id="compania" class="form-control" name="compania">
+                                        <input type="text" value="" data="<?php echo $id?>" id="descripcion" class="form-control" name="descripcion">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="permanent_address" class="col-md-4 col-form-label text-md-right">Estado</label>
+                                    <label for="permanent_address" class="col-md-4 col-form-label text-md-right">Nivel de Permisos</label>
                                     <div class="col-md-6">
-                                        <input list="estado" id="estado-seleccion" class="form-control" name="estado-seleccion">
-                                        <datalist id="estado">
-                                            <option value="activo">
-                                            <option value="archivado">
-                                          </datalist>
+                                        <input type="number" value="" id="nivelDePermisos" class="form-control" name="nivelDePermisos">
                                     </div>
                                 </div>
 
@@ -78,11 +74,17 @@
                                     </div>
                                 </div>-->
 
-                                    <div class="col-md-6 offset-md-4">
-                                        <button type="submit" class="btn btn-primary">
+                                <div class="col-md-6 offset-md-4">
+                                    <button type="submit" class="btn btn-primary actionbutton"  id="btnSave">
                                         Guardar
-                                        </button>
-                                    </div>
+                                    </button>
+                                    <button type="submit" class="btn btn-primary actionbutton" id="btnAddNew">
+                                        Nuevo Registro
+                                    </button>
+                                    <button type="submit" class="btn btn-danger actionbutton" id="btnDelete">
+                                        Borrar Registro
+                                    </button>
+                                </div>
                                 </div>
                             </form>
                         </div>
@@ -93,5 +95,20 @@
 
 </main>
 <?php include "../common/commonJS.php"; ?>
+<script src="../common/js/CommonAlerts.js"></script>
+<script src="js/DataToSendManager.js"></script>
+<script>
+    msg = new alerts();
+    form = new DataToSendManager();
+    connection="Controllers/formNivelUsuarioController.php";
+    formSelector="#formulario";
+    registerKeyDataField="#descripcion";
+    loadregisterfunc = form.onloadNivelUsuarioRegister();
+    savePostData=form.onSavePostDataOfNivelUsuario();
+    onDeleteNewRedirect="../../backend/formulario-nivel-usuario.php";
+    SuccessAlert=msg.basicSuccessAlert();
+    WarningAlert=msg.basicwarningAlert();
+</script>
+<script src="js/AJAXController.js"></script>
 </body>
 </html>
