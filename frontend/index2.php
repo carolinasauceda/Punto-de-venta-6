@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php  require "../common/Controllers/sessionController.php" ?>
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/index-style.css">
@@ -14,7 +15,7 @@
             <div class="col-md-3 d-flex justify-content-between">
                 <!--<h6 class="logo">L O G O</h6>-->
                 <a href="/frontend/index2.html"><img src="img/logo.png" alt="logo-punto-de-venta" width="90px"></a>
-                <h6 class="logo"> Welcome, user</h6>
+                <h6 class="logo"> Bienvenido,<?php  echo $_SESSION["Nombre"]?></h6>
                 <input type="checkbox" name="modo" id="modo" class="logo">
             </div>
             <div class="col-md-9">
@@ -23,7 +24,7 @@
                     <li><a href="#">Empleados</a></li>
                     <li><a href="#">Proveedores</a></li>
                     <li><a href="#">Productos</a></li>
-                    <li class="boton-especial"><a href="#">Salir</a></li>
+                    <li class="boton-especial"><a href="login.php">Salir</a></li>
                 </ul>
             </div>
         </div>

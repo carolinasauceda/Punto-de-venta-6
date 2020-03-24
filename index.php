@@ -7,7 +7,7 @@
 </head>
 <body>
 <br>
-<a href="frontend/index.php">Frontend</a>
+<a href="frontend/index2.php">Frontend</a>
 <?php
 	include "DB/DBManager.php";
 	echo "<h1>Conexión Basica a tabla clientes:</h1>";
