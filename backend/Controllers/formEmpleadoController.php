@@ -122,7 +122,7 @@ class tablaEmpleados extends  DBManager{
     function dropRegisterByID($ID){
         try{
             if($this->_registerExist($ID)){
-                $this->sql="Delete from Empleados where RFC= :ID";
+                $this->sql="Delete from Empleados where IDEmpleado= :ID";
                 $resultado=$this->base->prepare($this->sql);
                 $resultado->bindValue(":ID",$ID);
                 $resultado->execute();
