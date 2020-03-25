@@ -1,0 +1,19 @@
+<?php
+
+    class formButtons{
+
+        public function renderButtons($enable){
+            !$enable? $disable= "disabled" :$disable= '';
+            echo '<button type="submit" class="btn btn-primary actionbutton" '.$disable .'  id="btnSave">
+                    Guardar
+                  </button>
+                  <button type="submit" class="btn btn-primary actionbutton" '.$disable.' id="btnAddNew">
+                    Nuevo Registro
+                  </button>
+                   <button type="submit" class="btn btn-danger actionbutton" '.$disable.' id="btnDelete">
+                   Borrar Registro
+                   </button>';
+        }
+    }
+
+?>
