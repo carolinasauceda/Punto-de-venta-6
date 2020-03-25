@@ -139,6 +139,7 @@ class DataToSendManager{
 
     /*Productos-----------------------------------------------------------------------------------*/
 
+
     onloadProductoRegister(){
         return function(responde){
             $("#nombre").attr("data",responde['IDProducto']);

@@ -109,11 +109,11 @@ if(isset($_POST['nombre'])){
     $precio=htmlentities(addslashes($_POST["precio"]));
     $stock=htmlentities(addslashes($_POST["stock"]));
     $activo=htmlentities(addslashes($_POST["activo"]));
-        if($nombre=="" ||$proveedor=="" || $categoria=="" || $precio==0.0 || ((int)$activo>1)){
-          echo 0;
-        }else{
-            echo $formObj->saveChanges($id, $nombre, $proveedor, $categoria, $precio,$stock, $activo);
-        }
+    if($nombre=="" ||$proveedor=="" || $categoria=="" || $precio==0.0 || ((int)$activo>1)){
+        echo 0;
+    }else{
+        echo $formObj->saveChanges($id, $nombre, $proveedor, $categoria, $precio,$stock, $activo);
+    }
 
 
 }else if(isset($_POST["initData"])){
