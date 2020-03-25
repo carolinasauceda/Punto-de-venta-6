@@ -13,6 +13,11 @@
 
     <link rel="icon" href="Favicon.png">
     <title>Nuevo Producto</title>
+    <?php
+    include_once '../DB/helperformsLists.php';
+    $id=0;
+    if(isset($_GET["id"])){$id=$_GET["id"];}else{$id=0;}
+    ?>
 </head>
 <body>
 
@@ -44,70 +49,60 @@
                     <div class="card">
                         <div class="card-header">Nuevo producto</div>
                         <div class="card-body">
-                            <form name="my-form"   method="post">
+                            <div id="alertsArea"></div>
+                            <form name="my-form"  id="formulario" method="post" enctype="multipart/form-data">
                                 <div class="form-group row">
                                     <label for="full_name" class="col-md-4 col-form-label text-md-right">Nombre</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="nombre" class="form-control" name="nombre">
+                                        <input type="text" data="<?php echo $id?>" id="nombre" class="form-control" name="nombre">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label for="email_address" class="col-md-4 col-form-label text-md-right">Proveedor</label>
                                     <div class="col-md-6">
-                                        <input list="browsers" id="proveedor" class="form-control name="proveedor">
-                                        <datalist id="browsers">
-                                            <option value="Bimbo">
-                                            <option value="Coca cola">
-                                            <option value="Pepsi">
-                                            <option value="Sabritas">
-                                            <option value="Gamesa">
-                                          </datalist>
+                                        <select id="proveedor" name="proveedor" class="form-control">
+                                            <?php
+                                            $proveedores= new formsList();
+                                            $proveedores->getListaProveedores();
+                                            ?>
+                                        </select>
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label for="user_name" class="col-md-4 col-form-label text-md-right">Categoria</label>
                                     <div class="col-md-6">
-                                        <input list="categoria" id="categorias" class="form-control name="categorias">
-                                        <datalist id="categoria">
-                                            <option value="Bebida">
-                                            <option value="Pan dulce">
-                                            <option value="Jugo natural">
-                                            <option value="Galletas">
-                                            <option value="Dulces">
-                                          </datalist>
+                                        <select id="categoriaProducto"  name="categoriaProducto" class="form-control">
+                                            <?php
+                                            $categoria= new formsList();
+                                            $categoria->getListaCategoriaProducto();
+                                            ?>
+                                        </select>
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label for="phone_number" class="col-md-4 col-form-label text-md-right">Precio individual</label>
                                     <div class="col-md-6">
-                                        <input type="number" class="form-control min="0.00" max="10000.00" step="0.01" id="precio" name="precio">
+                                        <input type="number" id="precio" name="precio" class="form-control min="0.00" value="0.0" max="10000.00" step="0.01" id="precio" name="precio">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label for="present_address" class="col-md-4 col-form-label text-md-right">Stock</label>
                                     <div class="col-md-6">
-                                        <input type="number" id="stock" name="stock" class="form-control">
+                                        <input type="number" id="stock" name="stock" value="0" class="form-control">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="permanent_address" class="col-md-4 col-form-label text-md-right">Imagen</label>
-                                    <div class="col-md-6">
-                                        <input type="file" id="imagen" class="form-control" name="imagen">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
                                     <label for="permanent_address" class="col-md-4 col-form-label text-md-right">Estado</label>
                                     <div class="col-md-6">
-                                        <input list="estado" id="estado-seleccion" class="form-control" name="estado-seleccion">
-                                        <datalist id="estado">
-                                            <option value="activo">
-                                            <option value="archivado">
-                                          </datalist>
+                                        <select id="estado-seleccion" class="form-control" name="estado-seleccion">
+                                            <option value="1">Activo</option>
+                                            <option value="0">Archivado</option>
+                                        </select>
                                     </div>
                                 </div>
 
@@ -121,8 +116,14 @@
                                 </div>-->
 
                                     <div class="col-md-6 offset-md-4">
-                                        <button type="submit" class="btn btn-primary">
-                                        Guardar
+                                        <button type="submit" class="btn btn-primary actionbutton"  id="btnSave">
+                                            Guardar
+                                        </button>
+                                        <button type="submit" class="btn btn-primary actionbutton" id="btnAddNew">
+                                            Nuevo Registro
+                                        </button>
+                                        <button type="submit" class="btn btn-danger actionbutton" id="btnDelete">
+                                            Borrar Registro
                                         </button>
                                     </div>
                                 </div>
@@ -135,5 +136,20 @@
 
 </main>
 <?php include "../common/commonJS.php"; ?>
+<script src="../common/js/CommonAlerts.js"></script>
+<script src="js/DataToSendManager.js"></script>
+<script>
+    msg = new alerts();
+    form = new DataToSendManager();
+    connection="Controllers/formProductoController.php";
+    formSelector="#formulario";
+    registerKeyDataField="#nombre";
+    loadregisterfunc = form.onloadProductoRegister();
+    savePostData=form.onSavePostDataOfProducto();
+    onDeleteNewRedirect="../../backend/formulario-producto.php";
+    SuccessAlert=msg.basicSuccessAlert();
+    WarningAlert=msg.basicwarningAlert();
+</script>
+<script src="js/AJAXController.js"></script>
 </body>
 </html>

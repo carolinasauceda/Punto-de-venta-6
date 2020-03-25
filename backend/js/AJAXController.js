@@ -77,7 +77,7 @@ $(document).ready(function(){
     ajaxController.loadRegister(registerKeyDataField,function(responde){loadregisterfunc(responde)});
 
     $(formSelector).submit(function (e){
-        console.log(savePostData);
+       console.log(registerKeyDataField);
         if(buttonpressed=="btnSave"){
             ajaxController.saveRegister(savePostData,registerKeyDataField,formSelector, SuccessAlert, WarningAlert);
         }else if(buttonpressed=="btnDelete"){

@@ -20,6 +20,7 @@ class DataToSendManager{
         };
     }
 
+    /*Clientes-------------------------------------------------------------------------*/
 
     onloadClienteRegister(){
         return function(responde){
@@ -89,7 +90,6 @@ class DataToSendManager{
 
     /*Nivel de Usuario*/
 
-    /*Empleados----------------------------------------------------------------------*/
 
     onloadNivelUsuarioRegister(){
         return function(responde){
@@ -106,6 +106,62 @@ class DataToSendManager{
                 id:$("#descripcion").attr("data"),
                 descripcion:$("#descripcion").val(),
                 nivel: $('#nivelDePermisos').val(),
+            };
+        }
+    }
+
+    /*Proveedores-------------------------------------------------------------------------------*/
+
+    onloadProveedoresRegister(){
+        return function(responde){
+            $("#compania").attr("data",responde['IDProveedor']);
+            $('#compania').attr('value',responde['Compania']);
+            $('#contacto').attr('value',responde['Contacto']);
+            $('#correo').attr('value',responde['Correo']);
+            $('#telefono').attr('value',responde['Telefono']);
+            $('#estado-seleccion').val(responde['RActivo']);
+        };
+    }
+
+    onSavePostDataOfProveedores(){
+
+        return function(){
+            return {
+                id:$("#compania").attr("data"),
+                compania:$("#compania").val(),
+                contacto: $('#contacto').val(),
+                correo:$('#correo').val(),
+                telefono:$('#telefono').val(),
+                activo:$('#estado-seleccion').val()
+            };
+        }
+    }
+
+    /*Productos-----------------------------------------------------------------------------------*/
+
+    onloadProductoRegister(){
+        return function(responde){
+            $("#nombre").attr("data",responde['IDProducto']);
+            $('#nombre').attr('value',responde['Nombre']);
+            $('#proveedor').attr('value',responde['IDProveedor']);
+            $('#categoriaProducto').attr('value',responde['IDCategoria']);
+            $('#precio').attr('value',responde['PrecioUnitario']);
+            $('#stock').attr('value',responde['EnExistencia']);
+            $('#estado-seleccion').val(responde['RActivo']);
+        };
+    }
+
+    onSavePostDataOfProducto(){
+
+        return function(){
+            return {
+                id:$("#nombre").attr("data"),
+                nombre:$("#nombre").val(),
+                proveedor: $('#proveedor').val(),
+                categoria:$('#categoriaProducto').val(),
+                precio:$('#precio').val(),
+                stock:$('#stock').val(),
+                activo:$('#estado-seleccion').val()
             };
         }
     }
