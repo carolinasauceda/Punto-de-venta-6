@@ -1,8 +1,8 @@
 $(document).ready(function(){
     $('.login-form').submit(function (e){
         const postData={
-          usernamefield: $('#usuario-field').val(),
-          passwordfield:$('#password-field').val(),
+            usernamefield: $('#usuario-field').val(),
+            passwordfield:$('#password-field').val(),
         };
         $.post("Controllers/loginController.php",postData,function(response){
             //console.log("Server response: "+response.toString());

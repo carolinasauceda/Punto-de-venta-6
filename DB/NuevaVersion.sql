@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 25-02-2020 a las 03:38:26
+-- Tiempo de generación: 25-03-2020 a las 01:32:28
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.2
 
@@ -21,6 +21,7 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `puntoventa`
 --
+DROP DATABASE IF EXISTS `puntoventa`;
 CREATE DATABASE IF NOT EXISTS `puntoventa` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `puntoventa`;
 
@@ -30,25 +31,21 @@ USE `puntoventa`;
 -- Estructura de tabla para la tabla `CategoriaProductos`
 --
 
-CREATE TABLE IF NOT EXISTS `CategoriaProductos` (
-  `IDCategoria` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `CategoriaProductos` (
+  `IDCategoria` int(11) NOT NULL,
   `Nombre` varchar(50) NOT NULL,
   `Descripcion` varchar(150) DEFAULT NULL,
-  `RActivo` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`IDCategoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4;
+  `RActivo` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `CategoriaProductos`
 --
 
 INSERT INTO `CategoriaProductos` (`IDCategoria`, `Nombre`, `Descripcion`, `RActivo`) VALUES
-(9, 'Productos de limpieza', 'Todo lo relacionado a productos de Limpieza', 1),
-(10, 'Higiene', 'Relacionado a higiene y aseo personal', 1),
-(11, 'Lacteos', '', 1),
-(12, 'Farmaceutica', 'Todo aquello relacionado a productos medicos', 1),
-(13, 'Bebidas', 'Refrescos o bebidas de sabor', 1),
-(14, 'Panaderia', NULL, 1);
+(33, 'Panaderia', 'Panes', 1),
+(34, 'Refrescos', 'Bebidas carbonatadas', 1),
+(35, 'Frituras', 'fritos :V', 1);
 
 -- --------------------------------------------------------
 
@@ -56,27 +53,29 @@ INSERT INTO `CategoriaProductos` (`IDCategoria`, `Nombre`, `Descripcion`, `RActi
 -- Estructura de tabla para la tabla `Clientes`
 --
 
-CREATE TABLE IF NOT EXISTS `Clientes` (
-  `IDCliente` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Clientes` (
+  `RFC` varchar(13) NOT NULL,
   `Nombre` varchar(50) NOT NULL,
   `Apellido_P` varchar(50) DEFAULT NULL,
   `Apellido_M` varchar(50) DEFAULT NULL,
   `Correo` varchar(50) DEFAULT NULL,
   `Telefono` varchar(20) DEFAULT NULL,
-  `RActivo` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`IDCliente`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+  `RActivo` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `Clientes`
 --
 
-INSERT INTO `Clientes` (`IDCliente`, `Nombre`, `Apellido_P`, `Apellido_M`, `Correo`, `Telefono`, `RActivo`) VALUES
-(1, 'Ambrocio Isaias', 'Laureano ', 'Castro', 'ambrocioisaias98@gmail.com', '8683019942', 1),
-(2, 'Ingrid Carolina', 'Sauceda', 'Peña', 'carolinasauceda@gmail.com', '8683019943', 1),
-(3, 'Lyvan Alejandro', 'Lumbreras', 'Hernandez', 'lyvan@gmail.com', '8683019944', 1),
-(4, 'Sebastian', 'Laureano ', 'Castro', 'sebastian@gmail.com', '8683019942', 1),
-(5, 'Karin', 'Laureano', 'Castro', 'Karin98@gmail.com', '8683098876', 1);
+INSERT INTO `Clientes` (`RFC`, `Nombre`, `Apellido_P`, `Apellido_M`, `Correo`, `Telefono`, `RActivo`) VALUES
+('LACA980706LU1', 'S', 'S', 'S', 'ambrocioisaias98@gmail.com', '22', 1),
+('LACA980706LU2', 'S', 'S', 'S', 'ambrocioisaias98@gmail.com', '3', 1),
+('LACA980706LU5', 's', 's', 's', 'ambrocioisaias98@gmail.com', '9', 1),
+('LACA980706LU6', 'kkkkk', 'Laureano', 'Castro', 'ambrocioisaias98@gmail.com', '8683019942', 1),
+('LACA980706LU7', 'Ambrocio Isaias', 'Laureano', 'Castro', 'ambrocioisaias98@gmail.com', '8683019942', 1),
+('LACA980706LU8', 'Ambrocio Isaias ', 'Laureano', 'Castro', '', '8683019942', 1),
+('LACA980706LU9', 'Ambrocio Isaias', 'a', 'a', 'ambrocioisaias98@gmail.com', '89', 1),
+('POLOO', 'PO', 'PO', 'PO', 'PO@gmail.com', '8683019942', 1);
 
 -- --------------------------------------------------------
 
@@ -84,15 +83,12 @@ INSERT INTO `Clientes` (`IDCliente`, `Nombre`, `Apellido_P`, `Apellido_M`, `Corr
 -- Estructura de tabla para la tabla `DetallesVenta`
 --
 
-CREATE TABLE IF NOT EXISTS `DetallesVenta` (
-  `IDDetallesV` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `DetallesVenta` (
+  `IDDetallesV` int(11) NOT NULL,
   `IDVenta` int(11) NOT NULL,
   `IDProducto` varchar(50) NOT NULL,
   `PrecioUnitario` decimal(7,2) NOT NULL,
-  `Cantidad` int(11) NOT NULL,
-  PRIMARY KEY (`IDDetallesV`),
-  KEY `IDVenta` (`IDVenta`),
-  KEY `IDProducto` (`IDProducto`)
+  `Cantidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -101,8 +97,9 @@ CREATE TABLE IF NOT EXISTS `DetallesVenta` (
 -- Estructura de tabla para la tabla `Empleados`
 --
 
-CREATE TABLE IF NOT EXISTS `Empleados` (
+CREATE TABLE `Empleados` (
   `IDEmpleado` varchar(25) NOT NULL,
+  `RFC` varchar(13) NOT NULL,
   `Nombre` varchar(50) NOT NULL,
   `Apellido_P` varchar(50) NOT NULL,
   `Apellido_M` varchar(50) NOT NULL,
@@ -112,20 +109,15 @@ CREATE TABLE IF NOT EXISTS `Empleados` (
   `Telefono` varchar(20) DEFAULT NULL,
   `NivelUsuario` int(11) NOT NULL,
   `Clave` varchar(25) NOT NULL,
-  `RActivo` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`IDEmpleado`),
-  KEY `NivelUsuario` (`NivelUsuario`)
+  `RActivo` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `Empleados`
 --
 
-INSERT INTO `Empleados` (`IDEmpleado`, `Nombre`, `Apellido_P`, `Apellido_M`, `Fecha_Nacimiento`, `Fecha_Contratacion`, `Direccion`, `Telefono`, `NivelUsuario`, `Clave`, `RActivo`) VALUES
-('AILC2020', 'Ambrocio Isaias', 'Laureano', 'Castro', '1998-07-06', '2020-02-03', 'Mi casa', '8683019942', 1, 'varela', 1),
-('ICSP2020', 'Ingrid Carolina', 'Sauceda', 'Peña', '1998-09-27', '2020-02-03', 'Su Casa', '8683019942', 1, 'ICSP2020', 1),
-('LALH2020', 'Lyvan Alejandro', 'Lumbreras', 'Hernandez', '1998-09-09', '2020-02-03', 'Su Casa', '8683019942', 1, 'LALH2020', 1),
-('PEPE2020', 'Pepe', 'Esteban', 'Sanchez', '2020-02-04', '2020-02-11', 'Su casa', '8683019934', 2, 'PEPE2020', 1);
+INSERT INTO `Empleados` (`IDEmpleado`, `RFC`, `Nombre`, `Apellido_P`, `Apellido_M`, `Fecha_Nacimiento`, `Fecha_Contratacion`, `Direccion`, `Telefono`, `NivelUsuario`, `Clave`, `RActivo`) VALUES
+('AILC2020', 'LACA980706LU7', 'Ambrocio Isaias', 'Laureano', 'Castro', '2020-03-03', '2020-03-08', 'Calle Oaxaca #31', '8683019942', 1, 'varela', 1);
 
 -- --------------------------------------------------------
 
@@ -133,12 +125,11 @@ INSERT INTO `Empleados` (`IDEmpleado`, `Nombre`, `Apellido_P`, `Apellido_M`, `Fe
 -- Estructura de tabla para la tabla `NivelUsuario`
 --
 
-CREATE TABLE IF NOT EXISTS `NivelUsuario` (
-  `IDNivel` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `NivelUsuario` (
+  `IDNivel` int(11) NOT NULL,
   `Descripcion` varchar(50) NOT NULL,
-  `Nivel` int(11) DEFAULT NULL,
-  PRIMARY KEY (`IDNivel`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+  `Nivel` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `NivelUsuario`
@@ -146,7 +137,8 @@ CREATE TABLE IF NOT EXISTS `NivelUsuario` (
 
 INSERT INTO `NivelUsuario` (`IDNivel`, `Descripcion`, `Nivel`) VALUES
 (1, 'Administrador', 100),
-(2, 'Empleado', 50);
+(2, 'Vendedor', 20),
+(4, 'SuperUsuario', 1000);
 
 -- --------------------------------------------------------
 
@@ -154,29 +146,23 @@ INSERT INTO `NivelUsuario` (`IDNivel`, `Descripcion`, `Nivel`) VALUES
 -- Estructura de tabla para la tabla `Productos`
 --
 
-CREATE TABLE IF NOT EXISTS `Productos` (
+CREATE TABLE `Productos` (
   `IDProducto` varchar(50) NOT NULL,
   `Nombre` varchar(50) NOT NULL,
   `IDProveedor` int(11) NOT NULL,
   `IDCategoria` int(11) NOT NULL,
   `PrecioUnitario` decimal(7,2) NOT NULL,
   `EnExistencia` int(11) NOT NULL,
-  `Foto` mediumblob DEFAULT NULL,
-  `RActivo` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`IDProducto`),
-  KEY `IDProveedor` (`IDProveedor`),
-  KEY `IDCategoria` (`IDCategoria`)
+  `RActivo` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `Productos`
 --
 
-INSERT INTO `Productos` (`IDProducto`, `Nombre`, `IDProveedor`, `IDCategoria`, `PrecioUnitario`, `EnExistencia`, `Foto`, `RActivo`) VALUES
-('0bd4a8de-f471-4309-9b74-f4975a3ebbf3', 'Pan tajado 500g', 1, 14, '20.00', 30, NULL, 1),
-('4cc0d046-8cb3-49d5-8d79-2ee26d483eb0', 'Refresco Coca-Cola 500ml', 2, 13, '10.50', 500, NULL, 1),
-('7b095654-67a7-4e88-9c1b-412f8b42d1b7', 'Donas Bimbo 100g', 1, 14, '10.50', 30, NULL, 1),
-('a5f86f43-8580-4b67-a44c-1d7d45d94954', 'Refresco Pepsi 1L', 4, 13, '23.50', 400, NULL, 1);
+INSERT INTO `Productos` (`IDProducto`, `Nombre`, `IDProveedor`, `IDCategoria`, `PrecioUnitario`, `EnExistencia`, `RActivo`) VALUES
+('1585096169', 'Pepsi 200ml', 2, 34, '10.00', 100, 1),
+('1585096190', 'Pepsi 500ml', 2, 34, '15.00', 200, 1);
 
 -- --------------------------------------------------------
 
@@ -184,25 +170,21 @@ INSERT INTO `Productos` (`IDProducto`, `Nombre`, `IDProveedor`, `IDCategoria`, `
 -- Estructura de tabla para la tabla `Proveedores`
 --
 
-CREATE TABLE IF NOT EXISTS `Proveedores` (
-  `IDProveedor` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Proveedores` (
+  `IDProveedor` int(11) NOT NULL,
   `Compania` varchar(50) NOT NULL,
   `Contacto` varchar(50) NOT NULL,
   `Correo` varchar(50) DEFAULT NULL,
   `Telefono` varchar(20) DEFAULT NULL,
-  `RActivo` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`IDProveedor`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+  `RActivo` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `Proveedores`
 --
 
 INSERT INTO `Proveedores` (`IDProveedor`, `Compania`, `Contacto`, `Correo`, `Telefono`, `RActivo`) VALUES
-(1, 'Bimbo', 'Jose Luis Gonzalez Iresti', 'bimbo@gmail.com', '8684029876', 1),
-(2, 'CocaCola', 'Alberto Martinez Sabadiel', 'cocacolacompany@gmail.com', '8683987754', 1),
-(3, 'Gamesa', 'Hernesto Capuchino Samafon', 'gamesa@gmail.com', '8684037753', 1),
-(4, 'Pepsi', 'Gabriel Melendez Hernandez', 'pepsico@gmail.com', '8647235684', 1);
+(2, 'Pepsi', 'Ambrocio', 'ambrocioisaias98@gmail.com', '8683019942', 1);
 
 -- --------------------------------------------------------
 
@@ -210,18 +192,108 @@ INSERT INTO `Proveedores` (`IDProveedor`, `Compania`, `Contacto`, `Correo`, `Tel
 -- Estructura de tabla para la tabla `Ventas`
 --
 
-CREATE TABLE IF NOT EXISTS `Ventas` (
-  `IDVenta` int(11) NOT NULL AUTO_INCREMENT,
-  `IDCliente` int(11) NOT NULL,
+CREATE TABLE `Ventas` (
+  `IDVenta` int(11) NOT NULL,
+  `Cliente` varchar(13) NOT NULL,
   `IDEmpleado` varchar(25) NOT NULL,
   `Fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `Total` decimal(7,2) NOT NULL,
   `Efectivo` decimal(7,2) NOT NULL,
-  `Cambio` decimal(7,2) NOT NULL,
-  PRIMARY KEY (`IDVenta`),
-  KEY `IDCliente` (`IDCliente`),
-  KEY `IDEmpleado` (`IDEmpleado`)
+  `Cambio` decimal(7,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `CategoriaProductos`
+--
+ALTER TABLE `CategoriaProductos`
+  ADD PRIMARY KEY (`IDCategoria`);
+
+--
+-- Indices de la tabla `Clientes`
+--
+ALTER TABLE `Clientes`
+  ADD PRIMARY KEY (`RFC`);
+
+--
+-- Indices de la tabla `DetallesVenta`
+--
+ALTER TABLE `DetallesVenta`
+  ADD PRIMARY KEY (`IDDetallesV`),
+  ADD KEY `IDVenta` (`IDVenta`),
+  ADD KEY `IDProducto` (`IDProducto`);
+
+--
+-- Indices de la tabla `Empleados`
+--
+ALTER TABLE `Empleados`
+  ADD PRIMARY KEY (`IDEmpleado`),
+  ADD KEY `NivelUsuario` (`NivelUsuario`);
+
+--
+-- Indices de la tabla `NivelUsuario`
+--
+ALTER TABLE `NivelUsuario`
+  ADD PRIMARY KEY (`IDNivel`);
+
+--
+-- Indices de la tabla `Productos`
+--
+ALTER TABLE `Productos`
+  ADD PRIMARY KEY (`IDProducto`),
+  ADD KEY `IDProveedor` (`IDProveedor`),
+  ADD KEY `IDCategoria` (`IDCategoria`);
+
+--
+-- Indices de la tabla `Proveedores`
+--
+ALTER TABLE `Proveedores`
+  ADD PRIMARY KEY (`IDProveedor`);
+
+--
+-- Indices de la tabla `Ventas`
+--
+ALTER TABLE `Ventas`
+  ADD PRIMARY KEY (`IDVenta`),
+  ADD KEY `Cliente` (`Cliente`),
+  ADD KEY `IDEmpleado` (`IDEmpleado`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `CategoriaProductos`
+--
+ALTER TABLE `CategoriaProductos`
+  MODIFY `IDCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+
+--
+-- AUTO_INCREMENT de la tabla `DetallesVenta`
+--
+ALTER TABLE `DetallesVenta`
+  MODIFY `IDDetallesV` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `NivelUsuario`
+--
+ALTER TABLE `NivelUsuario`
+  MODIFY `IDNivel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `Proveedores`
+--
+ALTER TABLE `Proveedores`
+  MODIFY `IDProveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `Ventas`
+--
+ALTER TABLE `Ventas`
+  MODIFY `IDVenta` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas
@@ -251,7 +323,7 @@ ALTER TABLE `Productos`
 -- Filtros para la tabla `Ventas`
 --
 ALTER TABLE `Ventas`
-  ADD CONSTRAINT `Ventas_ibfk_1` FOREIGN KEY (`IDCliente`) REFERENCES `Clientes` (`IDCliente`),
+  ADD CONSTRAINT `Ventas_ibfk_1` FOREIGN KEY (`Cliente`) REFERENCES `Clientes` (`RFC`),
   ADD CONSTRAINT `Ventas_ibfk_2` FOREIGN KEY (`IDEmpleado`) REFERENCES `Empleados` (`IDEmpleado`);
 COMMIT;
 
