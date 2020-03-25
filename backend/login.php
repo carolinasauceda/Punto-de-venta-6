@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include "../common/commonHeaders.php"?>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style-login.css">
     <link href="https://fonts.googleapis.com/css?family=Hind&display=swap" rel="stylesheet">
     <title>Punto de venta</title>
     <?php
@@ -15,7 +15,7 @@
 </head>
 <body>
     <div class="login-form">
-        <div class="logo"><img src="img/logo-prueba.png" alt=""></div>
+        <div class="logo"><img src="img/logo.png" alt=""></div>
         <h6>Sign In</h6>
         <form method="post">
             <div class="textbox">
@@ -39,10 +39,10 @@
         $(".textbox input").focusout(function(){
             if($(this).val() == ""){
                 $(this).siblings().removeClass("hidden");
-                $(this).css("background","#554343");
+                $(this).css("background","#b48d8d");
             }else{
                 $(this).siblings().addClass("hidden");
-                $(this).css("background","#484848");
+                $(this).css("background","#ffffff");
             }
         });
 

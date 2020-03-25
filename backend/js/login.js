@@ -9,7 +9,7 @@ $(document).ready(function(){
 
             if(response==1){
                 console.log("Access allow");
-                window.location.href = "index.php";
+                window.location.href = "index2.php";
             }else{
                 //Colocar aquí tu magia xd
                 console.log("Access denied");

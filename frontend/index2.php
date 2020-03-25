@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php  require "../common/Controllers/sessionController.php" ?>
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/index-style.css">
@@ -11,10 +12,11 @@
 <body>
     <nav>
         <div class="menu d-flex justify-content-between align-items-baseline">
-            <div class="col-md-3 text-center d-flex justify-content-between">
-                <h6 class="logo">L O G O</h6>
-                <h6 class="logo"> Welcome, user</h6>
-                <input type="checkbox" name="modo" id="modo">
+            <div class="col-md-3 d-flex justify-content-between">
+                <!--<h6 class="logo">L O G O</h6>-->
+                <a href="/frontend/index2.html"><img src="img/logo.png" alt="logo-punto-de-venta" width="90px"></a>
+                <h6 class="logo"> Bienvenido,<?php  echo $_SESSION["Nombre"]?></h6>
+                <input type="checkbox" name="modo" id="modo" class="logo">
             </div>
             <div class="col-md-9">
                 <ul class="d-flex justify-content-end">
@@ -22,16 +24,16 @@
                     <li><a href="#">Empleados</a></li>
                     <li><a href="#">Proveedores</a></li>
                     <li><a href="#">Productos</a></li>
-                    <li class="boton-especial"><a href="#">Salir</a></li>
+                    <li class="boton-especial"><a href="login.php">Salir</a></li>
                 </ul>
             </div>
         </div>
     </nav>
     <div class="filtro-negro">
-        <h1 class="text-center">Smart Closet System</h1>
-        <p class="text-center">The new way to pick your style</p>
+        <br><br><br><br><br>
+        <p class="text-center">Aplicación de punto de venta inicial</p>
         <footer class="text-center">
-            BEE Proyect &copy; Instituto Tecnologico de Matamoros
+            Programacion Web &copy; Instituto Tecnologico de Matamoros
         </footer>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -40,6 +42,7 @@
             $("#modo").click(function(){
                 if($("#modo").is(":checked")){
                 $("body").css("filter","invert(1)");
+                $(".filtro-negro").css("filter","inherit")
             }
             else if($("#modo").is(":not(:checked)")){
                 $("body").css("filter","none");
