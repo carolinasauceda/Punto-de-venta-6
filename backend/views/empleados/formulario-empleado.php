@@ -1,10 +1,15 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <?php
+        require "../../../common/Controllers/sessionController.php";
+        $userControl= new sessionController('../../../');
+        $edition=$userControl->isAutorizeFor('formEmpleados');
+    ?>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <?php include "../common/commonHeaders.php"; ?>
+    <?php include "../../../common/commonHeaders.php"; ?>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
@@ -15,7 +20,7 @@
     <title>Nuevo Empleado</title>
 
     <?php
-    include_once '../DB/helperformsLists.php';
+    include_once '../../../DB/helperformsLists.php';
     $id=0;
     if(isset($_GET["id"])){$id=$_GET["id"];}else{$id=0;}
     ?>
@@ -33,10 +38,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="index.php">INICIO</a>
+                <a class="nav-link" href="../index.php">INICIO</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="login.php">SALIR</a>
+                <a class="nav-link" href="../login.php">SALIR</a>
             </li>
         </ul>
 
@@ -142,15 +147,12 @@
                                 </div>-->
 
                                     <div class="col-md-6 offset-md-4">
-                                        <button type="submit" class="btn btn-primary actionbutton"  id="btnSave">
-                                            Guardar
-                                        </button>
-                                        <button type="submit" class="btn btn-primary actionbutton" id="btnAddNew">
-                                            Nuevo Registro
-                                        </button>
-                                        <button type="submit" class="btn btn-danger actionbutton" id="btnDelete">
-                                            Borrar Registro
-                                        </button>
+                                        <!--Botones de control-->
+                                        <?php
+                                            require "../layouts/formButtons";
+                                            $buttons = new formButtons();
+                                            $buttons->renderButtons($edition);
+                                        ?>
                                     </div>
                                 </div>
                             </form>
@@ -161,21 +163,21 @@
     </div>
 
 </main>
-<?php include "../common/commonJS.php"; ?>
-<script src="../common/js/CommonAlerts.js"></script>
-<script src="js/DataToSendManager.js"></script>
+<?php include "../../../common/commonJS.php"; ?>
+<script src="../../../common/js/CommonAlerts.js"></script>
+<script src="../../js/DataToSendManager.js"></script>
 <script>
     msg = new alerts();
     form = new DataToSendManager();
-    connection="Controllers/formEmpleadoController.php";
+    connection="../../Controllers/formEmpleadoController.php";
     formSelector="#formulario";
     registerKeyDataField="#RFC";
     loadregisterfunc = form.onloadEmpleadoRegister();
     savePostData=form.onSavePostDataOfEmpleado();
-    onDeleteNewRedirect="../../backend/formulario-empleado.php";
+    onDeleteNewRedirect="../../views/empleados/formulario-empleado.php";
     SuccessAlert=msg.basicSuccessAlert();
     WarningAlert=msg.basicwarningAlert();
 </script>
-<script src="js/AJAXController.js"></script>
+<script src="../../js/AJAXController.js"></script>
 </body>
 </html>

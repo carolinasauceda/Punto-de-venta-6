@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php  require "../common/Controllers/sessionController.php" ?>
+<?php require "../../common/Controllers/sessionController.php";
+ $sessionController = new sessionController("../../");
+ // el parametro de entrada es el numero de directorios necesarios para regresar a la carpeta raíz del sitio.
+?>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/index-style.css">
+    <link rel="stylesheet" href="../css/index-style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -14,7 +17,7 @@
         <div class="menu d-flex justify-content-between align-items-baseline">
             <div class="col-md-3 d-flex justify-content-between">
                 <!--<h6 class="logo">L O G O</h6>-->
-                <a href="/frontend/index2.html"><img src="img/logo.png" alt="logo-punto-de-venta" width="90px"></a>
+                <a href="/frontend/index2.html"><img src="../img/logo.png" alt="logo-punto-de-venta" width="90px"></a>
                 <h6 class="logo"> Bienvenido,<?php  echo $_SESSION["Nombre"]?></h6>
                 <input type="checkbox" name="modo" id="modo" class="logo">
             </div>

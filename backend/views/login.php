@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php include "../common/commonHeaders.php"?>
-    <link rel="stylesheet" href="css/style-login.css">
+    <?php include "../../common/commonHeaders.php"?>
+    <link rel="stylesheet" href="../css/style-login.css">
     <link href="https://fonts.googleapis.com/css?family=Hind&display=swap" rel="stylesheet">
     <title>Punto de venta</title>
     <?php
@@ -15,7 +15,7 @@
 </head>
 <body>
     <div class="login-form">
-        <div class="logo"><img src="img/logo.png" alt=""></div>
+        <div class="logo"><img src="../img/logo.png" alt=""></div>
         <h6>Sign In</h6>
         <form method="post">
             <div class="textbox">
@@ -63,7 +63,7 @@
         $Login->actionLogin();
     }*/
     ?>
-    <script src="js/login.js"></script>
+    <script src="../js/login.js"></script>
     <!--Nota para caro: si deseas agregar algun mensajito controlado por javascript favor de pasarte al archivo login.js dentro de la carpeta js de este directorio-->
 
 </body>

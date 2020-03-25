@@ -1,26 +1,29 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <?php
+        require "../../../common/Controllers/sessionController.php";
+        $userControl= new sessionController('../../../');
+        $edition=$userControl->isAutorizeFor('formCategoria');
+    ?>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <?php include "../common/commonHeaders.php"; ?>
+    <?php include "../../../common/commonHeaders.php"; ?>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
-
-
-
     <link rel="icon" href="Favicon.png">
-    <title>Nuevo Proveedor</title>
-    <?php
 
-        $id=0;
-        if(isset($_GET["id"])){$id=$_GET["id"];}else{$id=0;}
-    ?>
+    <title>Nueva Categoria</title>
 
 </head>
 <body>
+
+    <?php
+    $id=0;
+            if(isset($_GET["id"])){$id=(int)$_GET["id"];}else{$id=0;}
+    ?>
 
 <nav class="navbar navbar-expand-lg navbar-light navbar-laravel">
     <div class="container">
@@ -32,10 +35,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="index.php">INICIO</a>
+                <a class="nav-link" href="../index.php">INICIO</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="login.php">SALIR</a>
+                <a class="nav-link" href="../login.php">SALIR</a>
             </li>
         </ul>
 
@@ -48,48 +51,33 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                     <div class="card">
-                        <div class="card-header">Nuevo proveedor</div>
+                        <div class="card-header">Nueva categoria</div>
                         <div class="card-body">
                             <div id="alertsArea"></div>
-                            <form name="my-form"   id="formulario" method="post">
-
+                            <form name="my-form" id="formulario"   method="post">
                                 <div class="form-group row">
-                                    <label for="email_address" class="col-md-4 col-form-label text-md-right">Compañia</label>
+                                    <label for="nombre" class="col-md-4 col-form-label text-md-right">Nombre</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="compania" data="<?php echo $id?>" class="form-control" name="compania">
+                                        <input type="text" value=""id="nombre" data="<?php echo $id?>" class="form-control" name="nombre">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="user_name" class="col-md-4 col-form-label text-md-right">Contacto</label>
+                                    <label for="descripcion" class="col-md-4 col-form-label text-md-right">Descripción</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="contacto" class="form-control" name="contacto">
+                                        <input type="text" id="descripcion" class="form-control" name="descripcion" value="">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="phone_number" class="col-md-4 col-form-label text-md-right">Correo</label>
+                                    <label for="estado-seleccion" class="col-md-4 col-form-label text-md-right">Estado del registro:</label>
                                     <div class="col-md-6">
-                                        <input type="email" class="form-control" id="correo" name="correo">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="present_address" class="col-md-4 col-form-label text-md-right">Telefono</label>
-                                    <div class="col-md-6">
-                                        <input type="tel" id="telefono" name="telefono" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="permanent_address" class="col-md-4 col-form-label text-md-right">Estado</label>
-                                    <div class="col-md-6">
-                                        <select id="estado-seleccion" class="form-control" name="estado-seleccion">
+                                        <select id="estado-seleccion" class="form-control">
                                             <option value="1">Activo</option>
                                             <option value="0">Archivado</option>
                                         </select>
                                     </div>
                                 </div>
-
 
                                 <!--<div class="form-group row">
                                     <label for="nid_number" class="col-md-4 col-form-label text-md-right"><abbr
@@ -100,15 +88,12 @@
                                 </div>-->
 
                                     <div class="col-md-6 offset-md-4">
-                                        <button type="submit" class="btn btn-primary actionbutton"  id="btnSave">
-                                            Guardar
-                                        </button>
-                                        <button type="submit" class="btn btn-primary actionbutton" id="btnAddNew">
-                                            Nuevo Registro
-                                        </button>
-                                        <button type="submit" class="btn btn-danger actionbutton" id="btnDelete">
-                                            Borrar Registro
-                                        </button>
+                                        <!--Botones de control-->
+                                        <?php
+                                            require "../layouts/formButtons";
+                                            $buttons = new formButtons();
+                                            $buttons->renderButtons($edition);
+                                        ?>
                                     </div>
                                 </div>
                             </form>
@@ -119,21 +104,21 @@
     </div>
 
 </main>
-<?php include "../common/commonJS.php"; ?>
-<script src="../common/js/CommonAlerts.js"></script>
-<script src="js/DataToSendManager.js"></script>
+<?php include "../../../common/commonJS.php"; ?>
+<script src="../../../../common/js/CommonAlerts.js"></script>
+<script src="../../js/DataToSendManager.js"></script>
 <script>
     msg = new alerts();
     form = new DataToSendManager();
-    connection="Controllers/formProveedorController.php";
+    connection="../../Controllers/formCategoriaController.php";
     formSelector="#formulario";
-    registerKeyDataField="#compania";
-    loadregisterfunc = form.onloadProveedoresRegister();
-    savePostData=form.onSavePostDataOfProveedores();
-    onDeleteNewRedirect="../../backend/formulario-proveedor.php";
+    registerKeyDataField="#nombre";
+    loadregisterfunc = form.onloadCategoriaRegister();
+    savePostData=form.onSavePostDataOfCategoria();
+    onDeleteNewRedirect="../../views/categorias/formulario-categoria.php";
     SuccessAlert=msg.basicSuccessAlert();
     WarningAlert=msg.basicwarningAlert();
 </script>
-<script src="js/AJAXController.js"></script>
+<script src="../../js/AJAXController.js"></script>
 </body>
 </html>
