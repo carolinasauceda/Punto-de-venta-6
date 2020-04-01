@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+     <!-- Creacion de barra de tareas. Esto para poder solicitar su uso sin necesidad de repetir el codigo
+    en todas las pantallas donde lo vayamos a solicitar  -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="index-style.css">
@@ -13,7 +15,7 @@
         <div class="menu d-flex justify-content-between align-items-baseline">
             <div class="col-md-3 d-flex justify-content-between">
                 <!--<h6 class="logo">L O G O</h6>-->
-                <a href="/frontend/index2.html"><img src="img/logo.png" alt="logo-punto-de-venta" width="100px" height="35px"></a>
+                <a href="/frontend/index2.html"><img src="../img/logo.png" alt="logo-punto-de-venta" width="100px" height="35px"></a>
                 <h6 class="logo"> Bienvenido,<?php  echo $_SESSION["Nombre"]?></h6>
                 <input type="checkbox" name="modo" id="modo" class="logo">
             </div>
@@ -23,7 +25,7 @@
                     <li><a href="#">Empleados</a></li>
                     <li><a href="#">Proveedores</a></li>
                     <li><a href="#">Productos</a></li>
-                    <li class="boton-especial"><a href="../backend/views/login.php">Salir</a></li>
+                    <li class="boton-especial"><a href="login.php">Salir</a></li>
                 </ul>
             </div>
         </div>

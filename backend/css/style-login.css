@@ -6,7 +6,7 @@
     text-decoration: none;
 }
 body{
-    background: #a5a5a5;
+    background: #ffffff;
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -14,7 +14,7 @@ body{
 }
 .login-form{
     width: 470px;
-    background: #cacaca;
+    background: #fafafa;
     padding: 30px 60px;
 }
 .logo{
@@ -25,7 +25,7 @@ body{
     height: 50px;
 }
 .login-form h6{
-    color: #ffffff;
+    color: #00b7ff;
     font-size: 15px;
     text-transform: uppercase;
     font-weight: 500;
@@ -40,14 +40,14 @@ body{
     width: 100%;
     height: 50px;
     border: none;
-    background: #ebebeb;
+    background: #ffffff;
     padding: 0 15px;
     font-size: 16px;
     outline: none;
-    color: #252525;
+    color: #000000;
 }
 .textbox input:focus{
-    background: #c7c7c7 !important;
+    background: #a1e4ff !important;
 }
 .check-message{
     position: absolute;
@@ -64,7 +64,7 @@ body{
     width: 100%;
     height: 50px;
     margin-top: 30px;
-    background: #3a3a3a;
+    background: #000000;
     border: none;
     outline: none;
     cursor: pointer;
@@ -73,8 +73,8 @@ body{
     transition: .3s linear;
 }
 .login-btn.active{
-    background: #03ee4a;
-    color: #fff;
+    background: #00b7ff;
+    color: rgb(255, 255, 255);
 }
 .login-btn.active:hover{
     opacity: .7;
@@ -85,13 +85,13 @@ body{
 .privacy-link{
     text-align: center;
     margin-top: 35px;
-    color: #f1f1f1;
+    color: #000000;
     font-size: 14px;
 }
 .informacion-adicional{
     font-size: 14px;
     text-align: center;
-    color: #00000080;
+    color: #00000086;
     margin: 20px 0;
 }
 @media screen and (max-width:470px){

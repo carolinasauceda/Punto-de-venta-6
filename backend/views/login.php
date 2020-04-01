@@ -15,8 +15,8 @@
 </head>
 <body>
     <div class="login-form">
-        <div class="logo"><img src="../img/logo.png" alt=""></div>
-        <h6>Sign In</h6>
+        <div class="logo"><img src="../img/logo.png" alt="logo-ADPI"></div>
+        <h6>Iniciar sesion</h6>
         <form method="post">
             <div class="textbox">
                 <input name="usuario"  id="usuario-field" type="text" placeholder="Usuario">
@@ -28,7 +28,7 @@
             </div>
             <input type="submit" value="Log In Now" name="loginbtn" class="login-btn" disabled>
             <div class="privacy-link">
-                <h6>Aplicacion</h6>
+                <h6>Punto de venta</h6>
             </div>
         </form>
         <div class="informacion-adicional">
@@ -39,7 +39,7 @@
         $(".textbox input").focusout(function(){
             if($(this).val() == ""){
                 $(this).siblings().removeClass("hidden");
-                $(this).css("background","#b48d8d");
+                $(this).css("background","red");
             }else{
                 $(this).siblings().addClass("hidden");
                 $(this).css("background","#ffffff");
