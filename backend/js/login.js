@@ -14,6 +14,7 @@ $(document).ready(function(){
                 //Colocar aquí tu magia xd
                 console.log("Access denied");
                 alert("Credenciales incorrectas");
+                
             }
         });
         e.preventDefault();

@@ -16,6 +16,7 @@ body{
     width: 470px;
     background: #fafafa;
     padding: 30px 60px;
+    box-shadow:0 0 25px -15px #000;
 }
 .logo{
     height: 50px;

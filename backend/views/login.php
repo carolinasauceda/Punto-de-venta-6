@@ -26,7 +26,7 @@
                 <input name="password" type="password" id="password-field" placeholder="Contraseña">
                 <span class="check-message hidden">Required</span>
             </div>
-            <input type="submit" value="Log In Now" name="loginbtn" class="login-btn" disabled>
+            <input type="submit" id="opener" value="Log In Now" name="loginbtn" class="login-btn" disabled>
             <div class="privacy-link">
                 <h6>Punto de venta</h6>
             </div>
@@ -56,6 +56,7 @@
                 $(".login-btn").removeClass("active");
             }
         });
+        
     </script>
 
     <?php
