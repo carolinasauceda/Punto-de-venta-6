@@ -35,6 +35,7 @@
             Aplicacion creada por: equipo 6
         </div>
     </div>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script type="text/javascript">
         $(".textbox input").focusout(function(){
             if($(this).val() == ""){

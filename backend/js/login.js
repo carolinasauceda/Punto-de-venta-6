@@ -13,7 +13,8 @@ $(document).ready(function(){
             }else{
                 //Colocar aquí tu magia xd
                 console.log("Access denied");
-                alert("Credenciales incorrectas");
+                //alert("Credenciales incorrectas");
+                swal("Error","Credenciales incorrectas","error");
                 
             }
         });
