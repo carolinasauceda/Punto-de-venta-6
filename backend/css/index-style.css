@@ -78,4 +78,10 @@ input[type="checkbox"]:checked:before{
     margin: 0;
     height: 2.5rem;
 }
+@media (max-width: 1641px) {
+    .filtro-negro{
+        width: 100%;
+        height: 94%;
+    }
+}
 
