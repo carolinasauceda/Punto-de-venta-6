@@ -102,15 +102,15 @@
 <script>
     msg = new alerts();
     form = new DataToSendManager();
-    connection="../../Controllers/formNivelUsuarioController.php";
+    connection="../../Controllers/NivelUsuario/Providers/AJAXFormProvider.php";
     formSelector="#formulario";
     registerKeyDataField="#descripcion";
     loadregisterfunc = form.onloadNivelUsuarioRegister();
     savePostData=form.onSavePostDataOfNivelUsuario();
-    onDeleteNewRedirect="../../views/nivelusuario/formulario-nivel-usuario.php";
+    onDeleteNewRedirect="../../views/nivelusuario/form.php";
     SuccessAlert=msg.basicSuccessAlert();
     WarningAlert=msg.basicwarningAlert();
 </script>
-<script src="../../js/AJAXController.js"></script>
+<script src="../../js/AJAXFormController.js"></script>
 </body>
 </html>

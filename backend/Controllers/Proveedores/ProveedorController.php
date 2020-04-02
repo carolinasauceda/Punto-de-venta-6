@@ -1,7 +1,7 @@
 <?php
-require "../../DB/DBManager.php";
 
-class tablaCategoria extends  DBManager{
+class tablaProveedores extends  DBManager{
+
     public function __construct()
     {
         parent::__construct();
@@ -9,7 +9,7 @@ class tablaCategoria extends  DBManager{
 
     protected function _registerExist($id){
         try{
-            $this->sql="SELECT * FROM CategoriaProductos where IDCategoria= :id";
+            $this->sql="SELECT * FROM Proveedores where IDProveedor= :id";
             $resultado=$this->base->prepare($this->sql);
             $resultado->bindValue(":id",$id);
             $resultado->execute();
@@ -24,21 +24,23 @@ class tablaCategoria extends  DBManager{
         }
     }
 
-    function saveChanges($id, $nombre, $descripcion, $activo){
+    function saveChanges($id, $compania, $contacto, $correo, $telefono, $activo){
 
         try{
             $typeSqlrequest=$this->_registerExist($id);
             if($typeSqlrequest==0){
                 //IS an insert instruction
-                $this->sql="Insert Into CategoriaProductos (Nombre, Descripcion, RActivo) values (:nombre,:descripcion,:activo)";
+                $this->sql="Insert Into Proveedores (Compania, Contacto, Correo, Telefono, RActivo) values (:compania,:contacto, :correo, :telefono,:activo)";
             }else{
                 //IS an Update instruction
-                $this->sql="Update CategoriaProductos set Nombre= :nombre,Descripcion= :descripcion,RActivo= :activo where IDCategoria= :ID";
+                $this->sql="Update Proveedores set Compania= :compania, Contacto= :contacto, Correo= :correo, Telefono= :telefono, RActivo= :activo where IDProveedor= :ID";
             }
 
             $resultado=$this->base->prepare($this->sql);
-            $resultado->bindValue(":nombre",$nombre);
-            $resultado->bindValue(":descripcion",$descripcion);
+            $resultado->bindValue(":compania",$compania);
+            $resultado->bindValue(":contacto",$contacto);
+            $resultado->bindValue(":correo",$correo);
+            $resultado->bindValue(":telefono",$telefono);
             $resultado->bindValue(":activo",$activo);
             $typeSqlrequest==1?$resultado->bindValue(":ID",$id):null;
             $resultado->execute();
@@ -53,7 +55,7 @@ class tablaCategoria extends  DBManager{
 
     function getRegisterFilterByID($ID){
         try{
-            $this->sql="SELECT * FROM CategoriaProductos where IDCategoria= :id";
+            $this->sql="SELECT * FROM Proveedores where IDProveedor= :id";
             $resultado=$this->base->prepare($this->sql);
             $resultado->bindValue(":id",$ID);
             $resultado->execute();
@@ -75,7 +77,7 @@ class tablaCategoria extends  DBManager{
     function dropRegisterByID($ID){
         try{
             if($this->_registerExist($ID)){
-                $this->sql="Delete from CategoriaProductos where IDCategoria= :ID";
+                $this->sql="Delete from Proveedores where IDProveedor= :ID";
                 $resultado=$this->base->prepare($this->sql);
                 $resultado->bindValue(":ID",$ID);
                 $resultado->execute();
@@ -92,38 +94,4 @@ class tablaCategoria extends  DBManager{
     }
 }
 
-
-$formCatobj= new tablaCategoria();
-
-if(isset($_POST['nombre'])){
-    $nombre=htmlentities(addslashes($_POST["nombre"]));
-    $id=(int)htmlentities(addslashes($_POST["id"]));
-    $descripcion=htmlentities(addslashes($_POST["descripcion"]));
-    $activo=htmlentities(addslashes($_POST["activo"]));
-    if($nombre=="" || ((int)$activo>1)){
-        echo 0;
-    }else{
-        if($descripcion==""){
-            $descripcion="Sin descripcion aún";
-        }
-        echo $formCatobj->saveChanges($id,$nombre,$descripcion,$activo);
-    }
-
-
-}else if(isset($_POST["initData"])){
-    $result= $formCatobj->getRegisterFilterByID($_POST["initData"]);
-    if($result==0)
-        return 0;
-    $json=array(
-        'id'=>$result['IDCategoria'],
-        'Nombre'=>$result['Nombre'],
-        'Descripcion'=>$result['Descripcion'],
-        'RActivo'=>$result['RActivo']
-    );
-    echo json_encode($json);
-}else if(isset($_POST["deleteAction"])){
-    echo $formCatobj->dropRegisterByID($_POST['id']);
-}else{
-    echo 0;
-}
 ?>

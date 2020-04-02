@@ -46,7 +46,7 @@
 		<div class="container">
 			<div class="row">
 				<h2 style="text-align:center">Productos disponibles</h2>
-				<h4 style="padding-left:800">
+				<h4 style="padding-left:800px">
 				</h4>
 			</div>
 			

@@ -4,7 +4,7 @@
     <?php
         require "../../../common/Controllers/sessionController.php";
         $userControl= new sessionController('../../../');
-        $edition=$userControl->isAutorizeFor('formEmpleados');
+        $edition=$userControl->isAutorizeFor('formProductos');
     ?>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -17,14 +17,12 @@
 
 
     <link rel="icon" href="Favicon.png">
-    <title>Nuevo Empleado</title>
-
+    <title>Nuevo Producto</title>
     <?php
     include_once '../../../DB/helperformsLists.php';
     $id=0;
     if(isset($_GET["id"])){$id=$_GET["id"];}else{$id=0;}
     ?>
-
 </head>
 <body>
 
@@ -54,83 +52,59 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                     <div class="card">
-                        <div class="card-header">Nuevo empleado</div>
+                        <div class="card-header">Nuevo producto</div>
                         <div class="card-body">
                             <div id="alertsArea"></div>
-                            <form name="my-form" id="formulario"  method="post">
-                                <div class="form-group row">
-                                    <label for="full_name" class="col-md-4 col-form-label text-md-right">RFC</label>
-                                    <div class="col-md-6">
-                                        <input type="text" id="RFC" data="<?php echo $id?>" class="form-control" name="RFC">
-                                    </div>
-                                </div>
+                            <form name="my-form"  id="formulario" method="post" enctype="multipart/form-data">
                                 <div class="form-group row">
                                     <label for="full_name" class="col-md-4 col-form-label text-md-right">Nombre</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="nombre" class="form-control" name="nombre">
+                                        <input type="text" data="<?php echo $id?>" id="nombre" class="form-control" name="nombre">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="email_address" class="col-md-4 col-form-label text-md-right">Apellido Paterno</label>
+                                    <label for="email_address" class="col-md-4 col-form-label text-md-right">Proveedor</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="apellido_p" class="form-control" name="apellido_p">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="user_name" class="col-md-4 col-form-label text-md-right">Apellido Materno</label>
-                                    <div class="col-md-6">
-                                        <input type="text" id="apellido_m" class="form-control" name="apellido_m">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="phone_number" class="col-md-4 col-form-label text-md-right">Fecha de nacimiento</label>
-                                    <div class="col-md-6">
-                                        <input type="date" class="form-control" id="fnac" name="fnac">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="permanent_address" class="col-md-4 col-form-label text-md-right">Fecha de Contratación</label>
-                                    <div class="col-md-6">
-                                        <input type="date" id="fcontratacion" class="form-control" name="fcontratacion">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="permanent_address" class="col-md-4 col-form-label text-md-right">Dirección</label>
-                                    <div class="col-md-6">
-                                        <input type="text" id="direccion" class="form-control" name="direccion">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="permanent_address" class="col-md-4 col-form-label text-md-right">Teléfono</label>
-                                    <div class="col-md-6">
-                                        <input type="tel" id="telefono" class="form-control" name="telefono">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="permanent_address" class="col-md-4 col-form-label text-md-right">Tipo de usuario</label>
-                                    <div class="col-md-6">
-                                        <select id="tipousuario" class="form-control">
+                                        <select id="proveedor" name="proveedor" class="form-control">
                                             <?php
-                                             $nivelesDeUsuario= new formsList();
-                                             $nivelesDeUsuario->getListaNivelUsuario();
+                                            $proveedores= new formsList();
+                                            $proveedores->getListaProveedores();
                                             ?>
                                         </select>
                                     </div>
                                 </div>
+
                                 <div class="form-group row">
-                                    <label for="permanent_address" class="col-md-4 col-form-label text-md-right">Clave</label>
+                                    <label for="user_name" class="col-md-4 col-form-label text-md-right">Categoria</label>
                                     <div class="col-md-6">
-                                        <input type="password" id="clave" class="form-control" name="clave">
+                                        <select id="categoriaProducto"  name="categoriaProducto" class="form-control">
+                                            <?php
+                                            $categoria= new formsList();
+                                            $categoria->getListaCategoriaProducto();
+                                            ?>
+                                        </select>
                                     </div>
                                 </div>
+
+                                <div class="form-group row">
+                                    <label for="phone_number" class="col-md-4 col-form-label text-md-right">Precio individual</label>
+                                    <div class="col-md-6">
+                                        <input type="number" id="precio" name="precio" class="form-control min="0.00" value="0.0" max="10000.00" step="0.01" id="precio" name="precio">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="present_address" class="col-md-4 col-form-label text-md-right">Stock</label>
+                                    <div class="col-md-6">
+                                        <input type="number" id="stock" name="stock" value="0" class="form-control">
+                                    </div>
+                                </div>
+
                                 <div class="form-group row">
                                     <label for="permanent_address" class="col-md-4 col-form-label text-md-right">Estado</label>
                                     <div class="col-md-6">
-                                        <select id="estado-seleccion" class="form-control">
+                                        <select id="estado-seleccion" class="form-control" name="estado-seleccion">
                                             <option value="1">Activo</option>
                                             <option value="0">Archivado</option>
                                         </select>
@@ -149,9 +123,9 @@
                                     <div class="col-md-6 offset-md-4">
                                         <!--Botones de control-->
                                         <?php
-                                            require "../layouts/formButtons";
-                                            $buttons = new formButtons();
-                                            $buttons->renderButtons($edition);
+                                        require "../layouts/formButtons";
+                                        $buttons = new formButtons();
+                                        $buttons->renderButtons($edition);
                                         ?>
                                     </div>
                                 </div>
@@ -169,15 +143,15 @@
 <script>
     msg = new alerts();
     form = new DataToSendManager();
-    connection="../../Controllers/formEmpleadoController.php";
+    connection="../../Controllers/Productos/Providers/AJAXFormProvider.php";
     formSelector="#formulario";
-    registerKeyDataField="#RFC";
-    loadregisterfunc = form.onloadEmpleadoRegister();
-    savePostData=form.onSavePostDataOfEmpleado();
-    onDeleteNewRedirect="../../views/empleados/formulario-empleado.php";
+    registerKeyDataField="#nombre";
+    loadregisterfunc = form.onloadProductoRegister();
+    savePostData=form.onSavePostDataOfProducto();
+    onDeleteNewRedirect="../../views/productos/form.php";
     SuccessAlert=msg.basicSuccessAlert();
     WarningAlert=msg.basicwarningAlert();
 </script>
-<script src="../../js/AJAXController.js"></script>
+<script src="../../js/AJAXFormController.js"></script>
 </body>
 </html>

@@ -13,12 +13,12 @@
     <p>Usuario: <?= $_SESSION["UsuarioTipo"]?> Autorizacion nivel: <?= $_SESSION["AutorizacionNivel"]?></p>
     <a href="login.php">Logout</a>
     <br>
-    <br> <a href="categorias/formulario-categoria.php">Formulario categoria</a>
-    <br> <a href="clientes/formulario-cliente.php">Formulario cliente</a>
-    <br> <a href="empleados/formulario-empleado.php">Formulario empleado</a>
-    <br> <a href="nivelusuario/formulario-nivel-usuario.php">Formulario nivel de usuario</a>
-    <br> <a href="productos/formulario-producto.php">Formulario producto</a>
-    <br> <a href="proveedores/formulario-proveedor.php">Formulario proveedores</a>
+    <br> <a href="categorias/form.php">Formulario categoria</a>
+    <br> <a href="clientes/form.php">Formulario cliente</a>
+    <br> <a href="empleados/form.php">Formulario empleado</a>
+    <br> <a href="nivelusuario/form.php">Formulario nivel de usuario</a>
+    <br> <a href="productos/form.php">Formulario producto</a>
+    <br> <a href="proveedores/form.php">Formulario proveedores</a>
 
 </body>
 </html>

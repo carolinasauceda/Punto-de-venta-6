@@ -110,15 +110,15 @@
 <script>
     msg = new alerts();
     form = new DataToSendManager();
-    connection="../../Controllers/formCategoriaController.php";
+    connection="../../Controllers/Categoria/Providers/AJAXFormProvider.php";
     formSelector="#formulario";
     registerKeyDataField="#nombre";
     loadregisterfunc = form.onloadCategoriaRegister();
     savePostData=form.onSavePostDataOfCategoria();
-    onDeleteNewRedirect="../../views/categorias/formulario-categoria.php";
+    onDeleteNewRedirect="../../views/categorias/form.php";
     SuccessAlert=msg.basicSuccessAlert();
     WarningAlert=msg.basicwarningAlert();
 </script>
-<script src="../../js/AJAXController.js"></script>
+<script src="../../js/AJAXFormController.js"></script>
 </body>
 </html>

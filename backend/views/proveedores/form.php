@@ -4,7 +4,7 @@
     <?php
         require "../../../common/Controllers/sessionController.php";
         $userControl= new sessionController('../../../');
-        $edition=$userControl->isAutorizeFor('formClientes');
+        $edition=$userControl->isAutorizeFor('formProveedor');
     ?>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -13,12 +13,16 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
+
+
+
     <link rel="icon" href="Favicon.png">
-    <title>Nuevo Cliente</title>
+    <title>Nuevo Proveedor</title>
     <?php
-    $id=0;
-    if(isset($_GET["id"])){$id=$_GET["id"];}else{$id=0;}
+        $id=0;
+        if(isset($_GET["id"])){$id=$_GET["id"];}else{$id=0;}
     ?>
+
 </head>
 <body>
 
@@ -48,55 +52,42 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                     <div class="card">
-                        <div class="card-header">Nuevo cliente</div>
+                        <div class="card-header">Nuevo proveedor</div>
                         <div class="card-body">
                             <div id="alertsArea"></div>
-                            <form name="my-form"  id="formulario"  method="post">
+                            <form name="my-form"   id="formulario" method="post">
 
                                 <div class="form-group row">
-                                    <label for="full_name" class="col-md-4 col-form-label text-md-right">RFC</label>
+                                    <label for="email_address" class="col-md-4 col-form-label text-md-right">Compañia</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="RFC" data="<?php echo $id?>" class="form-control" name="RFC">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="full_name" class="col-md-4 col-form-label text-md-right">Nombre</label>
-                                    <div class="col-md-6">
-                                        <input type="text" id="nombre" class="form-control" name="nombre">
+                                        <input type="text" id="compania" data="<?php echo $id?>" class="form-control" name="compania">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="email_address" class="col-md-4 col-form-label text-md-right">Apellido Paterno</label>
+                                    <label for="user_name" class="col-md-4 col-form-label text-md-right">Contacto</label>
                                     <div class="col-md-6">
-                                        <input type="text" id="apellido_p" class="form-control" name="apellido_p">
+                                        <input type="text" id="contacto" class="form-control" name="contacto">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="user_name" class="col-md-4 col-form-label text-md-right">Apellido Materno</label>
-                                    <div class="col-md-6">
-                                        <input type="text" id="apellido_m" class="form-control" name="apellido_m">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="correo" class="col-md-4 col-form-label text-md-right">Correo electronico</label>
+                                    <label for="phone_number" class="col-md-4 col-form-label text-md-right">Correo</label>
                                     <div class="col-md-6">
                                         <input type="email" class="form-control" id="correo" name="correo">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="telefono" class="col-md-4 col-form-label text-md-right">Telefono</label>
+                                    <label for="present_address" class="col-md-4 col-form-label text-md-right">Telefono</label>
                                     <div class="col-md-6">
-                                        <input type="tel" id="telefono" class="form-control" name="telefono">
+                                        <input type="tel" id="telefono" name="telefono" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="permanent_address" class="col-md-4 col-form-label text-md-right">Estado</label>
                                     <div class="col-md-6">
-                                         <select id="estado-seleccion" class="form-control">
+                                        <select id="estado-seleccion" class="form-control" name="estado-seleccion">
                                             <option value="1">Activo</option>
                                             <option value="0">Archivado</option>
                                         </select>
@@ -118,7 +109,7 @@
                                             require "../layouts/formButtons";
                                             $buttons = new formButtons();
                                             $buttons->renderButtons($edition);
-                                        ?>
+                                            ?>
                                     </div>
                                 </div>
                             </form>
@@ -135,15 +126,15 @@
 <script>
     msg = new alerts();
     form = new DataToSendManager();
-    connection="../../Controllers/formClienteController.php";
+    connection="../../Controllers/Proveedores/Providers/AJAXFormProvider.php";
     formSelector="#formulario";
-    registerKeyDataField="#RFC";
-    loadregisterfunc = form.onloadClienteRegister();
-    savePostData=form.onSavePostDataOfCliente();
-    onDeleteNewRedirect="../../views/clientes/formulario-cliente.php";
+    registerKeyDataField="#compania";
+    loadregisterfunc = form.onloadProveedoresRegister();
+    savePostData=form.onSavePostDataOfProveedores();
+    onDeleteNewRedirect="../../views/proveedores/form.php";
     SuccessAlert=msg.basicSuccessAlert();
-    WarningAlert="Verifica que la información este correctamente llenada y/o verifique que el RFC no este relacionado con otro registro";
+    WarningAlert=msg.basicwarningAlert();
 </script>
-<script src="../../js/AJAXController.js"></script>
+<script src="../../js/AJAXFormController.js"></script>
 </body>
 </html>

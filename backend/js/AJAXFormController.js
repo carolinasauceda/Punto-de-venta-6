@@ -1,4 +1,4 @@
-class AJAXController{
+class AJAXFormController{
 
    constructor(connectionString) {
        this.ConnectionString=connectionString;
@@ -65,7 +65,7 @@ class AJAXController{
 /*-------------------------------------------------Manejadores de Eventos-----------------------------------------------------------*/
 
 alerta = new alerts();
-var ajaxController = new AJAXController(connection);
+var ajaxController = new AJAXFormController(connection);
 
 var buttonpressed;
 $('.actionbutton').click(function() {

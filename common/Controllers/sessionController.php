@@ -30,7 +30,7 @@
 
                 case 'formProveedor':
                 case 'formCategoria':
-                if($permisosNivel<=20) $this->_notAutorizeRedirect(); else return 0;
+                if($permisosNivel<=20) $this->_notAutorizeRedirect();
                     break;
             }
 
