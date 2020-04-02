@@ -2,7 +2,7 @@
 <html lang="en">
 <?php require "../../common/Controllers/sessionController.php";
  $sessionController = new sessionController("../../");
- require 'barra_tareas.php';
+ require 'layouts/barra_tareas.php';
  // el parametro de entrada es el numero de directorios necesarios para regresar a la carpeta raíz del sitio.
 ?>
 <head>

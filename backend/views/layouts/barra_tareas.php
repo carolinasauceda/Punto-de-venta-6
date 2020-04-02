@@ -5,7 +5,7 @@
     en todas las pantallas donde lo vayamos a solicitar  -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="index-style.css">
+    <link rel="stylesheet" href="../css/index-style.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     
@@ -25,7 +25,7 @@
                     <li><a href="#">Empleados</a></li>
                     <li><a href="#">Proveedores</a></li>
                     <li><a href="#">Productos</a></li>
-                    <li class="boton-especial"><a href="login.php">Salir</a></li>
+                    <li class="boton-especial"><a href="../login.php">Salir</a></li>
                 </ul>
             </div>
         </div>
