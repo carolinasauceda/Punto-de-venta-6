@@ -1,5 +1,5 @@
 <?php
-
+//Por cuestiones del desarrollo se debe importar el archivo DBManager antes de importar esta clase
 class tablaNivelUsuario extends  DBManager{
 
     public function __construct()
