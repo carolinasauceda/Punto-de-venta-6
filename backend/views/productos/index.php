@@ -61,18 +61,18 @@
 
 
 			<div class="row table-responsive">
-				<table class="display" id="mitabla">
+				<table  id="mitabla" class="table display">
 					<thead>
 						<tr>
-							<th>ID</th>
-							<th>Nombre</th>
-							<th>Proveedor</th>
-							<th>Categoria</th>
-							<th>Precio Unitario</th>
-							<th>Existencia</th>
-							<th>Estado</th>
-							<th></th>
-							<th></th>
+							<th scope="col">ID</th>
+							<th scope="col">Nombre</th>
+							<th scope="col">Proveedor</th>
+							<th scope="col">Categoria</th>
+							<th scope="col">Precio Unitario</th>
+							<th scope="col">Existencia</th>
+							<th scope="col">Estado</th>
+							<th scope="col"></th>
+							<th scope="col"></th>
 						</tr>
 					</thead>
 					

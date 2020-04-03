@@ -25,11 +25,14 @@ $(function(){
             let filas="";
             response.forEach(
                 row => {
-                    filas+= '<tr>' +
+                    filas+= '<tr scope="row">' +
                         '<td> '+row.ID+' </td>' +'<td> '+row.Nombre+' </td>' +'<td> '+row.IDProveedor+' </td>' +'<td> '+row.IDCategoria+' </td>' + '<td> '+row.Precio+' </td>' +'<td> '+row.EnExistencia+' </td>' +'<td> '+row.RActivo+' </td>' +
                         '</tr>'
                 });
            $('#cuerpoTabla').html(filas);
        });
    });
+
+
+
 });
