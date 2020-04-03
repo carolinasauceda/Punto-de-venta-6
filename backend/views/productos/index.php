@@ -2,18 +2,11 @@
 
 <html lang="es">
 	<head>
+        <?php include_once '../../../common/commonHeaders.php'?>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-		<link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
 		<link href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/cosmo/bootstrap.min.css" rel="stylesheet" integrity="sha384-qdQEsAI45WFCO5QwXBelBe1rR9Nwiss4rGEqiszC+9olH1ScrLrMQr1KmDR964uZ" crossorigin="anonymous">
-		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-		<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-		<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-		<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 		
-		<script>
+		<!--<script>
 			$(document).ready(function(){
 				$('#mitabla').DataTable({
 					"order": [[1, "asc"]],
@@ -38,7 +31,7 @@
 			});
 			
 		</script>
-		
+		-->
 	</head>
 	
 	<body>
@@ -52,7 +45,7 @@
 			
 			<div class="row d-flex ">
 				<div class="col-md-2">
-				<a href="nuevo.php" class="btn btn-primary">Nuevo Producto</a>
+				<a href="form.php" class="btn btn-primary">Nuevo Producto</a>
 				</div>
 				<div class="col-md-2">
 				<a href="nuevo.php" class="btn btn-primary">Reporte</a>
@@ -60,7 +53,13 @@
 			</div>
 			
 			<br>
-			
+
+            <form class="form-inline my-2 my-lg-0">
+                <input name="search" id="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-success my-2 my-sm-0" id="btnSearch" type="submit">Search</button>
+            </form>
+
+
 			<div class="row table-responsive">
 				<table class="display" id="mitabla">
 					<thead>
@@ -77,14 +76,14 @@
 						</tr>
 					</thead>
 					
-					<tbody>
+					<tbody id="cuerpoTabla">
 						
 					</tbody>
 				</table>
 			</div>
 		</div>
-		
-		<!-- Modal -->
+	<!--	Ojo con los modales
+		 Modal
 		<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -105,7 +104,7 @@
 				</div>
 			</div>
 		</div>
-		<!-- Modal -->
+		 Modal
 		<div class="modal fade" id="Modificar_Gancho" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -118,7 +117,7 @@
 						<div class="form-group">
 							<label for="nombre" class="col-sm-2 control-label">Gancho $</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="preciogang" name="preciogang" placeholder="Precio" value="<?php echo $row['PrecioG']; ?>" required>
+								<input type="text" class="form-control" id="preciogang" name="preciogang" placeholder="Precio" value="<?php /*echo $row['PrecioG'];*/ ?>" required>
 							</div>
 							<br>
 						</div>
@@ -138,7 +137,15 @@
 				
 				$('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ok').attr('href') + '</strong>');
 			});
-		</script>	
-		
+		</script>
+    -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
+
+		<?php include_once '../../../common/commonJS.php'?>
+        <script src="../../js/AJAXIndexController.js"></script>
 	</body>
 </html>	

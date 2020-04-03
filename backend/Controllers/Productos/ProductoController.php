@@ -95,6 +95,63 @@ class tablaProducto extends  DBManager{
         }
 
     }
+
+    function getRegistersByNombre($name){
+        $this->sql="Select * from Productos where Nombre like :name";
+        $resultado=$this->base->prepare($this->sql);
+        $resultado->bindValue(":name",'%'.$name . '%');
+        $resultado->execute();
+        $this->closeConection();
+
+        $json=array();
+        while($row=$resultado->fetch()){
+            $json[]=array(
+                'ID'=>  $row['IDProducto'],
+                'Nombre'=>$row['Nombre'],
+                'IDProveedor'=>$row["IDProveedor"],
+                'IDCategoria'=>$row["IDCategoria"],
+                'Precio'=>$row["PrecioUnitario"],
+                'EnExistencia'=>$row["EnExistencia"],
+                'RActivo'=>$row["RActivo"]
+            );
+        }
+        return json_encode($json);
+    }
+
+    function getAllRegisters(){
+        $this->sql="Select * from Productos";
+        $resultado=$this->base->prepare($this->sql);
+        $resultado->execute();
+        $this->closeConection();
+
+        $json=array();
+        while($row=$resultado->fetch()){
+            $json[]=array(
+                'ID'=>  $row['IDProducto'],
+                'Nombre'=>$row['Nombre'],
+                'IDProveedor'=>$row["IDProveedor"],
+                'IDCategoria'=>$row["IDCategoria"],
+                'Precio'=>$row["PrecioUnitario"],
+                'EnExistencia'=>$row["EnExistencia"],
+                'RActivo'=>$row["RActivo"]
+            );
+        }
+        return json_encode($json);
+    }
 }
 
 ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

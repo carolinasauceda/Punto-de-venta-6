@@ -12,7 +12,9 @@
                   </button>
                    <button type="submit" class="btn btn-danger actionbutton" '.$disable.' id="btnDelete">
                    Borrar Registro
-                   </button>';
+                   </button>
+                   <a  class="btn btn-secondary" href="index.php">Regresar</a>
+                   ';
         }
     }
 
