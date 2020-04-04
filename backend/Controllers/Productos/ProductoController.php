@@ -124,9 +124,9 @@ class tablaProducto extends  DBManager{
         $resultado->execute();
         $this->closeConection();
 
-        $json=array();
+            $json['data'][]=array();
         while($row=$resultado->fetch()){
-            $json[]=array(
+            $json['data'][]=array(
                 'ID'=>  $row['IDProducto'],
                 'Nombre'=>$row['Nombre'],
                 'IDProveedor'=>$row["IDProveedor"],
@@ -136,6 +136,7 @@ class tablaProducto extends  DBManager{
                 'RActivo'=>$row["RActivo"]
             );
         }
+        unset($json['data'][0]);
         return json_encode($json);
     }
 }

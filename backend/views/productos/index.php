@@ -5,8 +5,8 @@
         <?php include_once '../../../common/commonHeaders.php'?>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/cosmo/bootstrap.min.css" rel="stylesheet" integrity="sha384-qdQEsAI45WFCO5QwXBelBe1rR9Nwiss4rGEqiszC+9olH1ScrLrMQr1KmDR964uZ" crossorigin="anonymous">
-		
-		<!--<script>
+		<link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+		<script>
 			$(document).ready(function(){
 				$('#mitabla').DataTable({
 					"order": [[1, "asc"]],
@@ -31,7 +31,6 @@
 			});
 			
 		</script>
-		-->
 	</head>
 	
 	<body>
@@ -51,14 +50,6 @@
 				<a href="nuevo.php" class="btn btn-primary">Reporte</a>
 				</div>
 			</div>
-			
-			<br>
-
-            <form class="form-inline my-2 my-lg-0">
-                <input name="search" id="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-success my-2 my-sm-0" id="btnSearch" type="submit">Search</button>
-            </form>
-
 
 			<div class="row table-responsive">
 				<table  id="mitabla" class="table display">
@@ -76,7 +67,7 @@
 						</tr>
 					</thead>
 					
-					<tbody id="cuerpoTabla">
+					<tbody>
 						
 					</tbody>
 				</table>
@@ -144,8 +135,7 @@
         <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
         <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 
-
 		<?php include_once '../../../common/commonJS.php'?>
-        <script src="../../js/AJAXIndexController.js"></script>
+
 	</body>
 </html>	
