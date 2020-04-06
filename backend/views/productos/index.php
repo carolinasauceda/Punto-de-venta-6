@@ -1,151 +1,221 @@
+<html>
+    <head>
+        <?php
+            //require_once '../../../DB/helperDataTransform.php';
+            //$datatransform = new DataTransform();
+        ?>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.20/b-1.6.1/fc-3.3.0/fh-3.1.6/kt-2.5.1/r-2.2.3/rg-1.1.1/rr-1.2.6/sc-2.0.1/sp-1.0.1/sl-1.3.1/datatables.min.css"/>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+        <script src="https://kit.fontawesome.com/22c16ef1fa.js" crossorigin="anonymous"></script>
+
+    </head>
+    <body>
 
 
-<html lang="es">
-<head>
-    <?php include_once '../../../common/commonHeaders.php'?>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/cosmo/bootstrap.min.css" rel="stylesheet" integrity="sha384-qdQEsAI45WFCO5QwXBelBe1rR9Nwiss4rGEqiszC+9olH1ScrLrMQr1KmDR964uZ" crossorigin="anonymous">
+   <div class="container">
 
-    <!--<script>
-        $(document).ready(function(){
-            $('#mitabla').DataTable({
-                "order": [[1, "asc"]],
-                "language":{
-                "lengthMenu": "Mostrar _MENU_ registros por pagina",
-                "info": "Mostrando pagina _PAGE_ de _PAGES_",
-                    "infoEmpty": "No hay registros disponibles",
-                    "infoFiltered": "(filtrada de _MAX_ registros)",
-                    "loadingRecords": "Cargando...",
-                    "processing":     "Procesando",
-                    "search": "Buscar:",
-                    "zeroRecords":    "No se encontraron registros coincidentes",
-                    "paginate": {
-                        "next":       "Siguiente",
-                        "previous":   "Anterior"
-                    },
-                },
-                "bProcessing": true,
-                "bServerSide": true,
-                "sAjaxSource": "server_process.php"
-            });
+       <div class="row">
+           <h2 style="text-align:center">Productos disponibles</h2>
+           <h4 style="padding-left:800px">
+           </h4>
+       </div>
+
+       <div class="row d-flex ">
+           <div class="col-md-2">
+               <a href="form.php" class="btn btn-primary">Nuevo Producto</a>
+           </div>
+           <div class="col-md-2">
+               <a href="nuevo.php" class="btn btn-primary">Reporte</a>
+           </div>
+       </div>
+
+       <br>
+
+       <table id="example" class="display" style="width:100%">
+           <thead>
+           <tr>
+               <th>ID</th>
+               <th>Nombre</th>
+               <th>Precio</th>
+               <th></th>
+           </tr>
+           </thead>
+           <tbody>
+           </tbody>
+           <tfoot>
+           <tr>
+           </tr>
+           </tfoot>
+       </table>
+   </div>
+    <!--modal delete-->
+    <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Eliminar Registro</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+                </div>
+
+                <div class="modal-body">
+                    ¿Desea eliminar este registro?
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button id="btnDelete" class="btn btn-danger btn-ok text-white">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--modal view -->
+    <div class="modal fade" id="register-view" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Producto: </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-6 font-weight-bold">ID: </div> <div class="col-6" id="modal-p-id"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 font-weight-bold">Nombre: </div> <div class="col-6" id="modal-p-nombre"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 font-weight-bold">Proveedor: </div> <div class="col-6" id="modal-p-proveedor"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 font-weight-bold">Categoria: </div> <div class="col-6" id="modal-p-categoria"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 font-weight-bold">Precio Unitario: </div> <div class="col-6" id="modal-p-precio"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 font-weight-bold">Stock: </div> <div class="col-6" id="modal-p-stock"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 font-weight-bold">Estado del registro: </div> <div class="col-6" id="modal-p-estado"></div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button id="btnDelete" class="btn btn-danger btn-ok text-white">Eliminar</button>
+                    <a href="form.php" class="btn btn-primary btn-ok text-white">Editar</a>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/b-1.6.1/fc-3.3.0/fh-3.1.6/kt-2.5.1/r-2.2.3/rg-1.1.1/rr-1.2.6/sc-2.0.1/sp-1.0.1/sl-1.3.1/datatables.min.js"></script>
+    <script src="../../../common/js/CommonAlerts.js"></script>
+    <script>
+        msg = new alerts();
+        var connection="../../Controllers/Productos/Providers/AJAXIndexProvider.php";
+        onDeleteNewRedirect="../../views/productos/pruebas.php";
+        SuccessAlert=msg.basicSuccessAlert();
+        var deleteElementId;
+        $( document ).ready(function() {
+            listar();
         });
 
+        var listar=function(){
+            var table=$('#example').DataTable({
+                'ajax':{
+                    'method':'POST',
+                    'url':connection,
+                },
+                'columns':[
+                    {'data':'ID'},
+                    {'data':'Nombre'},
+                    {'data':'Precio'},
+                    {'defaultContent':botonesDataTable}
+                ],
+                'language': DataTableLenguaje
+            });
+
+            accionBtnEditarListener('#example tbody',table);
+            accionBtnEliminarListener('#example tbody',table);
+            accionBtnVerListener('#example tbody',table);
+
+        }
+
+        var botonesDataTable="<button type='button' class='editar btn btn-primary'><i class='fas fa-edit'></i></button>" +
+                             "<button type='button' class='ver btn btn-secondary ml-1' data-toggle='modal' data-target='#register-view' ><i class='fa fa-eye'></i></button>"+
+                             "<button type='button' class='eliminar btn btn-danger ml-1' data-toggle='modal' data-target='#confirm-delete' ><i class='fa fa-trash-alt'></i></button>";
+
+        var accionBtnEditarListener=function(tbody, table){
+            $(tbody).on('click','button.editar', function(){
+               var data= table.row($(this).parents('tr')).data();
+               window.location ="form.php?id="+data.ID;
+            });
+        }
+
+        var accionBtnVerListener=function(tbody, table){
+            $(tbody).on('click','button.ver', function(){
+                var data= table.row($(this).parents('tr')).data();
+                $('#modal-p-id').text(data.ID);
+                $('#modal-p-nombre').text(data.Nombre);
+                $('#modal-p-proveedor').text(data.IDProveedor);
+                $('#modal-p-categoria').text(data.IDCategoria);
+                $('#modal-p-precio').text(data.Precio);
+                $('#modal-p-stock').text(data.EnExistencia);
+                $('#modal-p-estado').text(data.RActivo);
+            });
+        }
+
+        var accionBtnEliminarListener=function(tbody, table){
+            $(tbody).on('click','button.eliminar', function(){
+                var data= table.row($(this).parents('tr')).data();
+                deleteElementId=data.ID;
+                $('#confirm-delete').modal('show');
+            });
+        }
+
+
+        var DataTableLenguaje={
+            "sProcessing":     "Procesando...",
+            "sLengthMenu":     "Mostrar _MENU_ registros",
+            "sZeroRecords":    "No se encontraron resultados",
+            "sEmptyTable":     "Ningún dato disponible en esta tabla =(",
+            "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix":    "",
+            "sSearch":         "Buscar:",
+            "sUrl":            "",
+            "sInfoThousands":  ",",
+            "sLoadingRecords": "Cargando...",
+            "oPaginate": {
+                "sFirst":    "Primero",
+                "sLast":     "Último",
+                "sNext":     "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "oAria": {
+                "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            },
+            "buttons": {
+                "copy": "Copiar",
+                "colvis": "Visibilidad"
+            }
+        }
+
     </script>
-    -->
-</head>
+    <script src="../../js/AJAXIndexController.js"></script>
 
-<body>
-
-<div class="container">
-    <div class="row">
-        <h2 style="text-align:center">Productos disponibles</h2>
-        <h4 style="padding-left:800px">
-        </h4>
-    </div>
-
-    <div class="row d-flex ">
-        <div class="col-md-2">
-            <a href="form.php" class="btn btn-primary">Nuevo Producto</a>
-        </div>
-        <div class="col-md-2">
-            <a href="nuevo.php" class="btn btn-primary">Reporte</a>
-        </div>
-    </div>
-
-    <br>
-
-    <form class="form-inline my-2 my-lg-0">
-        <input name="search" id="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-success my-2 my-sm-0" id="btnSearch" type="submit">Search</button>
-    </form>
-
-
-    <div class="row table-responsive">
-        <table  id="mitabla" class="table display">
-            <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Proveedor</th>
-                <th scope="col">Categoria</th>
-                <th scope="col">Precio Unitario</th>
-                <th scope="col">Existencia</th>
-                <th scope="col">Estado</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-            </tr>
-            </thead>
-
-            <tbody id="cuerpoTabla">
-
-            </tbody>
-        </table>
-    </div>
-</div>
-<!--	Ojo con los modales
-		 Modal
-		<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="myModalLabel">Eliminar Registro</h4>
-					</div>
-
-					<div class="modal-body">
-						¿Desea eliminar este registro?
-					</div>
-
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-						<a class="btn btn-danger btn-ok">Eliminar</a>
-					</div>
-				</div>
-			</div>
-		</div>
-		 Modal
-		<div class="modal fade" id="Modificar_Gancho" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="myModalLabel">Modificar</h4>
-					</div>
-					<form action="modificargancho.php" method="POST">
-					<div class="modal-body">
-						<div class="form-group">
-							<label for="nombre" class="col-sm-2 control-label">Gancho $</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="preciogang" name="preciogang" placeholder="Precio" value="<?php /*echo $row['PrecioG'];*/ ?>" required>
-							</div>
-							<br>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-						<button type="submit" class="btn btn-primary">Guardar</button>
-					</div>
-					</form>
-				</div>
-			</div>
-		</div>
-
-		<script>
-			$('#confirm-delete').on('show.bs.modal', function(e) {
-				$(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
-
-				$('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ok').attr('href') + '</strong>');
-			});
-		</script>
-    -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-
-
-<?php include_once '../../../common/commonJS.php'?>
-<script src="../../js/AJAXIndexController.js"></script>
-</body>
-</html>	
+    </body>
+</html>
