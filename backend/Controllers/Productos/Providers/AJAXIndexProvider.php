@@ -1,8 +1,14 @@
 <?php
 require_once '../../../../DB/DBManager.php';
 require '../ProductoController.php'; //Necesitamos importar DBManager primero
+$formObj= new tablaProducto();
 
-    $tableObj = new tablaProducto();
-    echo $tableObj->getAllRegisters();
+if(isset($_POST["deleteAction"])){
+    echo $formObj->dropRegisterByID($_POST['id']);
+}else{
+    echo $formObj->getAllRegisters();
+}
+
+
 
 ?>
