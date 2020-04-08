@@ -16,14 +16,14 @@
    <div class="container">
 
        <div class="row">
-           <h2 style="text-align:center">Productos disponibles</h2>
+           <h2 style="text-align:center">Proveedores:</h2>
            <h4 style="padding-left:800px">
            </h4>
        </div>
 
        <div class="row d-flex ">
            <div class="col-md-2">
-               <a href="form.php" class="btn btn-primary">Nuevo Producto</a>
+               <a href="form.php" class="btn btn-primary">Nuevo Proveedor</a>
            </div>
            <div class="col-md-2">
                <a href="nuevo.php" class="btn btn-primary">Reporte</a>
@@ -36,8 +36,10 @@
            <thead>
            <tr>
                <th>ID</th>
-               <th>Nombre</th>
-               <th>Precio</th>
+               <th>Compañia</th>
+               <th>Contacto</th>
+               <th>Correo</th>
+               <th>Telefono</th>
                <th></th>
            </tr>
            </thead>
@@ -87,19 +89,16 @@
                         <div class="col-6 font-weight-bold">ID: </div> <div class="col-6" id="modal-p-id"></div>
                     </div>
                     <div class="row">
-                        <div class="col-6 font-weight-bold">Nombre: </div> <div class="col-6" id="modal-p-nombre"></div>
+                        <div class="col-6 font-weight-bold">Compania: </div> <div class="col-6" id="modal-p-compania"></div>
                     </div>
                     <div class="row">
-                        <div class="col-6 font-weight-bold">Proveedor: </div> <div class="col-6" id="modal-p-proveedor"></div>
+                        <div class="col-6 font-weight-bold">Contacto: </div> <div class="col-6" id="modal-p-contacto"></div>
                     </div>
                     <div class="row">
-                        <div class="col-6 font-weight-bold">Categoria: </div> <div class="col-6" id="modal-p-categoria"></div>
+                        <div class="col-6 font-weight-bold">Correo: </div> <div class="col-6" id="modal-p-correo"></div>
                     </div>
                     <div class="row">
-                        <div class="col-6 font-weight-bold">Precio Unitario: </div> <div class="col-6" id="modal-p-precio"></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6 font-weight-bold">Stock: </div> <div class="col-6" id="modal-p-stock"></div>
+                        <div class="col-6 font-weight-bold">Telefono: </div> <div class="col-6" id="modal-p-telefono"></div>
                     </div>
                 </div>
 
@@ -120,8 +119,8 @@
     <script src="../../../common/js/CommonAlerts.js"></script>
     <script>
         msg = new alerts();
-        var connection="../../Controllers/Productos/Providers/AJAXIndexProvider.php";
-        onDeleteNewRedirect="../../views/productos/index.php";
+        var connection="../../Controllers/Proveedores/Providers/AJAXIndexProvider.php";
+        onDeleteNewRedirect="../../views/proveedores/index.php";
         var deleteElementId;
         SuccessAlert=msg.basicSuccessAlert();
         $( document ).ready(function() {
@@ -136,8 +135,10 @@
                 },
                 'columns':[
                     {'data':'ID'},
-                    {'data':'Nombre'},
-                    {'data':'Precio'},
+                    {'data':'Compania'},
+                    {'data':'Contacto'},
+                    {'data':'Correo'},
+                    {'data':'Telefono'},
                     {'defaultContent':botonesDataTable}
                 ],
                 'language': DataTableLenguaje
@@ -164,11 +165,10 @@
             $(tbody).on('click','button.ver', function(){
                 var data= table.row($(this).parents('tr')).data();
                 $('#modal-p-id').text(data.ID);
-                $('#modal-p-nombre').text(data.Nombre);
-                $('#modal-p-proveedor').text(data.IDProveedor);
-                $('#modal-p-categoria').text(data.IDCategoria);
-                $('#modal-p-precio').text(data.Precio);
-                $('#modal-p-stock').text(data.EnExistencia);
+                $('#modal-p-compania').text(data.Compania);
+                $('#modal-p-contacto').text(data.Contacto);
+                $('#modal-p-correo').text(data.Correo);
+                $('#modal-p-telefono').text(data.Telefono);
             });
         }
 

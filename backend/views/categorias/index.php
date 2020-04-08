@@ -16,14 +16,14 @@
    <div class="container">
 
        <div class="row">
-           <h2 style="text-align:center">Productos disponibles</h2>
+           <h2 style="text-align:center">Categorias de Productos disponibles</h2>
            <h4 style="padding-left:800px">
            </h4>
        </div>
 
        <div class="row d-flex ">
            <div class="col-md-2">
-               <a href="form.php" class="btn btn-primary">Nuevo Producto</a>
+               <a href="form.php" class="btn btn-primary">Nuevo Categoria</a>
            </div>
            <div class="col-md-2">
                <a href="nuevo.php" class="btn btn-primary">Reporte</a>
@@ -37,7 +37,7 @@
            <tr>
                <th>ID</th>
                <th>Nombre</th>
-               <th>Precio</th>
+               <th>Descripción</th>
                <th></th>
            </tr>
            </thead>
@@ -90,16 +90,7 @@
                         <div class="col-6 font-weight-bold">Nombre: </div> <div class="col-6" id="modal-p-nombre"></div>
                     </div>
                     <div class="row">
-                        <div class="col-6 font-weight-bold">Proveedor: </div> <div class="col-6" id="modal-p-proveedor"></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6 font-weight-bold">Categoria: </div> <div class="col-6" id="modal-p-categoria"></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6 font-weight-bold">Precio Unitario: </div> <div class="col-6" id="modal-p-precio"></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6 font-weight-bold">Stock: </div> <div class="col-6" id="modal-p-stock"></div>
+                        <div class="col-6 font-weight-bold">Descripción: </div> <div class="col-6" id="modal-p-descripcion"></div>
                     </div>
                 </div>
 
@@ -120,8 +111,8 @@
     <script src="../../../common/js/CommonAlerts.js"></script>
     <script>
         msg = new alerts();
-        var connection="../../Controllers/Productos/Providers/AJAXIndexProvider.php";
-        onDeleteNewRedirect="../../views/productos/index.php";
+        var connection="../../Controllers/Categoria/Providers/AJAXIndexProvider.php";
+        onDeleteNewRedirect="../../views/categorias/index.php";
         var deleteElementId;
         SuccessAlert=msg.basicSuccessAlert();
         $( document ).ready(function() {
@@ -137,7 +128,7 @@
                 'columns':[
                     {'data':'ID'},
                     {'data':'Nombre'},
-                    {'data':'Precio'},
+                    {'data':'Descripcion'},
                     {'defaultContent':botonesDataTable}
                 ],
                 'language': DataTableLenguaje
@@ -165,10 +156,7 @@
                 var data= table.row($(this).parents('tr')).data();
                 $('#modal-p-id').text(data.ID);
                 $('#modal-p-nombre').text(data.Nombre);
-                $('#modal-p-proveedor').text(data.IDProveedor);
-                $('#modal-p-categoria').text(data.IDCategoria);
-                $('#modal-p-precio').text(data.Precio);
-                $('#modal-p-stock').text(data.EnExistencia);
+                $('#modal-p-descripcion').text(data.Descripcion);
             });
         }
 

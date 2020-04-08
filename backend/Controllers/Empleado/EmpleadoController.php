@@ -136,5 +136,33 @@ class tablaEmpleados extends  DBManager{
         }
 
     }
+
+    function getAllRegisters(){
+        $this->sql="Select * from Empleados";
+        $resultado=$this->base->prepare($this->sql);
+        $resultado->execute();
+        $this->closeConection();
+
+
+        $resultado->fetch();
+        while($row=$resultado->fetch()){
+            $json['data'][]=array(
+                'ID'=>  $row['IDEmpleado'],
+                'RFC'=>$row['RFC'],
+                'Nombre'=>$row["Nombre"],
+                'Apellido_P'=>$row["Apellido_P"],
+                'Apellido_M'=>$row["Apellido_M"],
+                'Fecha_Nacimiento'=>$row["Fecha_Nacimiento"],
+                'Fecha_Contratacion'=>$row["Fecha_Contratacion"],
+                'Direccion'=>$row["Direccion"],
+                'NivelUsuario'=>$row["NivelUsuario"],
+                'Telefono'=>$row["Telefono"],
+                'RActivo'=>$row["RActivo"]
+            );
+        }
+
+        return json_encode($json);
+    }
+
 }
 ?>

@@ -16,14 +16,14 @@
    <div class="container">
 
        <div class="row">
-           <h2 style="text-align:center">Productos disponibles</h2>
+           <h2 style="text-align:center">Empleados:</h2>
            <h4 style="padding-left:800px">
            </h4>
        </div>
 
        <div class="row d-flex ">
            <div class="col-md-2">
-               <a href="form.php" class="btn btn-primary">Nuevo Producto</a>
+               <a href="form.php" class="btn btn-primary">Nuevo Empleado</a>
            </div>
            <div class="col-md-2">
                <a href="nuevo.php" class="btn btn-primary">Reporte</a>
@@ -37,7 +37,9 @@
            <tr>
                <th>ID</th>
                <th>Nombre</th>
-               <th>Precio</th>
+               <th>Apellido Paterno</th>
+               <th>Fecha Contratación</th>
+               <th>Teléfono</th>
                <th></th>
            </tr>
            </thead>
@@ -87,25 +89,37 @@
                         <div class="col-6 font-weight-bold">ID: </div> <div class="col-6" id="modal-p-id"></div>
                     </div>
                     <div class="row">
+                        <div class="col-6 font-weight-bold">RFC: </div> <div class="col-6" id="modal-p-rfc"></div>
+                    </div>
+                    <div class="row">
                         <div class="col-6 font-weight-bold">Nombre: </div> <div class="col-6" id="modal-p-nombre"></div>
                     </div>
                     <div class="row">
-                        <div class="col-6 font-weight-bold">Proveedor: </div> <div class="col-6" id="modal-p-proveedor"></div>
+                        <div class="col-6 font-weight-bold">Apellido Paterno: </div> <div class="col-6" id="modal-p-apellido_p"></div>
                     </div>
                     <div class="row">
-                        <div class="col-6 font-weight-bold">Categoria: </div> <div class="col-6" id="modal-p-categoria"></div>
+                        <div class="col-6 font-weight-bold">Apellido Materno: </div> <div class="col-6" id="modal-p-apellido_m"></div>
                     </div>
                     <div class="row">
-                        <div class="col-6 font-weight-bold">Precio Unitario: </div> <div class="col-6" id="modal-p-precio"></div>
+                        <div class="col-6 font-weight-bold">Fecha de Nacimiento: </div> <div class="col-6" id="modal-p-fechaNac"></div>
                     </div>
                     <div class="row">
-                        <div class="col-6 font-weight-bold">Stock: </div> <div class="col-6" id="modal-p-stock"></div>
+                        <div class="col-6 font-weight-bold">Fecha de Contratación: </div> <div class="col-6" id="modal-p-fechaCont"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 font-weight-bold">Dirección: </div> <div class="col-6" id="modal-p-direccion"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 font-weight-bold">Teléfono: </div> <div class="col-6" id="modal-p-telefono"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 font-weight-bold">NivelUsuario: </div> <div class="col-6" id="modal-p-nivelusuario"></div>
                     </div>
                 </div>
 
                 <div class="modal-footer">
                     <button id="btnDelete" class="btn btn-danger btn-ok text-white">Eliminar</button>
-                    <a href="form.php" class="btn btn-primary btn-ok text-white">Editar</a>
+                    <a href="form.php" id="modalEditBtn"class="btn btn-primary btn-ok text-white">Editar</a>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
@@ -120,8 +134,8 @@
     <script src="../../../common/js/CommonAlerts.js"></script>
     <script>
         msg = new alerts();
-        var connection="../../Controllers/Productos/Providers/AJAXIndexProvider.php";
-        onDeleteNewRedirect="../../views/productos/index.php";
+        var connection="../../Controllers/Empleado/Providers/AJAXIndexProvider.php";
+        onDeleteNewRedirect="../../views/empleados/index.php";
         var deleteElementId;
         SuccessAlert=msg.basicSuccessAlert();
         $( document ).ready(function() {
@@ -137,7 +151,9 @@
                 'columns':[
                     {'data':'ID'},
                     {'data':'Nombre'},
-                    {'data':'Precio'},
+                    {'data':'Apellido_P'},
+                    {'data':'Fecha_Contratacion'},
+                    {'data':'Telefono'},
                     {'defaultContent':botonesDataTable}
                 ],
                 'language': DataTableLenguaje
@@ -156,7 +172,8 @@
         var accionBtnEditarListener=function(tbody, table){
             $(tbody).on('click','button.editar', function(){
                var data= table.row($(this).parents('tr')).data();
-               window.location ="form.php?id="+data.ID;
+               console.log(data.ID);
+              window.location ="form.php?id="+data.ID;
             });
         }
 
@@ -164,11 +181,15 @@
             $(tbody).on('click','button.ver', function(){
                 var data= table.row($(this).parents('tr')).data();
                 $('#modal-p-id').text(data.ID);
+                $('#modal-p-rfc').text(data.RFC);
                 $('#modal-p-nombre').text(data.Nombre);
-                $('#modal-p-proveedor').text(data.IDProveedor);
-                $('#modal-p-categoria').text(data.IDCategoria);
-                $('#modal-p-precio').text(data.Precio);
-                $('#modal-p-stock').text(data.EnExistencia);
+                $('#modal-p-apellido_p').text(data.Apellido_P);
+                $('#modal-p-apellido_m').text(data.Apellido_M);
+                $('#modal-p-fechaNac').text(data.Fecha_Nacimiento);
+                $('#modal-p-fechaCont').text(data.Fecha_Contratacion);
+                $('#modal-p-direccion').text(data.Direccion);
+                $('#modal-p-telefono').text(data.Telefono);
+                $('#modal-p-nivelusuario').text(data.NivelUsuario);
             });
         }
 

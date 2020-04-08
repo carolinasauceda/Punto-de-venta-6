@@ -92,6 +92,31 @@ class tablaProveedores extends  DBManager{
         }
 
     }
+
+
+
+    function getAllRegisters(){
+        $this->sql="Select * from Proveedores";
+        $resultado=$this->base->prepare($this->sql);
+        $resultado->execute();
+        $this->closeConection();
+
+
+        $resultado->fetch();
+        while($row=$resultado->fetch()){
+            $json['data'][]=array(
+                'ID'=>  $row['IDProveedor'],
+                'Compania'=>$row['Compania'],
+                'Contacto'=>$row["Contacto"],
+                'Correo'=>$row["Correo"],
+                'Telefono'=>$row["Telefono"],
+                'RActivo'=>$row["RActivo"]
+            );
+        }
+
+        return json_encode($json);
+    }
+
 }
 
 ?>

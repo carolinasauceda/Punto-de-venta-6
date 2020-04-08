@@ -94,5 +94,29 @@ class tablaCliente extends  DBManager{
         }
 
     }
+
+
+    function getAllRegisters(){
+        $this->sql="Select * from Clientes";
+        $resultado=$this->base->prepare($this->sql);
+        $resultado->execute();
+        $this->closeConection();
+
+
+        $resultado->fetch();
+        while($row=$resultado->fetch()){
+            $json['data'][]=array(
+                'ID'=>  $row['RFC'],
+                'Nombre'=>$row['Nombre'],
+                'Apellido_P'=>$row["Apellido_P"],
+                'Apellido_M'=>$row["Apellido_M"],
+                'Correo'=>$row["Correo"],
+                'Telefono'=>$row["Telefono"],
+                'RActivo'=>$row["RActivo"]
+            );
+        }
+
+        return json_encode($json);
+    }
 }
 ?>

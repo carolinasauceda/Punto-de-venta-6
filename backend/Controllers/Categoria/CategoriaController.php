@@ -90,6 +90,26 @@ class tablaCategoria extends  DBManager{
         }
 
     }
+
+    function getAllRegisters(){
+        $this->sql="Select * from CategoriaProductos";
+        $resultado=$this->base->prepare($this->sql);
+        $resultado->execute();
+        $this->closeConection();
+
+
+        $resultado->fetch();
+        while($row=$resultado->fetch()){
+            $json['data'][]=array(
+                'ID'=>  $row['IDCategoria'],
+                'Nombre'=>$row['Nombre'],
+                'Descripcion'=>$row["Descripcion"],
+                'RActivo'=>$row["RActivo"]
+            );
+        }
+
+        return json_encode($json);
+    }
 }
 
 ?>
