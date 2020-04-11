@@ -1,9 +1,14 @@
 <html>
     <head>
+
         <?php
             //require_once '../../../DB/helperDataTransform.php';
             //$datatransform = new DataTransform();
+            require "../../../common/Controllers/sessionController.php";
+            $userControl= new sessionController('../../../');
+            $edition=$userControl->isAutorizeFor('Empleados');
         ?>
+
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.20/b-1.6.1/fc-3.3.0/fh-3.1.6/kt-2.5.1/r-2.2.3/rg-1.1.1/rr-1.2.6/sc-2.0.1/sp-1.0.1/sl-1.3.1/datatables.min.css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
@@ -118,8 +123,8 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button id="btnDelete" class="btn btn-danger btn-ok text-white">Eliminar</button>
-                    <a href="form.php" id="modalEditBtn"class="btn btn-primary btn-ok text-white">Editar</a>
+                    <button id="btnDelete" class="btn btn-danger btn-ok text-white" <?php echo !$edition? $disable= 'disabled' :$disable= '';?>>Eliminar</button>
+                    <a href="form.php" id="modalEditBtn"class="btn btn-primary btn-ok text-white <?php echo !$edition? $disable= 'disabled' :$disable= '';?>" >Editar</a>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
@@ -165,9 +170,9 @@
 
         }
 
-        var botonesDataTable="<button type='button' class='editar btn btn-primary'><i class='fas fa-edit'></i></button>" +
-                             "<button type='button' class='ver btn btn-secondary ml-1' data-toggle='modal' data-target='#register-view' ><i class='fa fa-eye'></i></button>"+
-                             "<button type='button' class='eliminar btn btn-danger ml-1' data-toggle='modal' data-target='#confirm-delete' ><i class='fa fa-trash-alt'></i></button>";
+        var botonesDataTable="<button type='button' class='editar btn btn-primary'<?php echo !$edition? $disable= 'disabled' :$disable= '';?>><i class='fas fa-edit'></i></button>" +
+                             "<button type='button' class='ver btn btn-secondary ml-1' <?php echo !$edition? $disable= 'disabled' :$disable= '';?> data-toggle='modal' data-target='#register-view' ><i class='fa fa-eye'></i></button>"+
+                             "<button type='button' class='eliminar btn btn-danger ml-1' <?php echo !$edition? $disable= 'disabled' :$disable= '';?> data-toggle='modal' data-target='#confirm-delete' ><i class='fa fa-trash-alt'></i></button>";
 
         var accionBtnEditarListener=function(tbody, table){
             $(tbody).on('click','button.editar', function(){
@@ -180,16 +185,21 @@
         var accionBtnVerListener=function(tbody, table){
             $(tbody).on('click','button.ver', function(){
                 var data= table.row($(this).parents('tr')).data();
-                $('#modal-p-id').text(data.ID);
-                $('#modal-p-rfc').text(data.RFC);
-                $('#modal-p-nombre').text(data.Nombre);
-                $('#modal-p-apellido_p').text(data.Apellido_P);
-                $('#modal-p-apellido_m').text(data.Apellido_M);
-                $('#modal-p-fechaNac').text(data.Fecha_Nacimiento);
-                $('#modal-p-fechaCont').text(data.Fecha_Contratacion);
-                $('#modal-p-direccion').text(data.Direccion);
-                $('#modal-p-telefono').text(data.Telefono);
-                $('#modal-p-nivelusuario').text(data.NivelUsuario);
+
+                $.post(connection,{ViewAction:1, Nivel:data.NivelUsuario},function(response){
+                    var datos = $.parseJSON(response);
+                    $('#modal-p-id').text(data.ID);
+                    $('#modal-p-rfc').text(data.RFC);
+                    $('#modal-p-nombre').text(data.Nombre);
+                    $('#modal-p-apellido_p').text(data.Apellido_P);
+                    $('#modal-p-apellido_m').text(data.Apellido_M);
+                    $('#modal-p-fechaNac').text(data.Fecha_Nacimiento);
+                    $('#modal-p-fechaCont').text(data.Fecha_Contratacion);
+                    $('#modal-p-direccion').text(data.Direccion);
+                    $('#modal-p-telefono').text(data.Telefono);
+                    $('#modal-p-nivelusuario').text(datos['Nivel']);
+                });
+
             });
         }
 

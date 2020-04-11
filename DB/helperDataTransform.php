@@ -16,7 +16,8 @@
                 $this->closeConection();
                 if($resultado->rowCount()!=0){
 
-                    return $resultado->fetch();
+                    $res=$resultado->fetch();
+                    return $res['Compania'];
 
                 }else{
                     return 0; //no existe
@@ -27,35 +28,39 @@
             }
         }
 
-        public function getListaProveedores(){
+        public function getCategoriaByID($id){
             try{
-                $this->sql="select * from Proveedores";
+                $this->sql="SELECT * FROM CategoriaProductos where IDCategoria= :id";
                 $resultado=$this->base->prepare($this->sql);
+                $resultado->bindValue(":id",$id);
                 $resultado->execute();
-                $this->closeConection();
-
-                foreach ($resultado as $campo){
-                    echo '<option value="' . $campo["IDProveedor"] . '">' .$campo["Compania"] . '</option>';
+                $numero_registro=$resultado->rowCount();
+                if($numero_registro!=0){
+                    $res=$resultado->fetch();
+                    return $res['Nombre'];
+                }else{
+                    return 0; //no existe
                 }
-
-            }catch(Exception $e){
-                die("Error en conexion" . $e->getMessage());
+            }catch (Exception $e){
+                die("Error" . $e);
             }
         }
 
-        public function getListaCategoriaProducto(){
+        public function getNivelUsuarioByID($id){
             try{
-                $this->sql="select * from CategoriaProductos";
+                $this->sql="SELECT * FROM NivelUsuario where IDNivel= :id";
                 $resultado=$this->base->prepare($this->sql);
+                $resultado->bindValue(":id",$id);
                 $resultado->execute();
-                $this->closeConection();
-
-                foreach ($resultado as $campo){
-                    echo '<option value="' . $campo["IDCategoria"] . '">' .$campo["Nombre"] . '</option>';
+                $numero_registro=$resultado->rowCount();
+                if($numero_registro!=0){
+                    $res=$resultado->fetch();
+                    return $res['Descripcion'];
+                }else{
+                    return 0; //no existe
                 }
-
-            }catch(Exception $e){
-                die("Error en conexion" . $e->getMessage());
+            }catch (Exception $e){
+                die("Error" . $e);
             }
         }
 

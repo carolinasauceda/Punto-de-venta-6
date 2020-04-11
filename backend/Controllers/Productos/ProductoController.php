@@ -140,6 +140,7 @@ class tablaProducto extends  DBManager{
 
         return json_encode($json);
     }
+
 }
 
 ?>

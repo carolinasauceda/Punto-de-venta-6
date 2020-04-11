@@ -144,7 +144,7 @@ class tablaEmpleados extends  DBManager{
         $this->closeConection();
 
 
-        $resultado->fetch();
+        //$resultado->fetch();
         while($row=$resultado->fetch()){
             $json['data'][]=array(
                 'ID'=>  $row['IDEmpleado'],

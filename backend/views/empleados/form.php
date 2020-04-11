@@ -4,7 +4,7 @@
     <?php
         require "../../../common/Controllers/sessionController.php";
         $userControl= new sessionController('../../../');
-        $edition=$userControl->isAutorizeFor('formEmpleados');
+        $edition=$userControl->isAutorizeFor('Empleados');
     ?>
     <!-- Required meta tags -->
     <meta charset="utf-8">

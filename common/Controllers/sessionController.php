@@ -18,18 +18,18 @@
         public function isAutorizeFor($page){
             $permisosNivel=(int) $_SESSION['AutorizacionNivel'];
             switch($page){
-                case 'formClientes':
-                case 'formEmpleados':
-                case 'formNivelUsuario':
+                case 'Clientes':
+                case 'Empleados':
+                case 'NivelUsuario':
                     if($permisosNivel<100) $this->_notAutorizeRedirect();
                     break;
 
-                case 'formProductos':
+                case 'Productos':
                     if($permisosNivel<=20) return 0;
                     break;
 
-                case 'formProveedor':
-                case 'formCategoria':
+                case 'Proveedor':
+                case 'Categoria':
                 if($permisosNivel<=20) $this->_notAutorizeRedirect();
                     break;
             }
