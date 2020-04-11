@@ -1,8 +1,11 @@
 <?php
 
-    class formButtons{
+class formButtons{
 
         public function renderButtons($enable){
+            $level=  (int) $_SESSION['AutorizacionNivel'];
+            $level=$level>=100?1:0; //Si el usuario tiene permisos mayores a 100 este tiene autorización para ver ciertos campos ocultos
+            $msg=$level?'Archivar':"Eliminar";
             !$enable? $disable= "disabled" :$disable= '';
             echo '<button type="submit" class="btn btn-primary actionbutton" '.$disable .'  id="btnSave">
                     Guardar
@@ -11,7 +14,7 @@
                     Nuevo Registro
                   </button>
                    <button type="submit" class="btn btn-danger actionbutton" '.$disable.' id="btnDelete">
-                   Borrar Registro
+                   '.$msg.'
                    </button>
                    <a  class="btn btn-secondary" href="index.php">Regresar</a>
                    ';

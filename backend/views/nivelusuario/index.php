@@ -122,7 +122,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button id="btnDelete" class="btn btn-danger btn-ok text-white" <?php echo !$edition? $disable= 'disabled' :$disable= '';?>>Eliminar</button>
+                    <button id="eliminar2" class="btn btn-danger btn-ok text-white" <?php echo !$edition? $disable= 'disabled' :$disable= '';?>>Eliminar</button>
                     <a href="form.php" id="modalEditBtn"class="btn btn-primary btn-ok text-white <?php echo !$edition? $disable= 'disabled' :$disable= '';?>" >Editar</a>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                 </div>
@@ -184,6 +184,7 @@
         var accionBtnVerListener=function(tbody, table){
             $(tbody).on('click','button.ver', function(){
                 var data= table.row($(this).parents('tr')).data();
+                deleteElementId=data.ID;
                 $('#modal-p-id').text(data.ID);
                 $('#modal-p-rfc').text(data.RFC);
                 $('#modal-p-nombre').text(data.Nombre);
@@ -204,6 +205,12 @@
                 $('#confirm-delete').modal('show');
             });
         }
+
+        $( "#eliminar2" ).click(function() {
+            $('#register-view').modal('hide');
+            $('#confirm-delete').modal('show');
+        });
+
 
 
         var DataTableLenguaje={

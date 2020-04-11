@@ -5,6 +5,8 @@
         require "../../../common/Controllers/sessionController.php";
         $userControl= new sessionController('../../../');
         $edition=$userControl->isAutorizeFor('Categoria');
+        $level=  (int) $_SESSION['AutorizacionNivel'];
+        $level=$level>=100?1:0; //Si el usuario tiene permisos mayores a 100 este tiene autorización para ver ciertos campos ocultos
 
     ?>
     <!-- Required meta tags -->
@@ -70,7 +72,7 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group row">
+                                <div class="form-group row <?php echo !$level?'d-none disabled':"";?>">
                                     <label for="estado-seleccion" class="col-md-4 col-form-label text-md-right">Estado del registro:</label>
                                     <div class="col-md-6">
                                         <select id="estado-seleccion" class="form-control">

@@ -80,7 +80,7 @@ class tablaProducto extends  DBManager{
     function dropRegisterByID($ID){
         try{
             if($this->_registerExist($ID)){
-                $this->sql="Delete from Productos where IDProducto= :ID";
+                $this->sql="Update Productos set RActivo=0 where IDProducto= :ID";
                 $resultado=$this->base->prepare($this->sql);
                 $resultado->bindValue(":ID",$ID);
                 $resultado->execute();
@@ -118,8 +118,13 @@ class tablaProducto extends  DBManager{
         return json_encode($json);
     }
 
-    function getAllRegisters(){
-        $this->sql="Select * from Productos";
+    function getAllRegisters($adminOrsuper){
+
+        if($adminOrsuper){
+            $this->sql="Select * from Productos";
+        }else{
+            $this->sql="Select * from Productos where RActivo=1";
+        }
         $resultado=$this->base->prepare($this->sql);
         $resultado->execute();
         $this->closeConection();
@@ -134,7 +139,7 @@ class tablaProducto extends  DBManager{
                 'IDCategoria'=>$row["IDCategoria"],
                 'Precio'=>$row["PrecioUnitario"],
                 'EnExistencia'=>$row["EnExistencia"],
-                'RActivo'=>$row["RActivo"]
+                'RActivo'=>$row["RActivo"]?"Si":"No"
             );
         }
 

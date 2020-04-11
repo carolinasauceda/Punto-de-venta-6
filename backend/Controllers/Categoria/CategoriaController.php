@@ -75,7 +75,7 @@ class tablaCategoria extends  DBManager{
     function dropRegisterByID($ID){
         try{
             if($this->_registerExist($ID)){
-                $this->sql="Delete from CategoriaProductos where IDCategoria= :ID";
+                $this->sql="Update CategoriaProductos set RActivo=0 where IDCategoria= :ID";
                 $resultado=$this->base->prepare($this->sql);
                 $resultado->bindValue(":ID",$ID);
                 $resultado->execute();
@@ -91,8 +91,13 @@ class tablaCategoria extends  DBManager{
 
     }
 
-    function getAllRegisters(){
-        $this->sql="Select * from CategoriaProductos";
+    function getAllRegisters($adminOrsuper){
+        if($adminOrsuper){
+            $this->sql="Select * from CategoriaProductos";
+        }else{
+            $this->sql="Select * from CategoriaProductos where RActivo=1";
+        }
+
         $resultado=$this->base->prepare($this->sql);
         $resultado->execute();
         $this->closeConection();
@@ -104,7 +109,7 @@ class tablaCategoria extends  DBManager{
                 'ID'=>  $row['IDCategoria'],
                 'Nombre'=>$row['Nombre'],
                 'Descripcion'=>$row["Descripcion"],
-                'RActivo'=>$row["RActivo"]
+                'RActivo'=>$row["RActivo"]?'Si':'No'
             );
         }
 

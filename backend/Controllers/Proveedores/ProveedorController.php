@@ -77,7 +77,7 @@ class tablaProveedores extends  DBManager{
     function dropRegisterByID($ID){
         try{
             if($this->_registerExist($ID)){
-                $this->sql="Delete from Proveedores where IDProveedor= :ID";
+                $this->sql="Update Proveedores  set RActivo=0 where IDProveedor= :ID";
                 $resultado=$this->base->prepare($this->sql);
                 $resultado->bindValue(":ID",$ID);
                 $resultado->execute();
@@ -95,8 +95,13 @@ class tablaProveedores extends  DBManager{
 
 
 
-    function getAllRegisters(){
-        $this->sql="Select * from Proveedores";
+    function getAllRegisters($adminOrsuper){
+        if($adminOrsuper){
+            $this->sql="Select * from Proveedores";
+        }else{
+            $this->sql="Select * from Proveedores where RActivo=1";
+        }
+
         $resultado=$this->base->prepare($this->sql);
         $resultado->execute();
         $this->closeConection();
@@ -110,7 +115,7 @@ class tablaProveedores extends  DBManager{
                 'Contacto'=>$row["Contacto"],
                 'Correo'=>$row["Correo"],
                 'Telefono'=>$row["Telefono"],
-                'RActivo'=>$row["RActivo"]
+                'RActivo'=>$row["RActivo"]?'Si':'No'
             );
         }
 

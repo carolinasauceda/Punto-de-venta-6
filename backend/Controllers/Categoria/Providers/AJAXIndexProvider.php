@@ -6,7 +6,7 @@ $formObj= new tablaCategoria();
 if(isset($_POST["deleteAction"])){
     echo $formObj->dropRegisterByID($_POST['id']);
 }else{
-    echo $formObj->getAllRegisters();
+    echo $formObj->getAllRegisters($_POST['level']);
 }
 
 

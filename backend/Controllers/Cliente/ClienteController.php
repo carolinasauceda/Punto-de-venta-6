@@ -79,7 +79,7 @@ class tablaCliente extends  DBManager{
     function dropRegisterByID($ID){
         try{
             if($this->_registerExist($ID)){
-                $this->sql="Delete from Clientes where RFC= :ID";
+                $this->sql="Update Clientes set RActivo=0 where RFC= :ID";
                 $resultado=$this->base->prepare($this->sql);
                 $resultado->bindValue(":ID",$ID);
                 $resultado->execute();
@@ -112,7 +112,7 @@ class tablaCliente extends  DBManager{
                 'Apellido_M'=>$row["Apellido_M"],
                 'Correo'=>$row["Correo"],
                 'Telefono'=>$row["Telefono"],
-                'RActivo'=>$row["RActivo"]
+                'RActivo'=>$row["RActivo"]?'Si':'No'
             );
         }
 

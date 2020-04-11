@@ -19,7 +19,7 @@ if(isset($_POST["deleteAction"])){
 
     echo json_encode($json);
 }else{
-    echo $formObj->getAllRegisters();
+    echo $formObj->getAllRegisters($_POST['level']);
 }
 
 

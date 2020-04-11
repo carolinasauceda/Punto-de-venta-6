@@ -121,7 +121,7 @@ class tablaEmpleados extends  DBManager{
     function dropRegisterByID($ID){
         try{
             if($this->_registerExist($ID)){
-                $this->sql="Delete from Empleados where IDEmpleado= :ID";
+                $this->sql="Update Empleados set RActivo=0 where IDEmpleado= :ID";
                 $resultado=$this->base->prepare($this->sql);
                 $resultado->bindValue(":ID",$ID);
                 $resultado->execute();
@@ -157,7 +157,7 @@ class tablaEmpleados extends  DBManager{
                 'Direccion'=>$row["Direccion"],
                 'NivelUsuario'=>$row["NivelUsuario"],
                 'Telefono'=>$row["Telefono"],
-                'RActivo'=>$row["RActivo"]
+                'RActivo'=>$row["RActivo"]?'Si':'No'
             );
         }
 

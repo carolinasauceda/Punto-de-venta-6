@@ -44,7 +44,7 @@
                <th>Nombre</th>
                <th>Apellido Paterno</th>
                <th>Fecha Contratación</th>
-               <th>Teléfono</th>
+               <th>Activo</th>
                <th></th>
            </tr>
            </thead>
@@ -62,18 +62,18 @@
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Eliminar Registro</h4>
+                    <h4 class="modal-title" id="myModalLabel">Archivar Registro</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 
                 </div>
 
                 <div class="modal-body">
-                    ¿Desea eliminar este registro?
+                    ¿Desea archivar este registro?
                 </div>
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    <button id="btnDelete" class="btn btn-danger btn-ok text-white">Eliminar</button>
+                    <button id="btnDelete" class="btn btn-danger btn-ok text-white">Archivar</button>
                 </div>
             </div>
         </div>
@@ -123,7 +123,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button id="btnDelete" class="btn btn-danger btn-ok text-white" <?php echo !$edition? $disable= 'disabled' :$disable= '';?>>Eliminar</button>
+                    <button id="eliminar2" class="btn btn-danger btn-ok text-white" <?php echo !$edition? $disable= 'disabled' :$disable= '';?>>Archivar</button>
                     <a href="form.php" id="modalEditBtn"class="btn btn-primary btn-ok text-white <?php echo !$edition? $disable= 'disabled' :$disable= '';?>" >Editar</a>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                 </div>
@@ -158,9 +158,10 @@
                     {'data':'Nombre'},
                     {'data':'Apellido_P'},
                     {'data':'Fecha_Contratacion'},
-                    {'data':'Telefono'},
+                    {'data':'RActivo'},
                     {'defaultContent':botonesDataTable}
                 ],
+                "order": [[ 4, "desc" ]],
                 'language': DataTableLenguaje
             });
 
@@ -172,7 +173,7 @@
 
         var botonesDataTable="<button type='button' class='editar btn btn-primary'<?php echo !$edition? $disable= 'disabled' :$disable= '';?>><i class='fas fa-edit'></i></button>" +
                              "<button type='button' class='ver btn btn-secondary ml-1' <?php echo !$edition? $disable= 'disabled' :$disable= '';?> data-toggle='modal' data-target='#register-view' ><i class='fa fa-eye'></i></button>"+
-                             "<button type='button' class='eliminar btn btn-danger ml-1' <?php echo !$edition? $disable= 'disabled' :$disable= '';?> data-toggle='modal' data-target='#confirm-delete' ><i class='fa fa-trash-alt'></i></button>";
+                             "<button type='button' class='eliminar btn btn-danger ml-1' <?php echo !$edition? $disable= 'disabled' :$disable= '';?> data-toggle='modal' data-target='#confirm-delete' ><i class='fa fa-archive'></i></button>";
 
         var accionBtnEditarListener=function(tbody, table){
             $(tbody).on('click','button.editar', function(){
@@ -185,7 +186,7 @@
         var accionBtnVerListener=function(tbody, table){
             $(tbody).on('click','button.ver', function(){
                 var data= table.row($(this).parents('tr')).data();
-
+                deleteElementId=data.ID;
                 $.post(connection,{ViewAction:1, Nivel:data.NivelUsuario},function(response){
                     var datos = $.parseJSON(response);
                     $('#modal-p-id').text(data.ID);
@@ -210,6 +211,11 @@
                 $('#confirm-delete').modal('show');
             });
         }
+
+        $( "#eliminar2" ).click(function() {
+            $('#register-view').modal('hide');
+            $('#confirm-delete').modal('show');
+        });
 
 
         var DataTableLenguaje={
