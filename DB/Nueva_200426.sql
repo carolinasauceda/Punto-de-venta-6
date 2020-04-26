@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 25-03-2020 a las 01:32:28
+-- Tiempo de generación: 26-04-2020 a las 22:57:24
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.2
 
@@ -21,9 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `puntoventa`
 --
-DROP DATABASE IF EXISTS `puntoventa`;
-CREATE DATABASE IF NOT EXISTS `puntoventa` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `puntoventa`;
 
 -- --------------------------------------------------------
 
@@ -43,9 +40,12 @@ CREATE TABLE `CategoriaProductos` (
 --
 
 INSERT INTO `CategoriaProductos` (`IDCategoria`, `Nombre`, `Descripcion`, `RActivo`) VALUES
-(33, 'Panaderia', 'Panes', 1),
-(34, 'Refrescos', 'Bebidas carbonatadas', 1),
-(35, 'Frituras', 'fritos :V', 1);
+(33, 'Panaderia', 'Panes dulces :v', 1),
+(34, 'Refrescos', 'Bebidas carbonatadas', 0),
+(35, 'Frituras', 'fritos :V', 0),
+(36, 'Dulceria', 'Dulces', 0),
+(38, 'Ambrocio Isaias', 'o', 1),
+(39, 'Jugueteria', 'Juguetitos :v', 1);
 
 -- --------------------------------------------------------
 
@@ -68,14 +68,13 @@ CREATE TABLE `Clientes` (
 --
 
 INSERT INTO `Clientes` (`RFC`, `Nombre`, `Apellido_P`, `Apellido_M`, `Correo`, `Telefono`, `RActivo`) VALUES
-('LACA980706LU1', 'S', 'S', 'S', 'ambrocioisaias98@gmail.com', '22', 1),
-('LACA980706LU2', 'S', 'S', 'S', 'ambrocioisaias98@gmail.com', '3', 1),
+('0000000000000', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 1),
+('LACA980706L12', 'Ambrocio Isaias', 'Laureano', 'Castro', 'ambrocioisaias98@gmail.com', '8683019942', 0),
+('LACA980706L98', 'Ambrocio Isaias', 'Laureano', 'Castro', 'ambrocioisaias98@gmail.com', '8683019943', 1),
 ('LACA980706LU5', 's', 's', 's', 'ambrocioisaias98@gmail.com', '9', 1),
 ('LACA980706LU6', 'kkkkk', 'Laureano', 'Castro', 'ambrocioisaias98@gmail.com', '8683019942', 1),
-('LACA980706LU7', 'Ambrocio Isaias', 'Laureano', 'Castro', 'ambrocioisaias98@gmail.com', '8683019942', 1),
 ('LACA980706LU8', 'Ambrocio Isaias ', 'Laureano', 'Castro', '', '8683019942', 1),
-('LACA980706LU9', 'Ambrocio Isaias', 'a', 'a', 'ambrocioisaias98@gmail.com', '89', 1),
-('POLOO', 'PO', 'PO', 'PO', 'PO@gmail.com', '8683019942', 1);
+('LACA980706LU9', 'Ambrocio Isaias', 'a', 'a', 'ambrocioisaias98@gmail.com', '89', 0);
 
 -- --------------------------------------------------------
 
@@ -85,11 +84,22 @@ INSERT INTO `Clientes` (`RFC`, `Nombre`, `Apellido_P`, `Apellido_M`, `Correo`, `
 
 CREATE TABLE `DetallesVenta` (
   `IDDetallesV` int(11) NOT NULL,
-  `IDVenta` int(11) NOT NULL,
+  `IDVenta` bigint(13) NOT NULL,
   `IDProducto` varchar(50) NOT NULL,
   `PrecioUnitario` decimal(7,2) NOT NULL,
   `Cantidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `DetallesVenta`
+--
+
+INSERT INTO `DetallesVenta` (`IDDetallesV`, `IDVenta`, `IDProducto`, `PrecioUnitario`, `Cantidad`) VALUES
+(1, 1587933955272, '1585096169', '10.00', 20),
+(2, 1587933955272, '1586190781', '10.00', 20),
+(3, 1587934199118, '1585096169', '10.00', 3),
+(4, 1587934199118, '1586190781', '2000.00', 6),
+(5, 1587934199118, '1586627817', '200.00', 3);
 
 -- --------------------------------------------------------
 
@@ -117,7 +127,9 @@ CREATE TABLE `Empleados` (
 --
 
 INSERT INTO `Empleados` (`IDEmpleado`, `RFC`, `Nombre`, `Apellido_P`, `Apellido_M`, `Fecha_Nacimiento`, `Fecha_Contratacion`, `Direccion`, `Telefono`, `NivelUsuario`, `Clave`, `RActivo`) VALUES
-('AILC2020', 'LACA980706LU7', 'Ambrocio Isaias', 'Laureano', 'Castro', '2020-03-03', '2020-03-08', 'Calle Oaxaca #31', '8683019942', 1, 'varela', 1);
+('AILC2020', 'LACA980706L12', 'Ambrocio Isaias', 'Laureano', 'Castro', '2020-03-03', '2020-03-08', 'Calle Oaxaca #31', '8683019943', 1, 'varela', 1),
+('CALA2020123166', 'LACA980706L12', 'Ambrocio Isaias', 'Laureano', 'Castro', '2020-12-30', '2020-12-31', 'Calle Oaxaca #31 Col. Esperanza', '8683019942', 1, 'varela', 1),
+('PESI2020123180', 'LACA980706LU5', 'Ingrid Carolina', 'Sauceda', 'Pe&ntilde;a', '2020-12-31', '2020-12-31', 'No s&eacute;', '8683019942', 6, 'varela', 0);
 
 -- --------------------------------------------------------
 
@@ -138,7 +150,8 @@ CREATE TABLE `NivelUsuario` (
 INSERT INTO `NivelUsuario` (`IDNivel`, `Descripcion`, `Nivel`) VALUES
 (1, 'Administrador', 100),
 (2, 'Vendedor', 20),
-(4, 'SuperUsuario', 1000);
+(4, 'SuperUsuario', 1000),
+(6, 'Almacenista', 30);
 
 -- --------------------------------------------------------
 
@@ -161,8 +174,11 @@ CREATE TABLE `Productos` (
 --
 
 INSERT INTO `Productos` (`IDProducto`, `Nombre`, `IDProveedor`, `IDCategoria`, `PrecioUnitario`, `EnExistencia`, `RActivo`) VALUES
-('1585096169', 'Pepsi 200ml', 2, 34, '10.00', 100, 1),
-('1585096190', 'Pepsi 500ml', 2, 34, '15.00', 200, 1);
+('1585096169', 'Pepsi 300ml', 2, 33, '10.00', 2359, 1),
+('1586190748', 'galvantrix', 2, 33, '200.00', 0, 1),
+('1586190781', 'polineciomitrix', 2, 33, '2000.00', 8, 1),
+('1586190788', 'Livanitrix', 2, 33, '200.00', 0, 1),
+('1586627817', 'Polinecio', 3, 34, '200.00', 37, 1);
 
 -- --------------------------------------------------------
 
@@ -184,7 +200,8 @@ CREATE TABLE `Proveedores` (
 --
 
 INSERT INTO `Proveedores` (`IDProveedor`, `Compania`, `Contacto`, `Correo`, `Telefono`, `RActivo`) VALUES
-(2, 'Pepsi', 'Ambrocio', 'ambrocioisaias98@gmail.com', '8683019942', 1);
+(2, 'Pepsi', 'Ambrocio', 'ambrocioisaias98@gmail.com', '8683019943', 1),
+(3, 'Coca-Cola', 'Ambrocio', 'ambrocioisaias98@gmail.com', '8683019942', 0);
 
 -- --------------------------------------------------------
 
@@ -193,14 +210,28 @@ INSERT INTO `Proveedores` (`IDProveedor`, `Compania`, `Contacto`, `Correo`, `Tel
 --
 
 CREATE TABLE `Ventas` (
-  `IDVenta` int(11) NOT NULL,
+  `IDVenta` bigint(13) NOT NULL,
   `Cliente` varchar(13) NOT NULL,
   `IDEmpleado` varchar(25) NOT NULL,
   `Fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `Total` decimal(7,2) NOT NULL,
-  `Efectivo` decimal(7,2) NOT NULL,
-  `Cambio` decimal(7,2) NOT NULL
+  `Total` decimal(10,2) NOT NULL,
+  `Efectivo` decimal(10,2) NOT NULL,
+  `Cambio` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `Ventas`
+--
+
+INSERT INTO `Ventas` (`IDVenta`, `Cliente`, `IDEmpleado`, `Fecha`, `Total`, `Efectivo`, `Cambio`) VALUES
+(1587932166566, '0000000000000', 'AILC2020', '2020-04-26 05:00:00', '10.00', '200.00', '190.00'),
+(1587933141882, '0000000000000', 'AILC2020', '2020-04-26 05:00:00', '10010.00', '200000.00', '189990.00'),
+(1587933437695, '0000000000000', 'AILC2020', '2020-04-26 05:00:00', '4020.00', '200000.00', '195980.00'),
+(1587933477735, '0000000000000', 'AILC2020', '2020-04-26 05:00:00', '4020.00', '200000.00', '195980.00'),
+(1587933631799, '0000000000000', 'AILC2020', '2020-04-26 05:00:00', '4020.00', '200000.00', '195980.00'),
+(1587933813754, '0000000000000', 'AILC2020', '2020-04-26 05:00:00', '4020.00', '200000.00', '195980.00'),
+(1587933955272, '0000000000000', 'AILC2020', '2020-04-26 05:00:00', '4020.00', '200000.00', '195980.00'),
+(1587934199118, '0000000000000', 'AILC2020', '2020-04-26 05:00:00', '12630.00', '200000.00', '187370.00');
 
 --
 -- Índices para tablas volcadas
@@ -269,31 +300,25 @@ ALTER TABLE `Ventas`
 -- AUTO_INCREMENT de la tabla `CategoriaProductos`
 --
 ALTER TABLE `CategoriaProductos`
-  MODIFY `IDCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `IDCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT de la tabla `DetallesVenta`
 --
 ALTER TABLE `DetallesVenta`
-  MODIFY `IDDetallesV` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `IDDetallesV` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `NivelUsuario`
 --
 ALTER TABLE `NivelUsuario`
-  MODIFY `IDNivel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `IDNivel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `Proveedores`
 --
 ALTER TABLE `Proveedores`
-  MODIFY `IDProveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT de la tabla `Ventas`
---
-ALTER TABLE `Ventas`
-  MODIFY `IDVenta` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `IDProveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Restricciones para tablas volcadas
