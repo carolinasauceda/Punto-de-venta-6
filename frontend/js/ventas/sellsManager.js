@@ -9,6 +9,17 @@ var efectivo;
 var t = $('#sellsTable').DataTable();
 $(document).ready(function(){
 
+    $('#clienteSearch').click(function () {
+
+        var client=$('#cliente').val();
+        $.post(ConnectionString,{'SearchClient':client},function(response){
+            response=JSON.parse(response);
+            $('#NombreCliente').text(response['Nombre']);
+            $('#idCliente').attr('data',response['ID']);
+        });
+
+    })
+
 
     function setCantidadAnteriorCache(cantidad){
         cantidadAnteriorCache=cantidad;
@@ -71,9 +82,18 @@ $("#code").on('keyup', function (e) {
         if(parseFloat(efectivo)>=parseFloat(total)){
             var cambio =  parseFloat(efectivo)-parseFloat(total);
             $('#Cambio').text(cambio);
+            var venta={'efectivo':efectivo, 'total':total, 'cambio':cambio, 'cliente':$('#idCliente').attr('data'), 'empleado':empleado};
+            console.log("Entre aqui");
+            $.post(ConnectionString,{'ProcesarVenta':1, 'Venta':venta, 'Productos':ventaDic.getItems()},function(response){
+                console.log(response.toString());
+            });
         }else{
             alert("No se puede procesar el pago, el efectivo no es suficiente");
         }
+
+
+
+
     });
 
 });
@@ -102,7 +122,6 @@ function total(){
     }
     totalVenta=total;
     $('#Total').text(totalVenta);
-
 }
 
 

@@ -2,6 +2,7 @@
 require_once '../../../../DB/DBManager.php';
 require '../VentasController.php'; //Necesitamos importar DBManager primero
 
+
 $formCatobj= new VentasManager();
 
 if(isset($_POST['nombre'])){
@@ -40,6 +41,11 @@ if(isset($_POST['nombre'])){
     echo json_encode($json);
 }else if(isset($_POST["IDForStock"])){
     echo $formCatobj->UpdateStockByID($_POST['IDForStock'], $_POST["UpdateStock"]);
+}else if(isset($_POST['ProcesarVenta'])){
+
+    echo $formCatobj->registrarVenta($_POST['Venta'], $_POST['Productos']);
+}else if(isset($_POST['SearchClient'])){
+    echo $formCatobj->getClientInfo($_POST['SearchClient']);
 }else{
     echo 0;
 }
