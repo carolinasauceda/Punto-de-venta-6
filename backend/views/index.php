@@ -1,10 +1,11 @@
+<?php require "../../common/Controllers/sessionController.php";
+$sessionController = new sessionController("../../");
+require 'layouts/barra_tareas.php';
+// el parametro de entrada es el numero de directorios necesarios para regresar a la carpeta raíz del sitio.
+?>
 <!DOCTYPE html>
 <html lang="en">
-<?php require "../../common/Controllers/sessionController.php";
- $sessionController = new sessionController("../../");
- require 'layouts/barra_tareas.php';
- // el parametro de entrada es el numero de directorios necesarios para regresar a la carpeta raíz del sitio.
-?>
+
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../css/index-style.css">

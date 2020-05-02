@@ -1,3 +1,7 @@
+<?php
+session_start();
+session_destroy();
+?>
 <!--Pagina principal del backend-->
 <!DOCTYPE html>
 <html lang="en">
@@ -8,10 +12,6 @@
     <link rel="stylesheet" href="../css/style-login.css">
     <link href="https://fonts.googleapis.com/css?family=Hind&display=swap" rel="stylesheet">
     <title>Punto de venta</title>
-    <?php
-    session_start();
-    session_destroy();
-    ?>
 </head>
 <body>
     <div class="login-form">

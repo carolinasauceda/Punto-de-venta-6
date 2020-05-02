@@ -1,9 +1,9 @@
+<?php require "../../common/Controllers/sessionController.php";
+    $sessionController = new sessionController("../../");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php require "../../common/Controllers/sessionController.php";
-        $sessionController = new sessionController("../../");
-    ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>

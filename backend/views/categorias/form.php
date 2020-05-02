@@ -1,14 +1,15 @@
+<?php
+require "../../../common/Controllers/sessionController.php";
+$userControl= new sessionController('../../../');
+$edition=$userControl->isAutorizeFor('Categoria');
+$level=  (int) $_SESSION['AutorizacionNivel'];
+$level=$level>=100?1:0; //Si el usuario tiene permisos mayores a 100 este tiene autorización para ver ciertos campos ocultos
+
+?>
 <!doctype html>
 <html lang="en">
 <head>
-    <?php
-        require "../../../common/Controllers/sessionController.php";
-        $userControl= new sessionController('../../../');
-        $edition=$userControl->isAutorizeFor('Categoria');
-        $level=  (int) $_SESSION['AutorizacionNivel'];
-        $level=$level>=100?1:0; //Si el usuario tiene permisos mayores a 100 este tiene autorización para ver ciertos campos ocultos
 
-    ?>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">

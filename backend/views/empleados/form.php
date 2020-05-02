@@ -1,11 +1,12 @@
+<?php
+    require "../../../common/Controllers/sessionController.php";
+    $userControl= new sessionController('../../../');
+    $edition=$userControl->isAutorizeFor('Empleados');
+?>
 <!doctype html>
 <html lang="en">
 <head>
-    <?php
-        require "../../../common/Controllers/sessionController.php";
-        $userControl= new sessionController('../../../');
-        $edition=$userControl->isAutorizeFor('Empleados');
-    ?>
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">

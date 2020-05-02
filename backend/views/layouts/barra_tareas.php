@@ -1,3 +1,6 @@
+<?php
+    $siteURL="http://www.puntodventa.com/";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,9 +25,10 @@
             <div class="col-md-9">
                 <ul class="d-flex justify-content-end">
                     <li><a href="#">Inventario</a></li>
-                    <li><a href="#">Empleados</a></li>
-                    <li><a href="#">Proveedores</a></li>
-                    <li><a href="#">Productos</a></li>
+                    <li><a href="<?php echo $siteURL?>backend/views/empleados/">Empleados</a></li>
+                    <li><a href="<?php echo $siteURL?>backend/views/proveedores/">Proveedores</a></li>
+                    <li><a href="<?php echo $siteURL?>backend/views/productos/">Productos</a></li>
+                    <li><a href="<?php echo $siteURL?>frontend/views/ventas/">Ventas</a></li>
                     <li class="boton-especial"><a href="../login.php">Salir</a></li>
                 </ul>
             </div>
