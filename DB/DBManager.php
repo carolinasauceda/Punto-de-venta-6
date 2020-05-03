@@ -3,11 +3,18 @@
 class DBManager {
     public $base;
     protected $sql; //Instruccion sql
+    //Local
     const DBName="puntoventa";
     const Host="localhost";
     const DBUserName="root";
     const DBPassword="";
-
+    /*
+    //Remoto
+    const DBName="id13538003_puntoventa";
+    const Host="localhost";
+    const DBUserName="id13538003_root";
+    const DBPassword="Varela.123456789";
+*/
     public function __construct()
     {
         try{
